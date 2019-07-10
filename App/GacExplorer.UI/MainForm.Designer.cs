@@ -30,13 +30,18 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureGacutilLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gridViewAssemblies = new System.Windows.Forms.DataGridView();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCulture = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPublicKeyToken = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProcessorArchitecture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -59,20 +64,6 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
             // configureGacutilLocationToolStripMenuItem
             // 
             this.configureGacutilLocationToolStripMenuItem.Name = "configureGacutilLocationToolStripMenuItem";
@@ -85,28 +76,80 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
-            // dataGridView1
+            // helpToolStripMenuItem
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 24);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(800, 426);
-            this.dataGridView1.TabIndex = 1;
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // gridViewAssemblies
+            // 
+            this.gridViewAssemblies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridViewAssemblies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colName,
+            this.colVersion,
+            this.colCulture,
+            this.colPublicKeyToken,
+            this.colProcessorArchitecture});
+            this.gridViewAssemblies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridViewAssemblies.Location = new System.Drawing.Point(0, 24);
+            this.gridViewAssemblies.Name = "gridViewAssemblies";
+            this.gridViewAssemblies.Size = new System.Drawing.Size(800, 426);
+            this.gridViewAssemblies.TabIndex = 1;
+            // 
+            // colName
+            // 
+            this.colName.HeaderText = "Name";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 300;
+            // 
+            // colVersion
+            // 
+            this.colVersion.HeaderText = "Version";
+            this.colVersion.Name = "colVersion";
+            this.colVersion.ReadOnly = true;
+            // 
+            // colCulture
+            // 
+            this.colCulture.HeaderText = "Culture";
+            this.colCulture.Name = "colCulture";
+            this.colCulture.ReadOnly = true;
+            // 
+            // colPublicKeyToken
+            // 
+            this.colPublicKeyToken.HeaderText = "PublicKeyToken";
+            this.colPublicKeyToken.Name = "colPublicKeyToken";
+            this.colPublicKeyToken.ReadOnly = true;
+            this.colPublicKeyToken.Width = 250;
+            // 
+            // colProcessorArchitecture
+            // 
+            this.colProcessorArchitecture.HeaderText = "Architecture";
+            this.colProcessorArchitecture.Name = "colProcessorArchitecture";
+            this.colProcessorArchitecture.ReadOnly = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.gridViewAssemblies);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "GAC Explorer";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,7 +163,12 @@
         private System.Windows.Forms.ToolStripMenuItem configureGacutilLocationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView gridViewAssemblies;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colVersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCulture;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublicKeyToken;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProcessorArchitecture;
     }
 }
 
