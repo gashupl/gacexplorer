@@ -16,5 +16,17 @@ namespace GacExplorer.UI
         {
             InitializeComponent();
         }
+
+        private void ConfigureGacutilLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var result = this.openGacFileDialog.ShowDialog(); 
+            if (result == DialogResult.OK)
+            {
+              //  result.T
+            }
+            this.openGacFileDialog.Dispose(); 
+
+
+        }
     }
 }
