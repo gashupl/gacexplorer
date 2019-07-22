@@ -142,6 +142,7 @@
             // openGacFileDialog
             // 
             this.openGacFileDialog.FileName = "gacutil.exe";
+            this.openGacFileDialog.Title = "Show me where the gacutil.exe is";
             // 
             // MainForm
             // 
