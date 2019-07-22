@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GacExplorer.Services;
+using SimpleInjector;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,15 +10,24 @@ namespace GacExplorer.UI
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        private static Container container;
+
+
         [STAThread]
         static void Main()
         {
+            Bootstrap(); 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(container.GetInstance<MainForm>());
+        }
+
+        private static void Bootstrap()
+        {
+            container = new Container();
+            container.Register<IConfigurationService, ConfigurationService>();
+
+            container.Verify();
         }
     }
 }

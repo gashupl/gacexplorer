@@ -40,6 +40,7 @@
             this.colCulture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublicKeyToken = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProcessorArchitecture = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.openGacFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).BeginInit();
             this.SuspendLayout();
@@ -69,6 +70,7 @@
             this.configureGacutilLocationToolStripMenuItem.Name = "configureGacutilLocationToolStripMenuItem";
             this.configureGacutilLocationToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.configureGacutilLocationToolStripMenuItem.Text = "Configure Gacutil location";
+            this.configureGacutilLocationToolStripMenuItem.Click += new System.EventHandler(this.ConfigureGacutilLocationToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -137,6 +139,11 @@
             this.colProcessorArchitecture.Name = "colProcessorArchitecture";
             this.colProcessorArchitecture.ReadOnly = true;
             // 
+            // openGacFileDialog
+            // 
+            this.openGacFileDialog.FileName = "gacutil.exe";
+            this.openGacFileDialog.Title = "Show me where the gacutil.exe is";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -169,6 +176,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCulture;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublicKeyToken;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProcessorArchitecture;
+        private System.Windows.Forms.OpenFileDialog openGacFileDialog;
     }
 }
 
