@@ -8,6 +8,8 @@ namespace GacExplorer.Services
 {
     public interface IConfigurationService
     {
-        ServiceOperationResult SaveGacutilLocation(string fileLocation); 
+        ServiceOperationResult SaveGacutilLocation(string fileLocation);
+
+        ServiceOperationResult ReadGacutilLocation(); 
     }
 }
