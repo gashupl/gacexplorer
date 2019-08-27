@@ -25,7 +25,8 @@ namespace GacExplorer.UI
         private static void Bootstrap()
         {
             container = new Container();
-            container.Register<IConfigurationService, ConfigurationService>();
+            container.Register<IApplicationConfigurationService, ApplicationConfigurationService>();
+            container.Register<IGacutilLocationService, GacutilLocationService>();
 
             container.Verify();
         }

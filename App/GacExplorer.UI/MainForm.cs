@@ -13,12 +13,12 @@ namespace GacExplorer.UI
 {
     public partial class MainForm : Form
     {
-        private IConfigurationService configurationService; 
+        private IGacutilLocationService gacutilLocationService; 
 
-        public MainForm(IConfigurationService configurationService)
+        public MainForm(IGacutilLocationService configurationService)
         {
             InitializeComponent();
-            this.configurationService = configurationService; 
+            this.gacutilLocationService = configurationService; 
         }
 
         private void ConfigureGacutilLocationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -27,7 +27,7 @@ namespace GacExplorer.UI
             if (result == DialogResult.OK)
             {
                 var fileLocation = this.openGacFileDialog.FileName;
-                this.configurationService.SaveGacutilLocation(fileLocation); 
+                this.gacutilLocationService.Save(fileLocation); 
             }
             this.openGacFileDialog.Dispose(); 
 

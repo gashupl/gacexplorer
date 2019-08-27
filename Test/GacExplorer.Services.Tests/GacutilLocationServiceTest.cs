@@ -4,16 +4,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace GacExplorer.Services.Tests
 {
     [TestClass]
-    public class ConfigurationServiceTest
+    public class GacutilLocationServiceTest
     {
         [TestMethod]
-        public void SaveGacutilLocation_SaveSuccesfull_ReturnServiceOperationResult()
+        public void Save_Succesfull_ReturnServiceOperationResult()
         {
             throw new NotImplementedException(); 
         }
 
         [TestMethod]
-        public void SaveGacutilLocation_SaveFailed_ReturnServiceOperationResult()
+        public void Save_Failed_ReturnServiceOperationResult()
         {
             throw new NotImplementedException();
         }

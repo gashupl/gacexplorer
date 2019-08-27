@@ -42,12 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationService.cs" />
-    <Compile Include="ConfigurationFileService.cs" />
-    <Compile Include="ConfigurationService.cs" />
-    <Compile Include="IApplicationService.cs" />
-    <Compile Include="IConfigurationFileService.cs" />
-    <Compile Include="IConfigurationService.cs" />
+    <Compile Include="ApplicationConfigurationService.cs" />
+    <Compile Include="GacutilLocationService.cs" />
+    <Compile Include="IApplicationConfigurationService.cs" />
+    <Compile Include="IGacutilLocationService.cs" />
     <Compile Include="OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

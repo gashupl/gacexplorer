@@ -3,30 +3,28 @@ using System.Configuration;
 
 namespace GacExplorer.Services
 {
-    public class ConfigurationService : IConfigurationService
+    public class GacutilLocationService : IGacutilLocationService
     {
         private const string locationKey = "GacUtilLocation";
 
-        private IApplicationService applicationService;
-        private IConfigurationFileService configurationFileService; 
+        private IApplicationConfigurationService appConfigurationService;
 
-        public ConfigurationService(IApplicationService applicationService, IConfigurationFileService configurationFileService)
+        public GacutilLocationService(IApplicationConfigurationService appConfigurationService)
         {
-            this.applicationService = applicationService;
-            this.configurationFileService = configurationFileService; 
+            this.appConfigurationService = appConfigurationService;
         }
 
-        public ServiceOperationResult ReadGacutilLocation()
+        public ServiceOperationResult Read()
         {
             throw new NotImplementedException();
         }
 
-        public ServiceOperationResult SaveGacutilLocation(string fileLocation)
+        public ServiceOperationResult Save(string fileLocation)
         {
             try
             {
-                Configuration appConfig = this.applicationService.GetApplicationConfiguration();
-                var appSettings = this.configurationFileService.GetSettings(appConfig); 
+                Configuration appConfig = this.appConfigurationService.GetConfiguration();
+                var appSettings = this.appConfigurationService.GetSettings(appConfig); 
                 if (appSettings[locationKey] == null)
                 {
                     appSettings.Add(locationKey, fileLocation);
@@ -37,8 +35,8 @@ namespace GacExplorer.Services
                     appSettings[locationKey].Value = fileLocation;
                 }
 
-                this.configurationFileService.SaveConfiguration(appConfig); 
-                this.configurationFileService.RefreshSettings(); 
+                this.appConfigurationService.SaveConfiguration(appConfig);
+                this.appConfigurationService.RefreshConfigurationSettings(); 
 
                 return new ServiceOperationResult(OperationResult.Success); 
             }
