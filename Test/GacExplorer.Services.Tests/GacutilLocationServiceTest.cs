@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace GacExplorer.Services.Tests
 {
@@ -7,15 +8,37 @@ namespace GacExplorer.Services.Tests
     public class GacutilLocationServiceTest
     {
         [TestMethod]
-        public void Save_Succesfull_ReturnServiceOperationResult()
+        public void Save_AppServiceKeyDoesNotExist_ReturnServiceOperationResult()
         {
-            throw new NotImplementedException(); 
+            Mock<IApplicationConfigurationService> appConfigMock = new Mock<IApplicationConfigurationService>();
+        
+            var gacService = new GacutilLocationService(appConfigMock.Object);
+            var result = gacService.Save(String.Empty);
+
+            Assert.AreEqual(result.Result, OperationResult.Success); 
+        }
+
+        [TestMethod]
+        public void Save_AppServiceKeyExist_ReturnServiceOperationResult()
+        {
+            Mock<IApplicationConfigurationService> appConfigMock = new Mock<IApplicationConfigurationService>();
+
+            var gacService = new GacutilLocationService(appConfigMock.Object);
+            var result = gacService.Save(String.Empty);
+
+            Assert.AreEqual(result.Result, OperationResult.Success);
         }
 
         [TestMethod]
         public void Save_Failed_ReturnServiceOperationResult()
         {
-            throw new NotImplementedException();
+            Mock<IApplicationConfigurationService> appConfigMock = new Mock<IApplicationConfigurationService>();
+
+            throw new NotImplementedException(); 
+            var gacService = new GacutilLocationService(appConfigMock.Object);
+            var result = gacService.Save(String.Empty);
+
+            Assert.AreEqual(result.Result, OperationResult.Failed);
         }
     }
 }
