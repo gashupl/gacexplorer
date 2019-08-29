@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Configuration; 
+using System.Configuration;
+using GacExplorer.Services.Wrappers;
 
 namespace GacExplorer.Services.Tests
 {
@@ -11,37 +12,41 @@ namespace GacExplorer.Services.Tests
         [TestMethod]
         public void Save_AppServiceKeyDoesNotExist_ReturnServiceOperationResult()
         {
-            Mock<IApplicationConfigurationService> appConfigMock = new Mock<IApplicationConfigurationService>();
-           // appConfigMock.Setup(a => a.GetConfiguration()).Returns();
+            Mock<IConfiguration> configurationMock = new Mock<IConfiguration>();
 
+            Mock<IApplicationConfigurationService> appConfigServiceMock = new Mock<IApplicationConfigurationService>();
+            appConfigServiceMock.Setup(a => a.GetConfiguration()).Returns(configurationMock.Object);
+            appConfigServiceMock.Setup(a => a.GetSettings(It.IsAny<IConfiguration>())).Returns(new KeyValueConfigurationCollection());
+            appConfigServiceMock.Setup(a => a.SaveConfiguration(It.IsAny<IConfiguration>())).Returns(new ServiceOperationResult(OperationResult.Success));
+            appConfigServiceMock.Setup(a => a.RefreshConfigurationSettings()).Returns(new ServiceOperationResult(OperationResult.Success));
 
-            var gacService = new GacutilLocationService(appConfigMock.Object);
+            var gacService = new GacutilLocationService(appConfigServiceMock.Object);
             var result = gacService.Save(String.Empty);
 
-            Assert.AreEqual(result.Result, OperationResult.Success); 
+            Assert.AreEqual(OperationResult.Success, result.Result); 
         }
 
         [TestMethod]
         public void Save_AppServiceKeyExist_ReturnServiceOperationResult()
         {
-            Mock<IApplicationConfigurationService> appConfigMock = new Mock<IApplicationConfigurationService>();
-
-            var gacService = new GacutilLocationService(appConfigMock.Object);
-            var result = gacService.Save(String.Empty);
-
-            Assert.AreEqual(result.Result, OperationResult.Success);
+            throw new NotImplementedException(); 
         }
 
         [TestMethod]
         public void Save_Failed_ReturnServiceOperationResult()
         {
-            Mock<IApplicationConfigurationService> appConfigMock = new Mock<IApplicationConfigurationService>();
+            Mock<IConfiguration> configurationMock = new Mock<IConfiguration>();
 
-            throw new NotImplementedException(); 
-            var gacService = new GacutilLocationService(appConfigMock.Object);
+            Mock<IApplicationConfigurationService> appConfigServiceMock = new Mock<IApplicationConfigurationService>();
+            appConfigServiceMock.Setup(a => a.GetConfiguration()).Returns(configurationMock.Object);
+            appConfigServiceMock.Setup(a => a.GetSettings(It.IsAny<IConfiguration>())).Returns(new KeyValueConfigurationCollection());
+            appConfigServiceMock.Setup(a => a.SaveConfiguration(It.IsAny<IConfiguration>())).Returns(new ServiceOperationResult(OperationResult.Failed));
+            appConfigServiceMock.Setup(a => a.RefreshConfigurationSettings()).Returns(new ServiceOperationResult(OperationResult.Success));
+
+            var gacService = new GacutilLocationService(appConfigServiceMock.Object);
             var result = gacService.Save(String.Empty);
 
-            Assert.AreEqual(result.Result, OperationResult.Failed);
+            Assert.AreEqual(OperationResult.Failed, result.Result);
         }
     }
 }

@@ -36,8 +36,18 @@ namespace GacExplorer.Services
                     appSettings[locationKey].Value = fileLocation;
                 }
 
-                this.appConfigurationService.SaveConfiguration(appConfig);
-                this.appConfigurationService.RefreshConfigurationSettings(); 
+
+                var result = this.appConfigurationService.SaveConfiguration(appConfig);
+                if(result.Result == OperationResult.Failed)
+                {
+                    return result; 
+                }
+
+                result = this.appConfigurationService.RefreshConfigurationSettings();
+                if (result.Result == OperationResult.Failed)
+                {
+                    return result;
+                }
 
                 return new ServiceOperationResult(OperationResult.Success); 
             }
