@@ -7,7 +7,7 @@ namespace GacExplorer.Services
 
         public Configuration GetConfiguration()
         {
-            var assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            var assemblyLocation = System.Reflection.Assembly.GetEntryAssembly().Location;
             return ConfigurationManager.OpenExeConfiguration(assemblyLocation);
         }
 
