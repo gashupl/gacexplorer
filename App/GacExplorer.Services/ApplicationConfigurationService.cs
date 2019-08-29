@@ -7,7 +7,7 @@ namespace GacExplorer.Services
     public class ApplicationConfigurationService : IApplicationConfigurationService
     {
 
-        public ConfigurationWrapper GetConfiguration()
+        public IConfiguration GetConfiguration()
         {
             var assemblyLocation = System.Reflection.Assembly.GetEntryAssembly().Location;
             var appConfig = ConfigurationManager.OpenExeConfiguration(assemblyLocation);
@@ -28,7 +28,7 @@ namespace GacExplorer.Services
       
         }
 
-        public ServiceOperationResult SaveConfiguration(ConfigurationWrapper configuration)
+        public ServiceOperationResult SaveConfiguration(IConfiguration configuration)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace GacExplorer.Services
            
         }
 
-        public KeyValueConfigurationCollection GetSettings(ConfigurationWrapper configuration)
+        public KeyValueConfigurationCollection GetSettings(IConfiguration configuration)
         {
             var appSettingsSection = configuration.GetSection("appSettings") as AppSettingsSection;
             if (appSettingsSection != null)

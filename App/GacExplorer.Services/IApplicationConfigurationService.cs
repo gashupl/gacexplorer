@@ -5,12 +5,12 @@ namespace GacExplorer.Services
 {
     public interface IApplicationConfigurationService
     {
-        ConfigurationWrapper GetConfiguration();
+        IConfiguration GetConfiguration();
 
-        ServiceOperationResult SaveConfiguration(ConfigurationWrapper configuration);
+        ServiceOperationResult SaveConfiguration(IConfiguration configuration);
 
         ServiceOperationResult RefreshConfigurationSettings();
 
-        KeyValueConfigurationCollection GetSettings(ConfigurationWrapper configuration);
+        KeyValueConfigurationCollection GetSettings(IConfiguration configuration);
     }
 }

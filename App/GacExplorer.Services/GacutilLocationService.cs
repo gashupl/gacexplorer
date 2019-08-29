@@ -24,7 +24,7 @@ namespace GacExplorer.Services
         {
             try
             {
-                ConfigurationWrapper appConfig = this.appConfigurationService.GetConfiguration();
+                IConfiguration appConfig = this.appConfigurationService.GetConfiguration();
                 var appSettings = this.appConfigurationService.GetSettings(appConfig); 
                 if (appSettings[locationKey] == null)
                 {
