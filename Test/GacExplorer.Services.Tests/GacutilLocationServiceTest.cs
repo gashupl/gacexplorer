@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Configuration; 
 
 namespace GacExplorer.Services.Tests
 {
@@ -11,7 +12,9 @@ namespace GacExplorer.Services.Tests
         public void Save_AppServiceKeyDoesNotExist_ReturnServiceOperationResult()
         {
             Mock<IApplicationConfigurationService> appConfigMock = new Mock<IApplicationConfigurationService>();
-        
+           // appConfigMock.Setup(a => a.GetConfiguration()).Returns();
+
+
             var gacService = new GacutilLocationService(appConfigMock.Object);
             var result = gacService.Save(String.Empty);
 

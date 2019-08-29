@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GacExplorer.Services.Wrappers;
+using System;
 using System.Configuration;
 
 namespace GacExplorer.Services
@@ -23,7 +24,7 @@ namespace GacExplorer.Services
         {
             try
             {
-                Configuration appConfig = this.appConfigurationService.GetConfiguration();
+                ConfigurationWrapper appConfig = this.appConfigurationService.GetConfiguration();
                 var appSettings = this.appConfigurationService.GetSettings(appConfig); 
                 if (appSettings[locationKey] == null)
                 {

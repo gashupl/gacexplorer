@@ -1,15 +1,16 @@
-﻿using System.Configuration;
+﻿using GacExplorer.Services.Wrappers;
+using System.Configuration;
 
 namespace GacExplorer.Services
 {
     public interface IApplicationConfigurationService
     {
-        Configuration GetConfiguration();
+        ConfigurationWrapper GetConfiguration();
 
-        void SaveConfiguration(Configuration configuration);
+        ServiceOperationResult SaveConfiguration(ConfigurationWrapper configuration);
 
-        void RefreshConfigurationSettings();
+        ServiceOperationResult RefreshConfigurationSettings();
 
-        KeyValueConfigurationCollection GetSettings(Configuration configuration);
+        KeyValueConfigurationCollection GetSettings(ConfigurationWrapper configuration);
     }
 }
