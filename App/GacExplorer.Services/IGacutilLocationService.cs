@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace GacExplorer.Services
 {
-    public interface IConfigurationService
+    public interface IGacutilLocationService
     {
-        ServiceOperationResult SaveGacutilLocation(string fileLocation); 
+        ServiceOperationResult Save(string fileLocation);
+
+        ServiceOperationResult Read(); 
     }
 }
