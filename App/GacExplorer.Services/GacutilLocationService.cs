@@ -6,7 +6,15 @@ namespace GacExplorer.Services
 {
     public class GacutilLocationService : IGacutilLocationService
     {
-        private const string locationKey = "GacUtilLocation";
+        private const string locationKey  =  "GacUtilLocation";
+
+        public static string LocationKey
+        {
+            get
+            {
+                return locationKey; 
+            }
+        }
 
         private IApplicationConfigurationService appConfigurationService;
 
@@ -30,26 +38,20 @@ namespace GacExplorer.Services
                 {
                     appSettings.Add(locationKey, fileLocation);
                 }
-
                 else
                 {
                     appSettings[locationKey].Value = fileLocation;
                 }
-
 
                 var result = this.appConfigurationService.SaveConfiguration(appConfig);
                 if(result.Result == OperationResult.Failed)
                 {
                     return result; 
                 }
-
-                result = this.appConfigurationService.RefreshConfigurationSettings();
-                if (result.Result == OperationResult.Failed)
+                else
                 {
-                    return result;
+                    return this.appConfigurationService.RefreshConfigurationSettings();
                 }
-
-                return new ServiceOperationResult(OperationResult.Success); 
             }
             catch(Exception ex)
             {
