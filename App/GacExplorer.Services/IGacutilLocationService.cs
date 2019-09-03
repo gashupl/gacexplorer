@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GacExplorer.Services.OperationResults;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace GacExplorer.Services
     {
         ServiceOperationResult Save(string fileLocation);
 
-        ServiceOperationResult Read(); 
+        ServiceOperationResult Read();
+
+        bool FileExists(string location); 
     }
 }

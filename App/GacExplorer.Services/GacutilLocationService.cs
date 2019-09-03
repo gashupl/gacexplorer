@@ -1,4 +1,5 @@
-﻿using GacExplorer.Services.Wrappers;
+﻿using GacExplorer.Services.OperationResults;
+using GacExplorer.Services.Wrappers;
 using System;
 using System.Configuration;
 
@@ -58,6 +59,11 @@ namespace GacExplorer.Services
                 return new ServiceOperationResult(
                     OperationResult.Failed, "ConfigurationService.SaveGacutilLocation operation failed", ex);
             }
+        }
+
+        public bool FileExists(string location)
+        {
+            throw new NotImplementedException();
         }
     }
 }

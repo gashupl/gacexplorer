@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Configuration;
 using GacExplorer.Services.Wrappers;
+using GacExplorer.Services.OperationResults;
 
 namespace GacExplorer.Services.Tests
 {

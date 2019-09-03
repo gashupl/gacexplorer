@@ -1,4 +1,5 @@
-﻿using GacExplorer.Services.Wrappers;
+﻿using GacExplorer.Services.OperationResults;
+using GacExplorer.Services.Wrappers;
 using System;
 using System.Configuration;
 
