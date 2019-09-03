@@ -46,6 +46,7 @@
     <Compile Include="GacutilLocationService.cs" />
     <Compile Include="IApplicationConfigurationService.cs" />
     <Compile Include="IGacutilLocationService.cs" />
+    <Compile Include="OperationResults\GacutilLocationReadResult.cs" />
     <Compile Include="OperationResults\ServiceOperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wrappers\ConfigurationWrapper.cs" />

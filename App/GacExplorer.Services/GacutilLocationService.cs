@@ -24,7 +24,7 @@ namespace GacExplorer.Services
             this.appConfigurationService = appConfigurationService;
         }
 
-        public ServiceOperationResult Read()
+        public GacutilLocationReadResult Read()
         {
             throw new NotImplementedException();
         }

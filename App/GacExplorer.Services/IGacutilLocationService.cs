@@ -11,7 +11,7 @@ namespace GacExplorer.Services
     {
         ServiceOperationResult Save(string fileLocation);
 
-        ServiceOperationResult Read();
+        GacutilLocationReadResult Read();
 
         bool FileExists(string location); 
     }
