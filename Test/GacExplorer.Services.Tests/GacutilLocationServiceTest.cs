@@ -78,5 +78,31 @@ namespace GacExplorer.Services.Tests
 
             Assert.AreEqual(OperationResult.Failed, result.Result);
         }
+
+        [TestMethod]
+        public void Read_LocationFound_ReturnSuccessOperationResult()
+        {
+            Mock<IConfiguration> configurationMock = new Mock<IConfiguration>();
+
+            Mock<IApplicationConfigurationService> appConfigServiceMock = new Mock<IApplicationConfigurationService>();
+
+            var gacService = new GacutilLocationService(appConfigServiceMock.Object);
+            var result = gacService.Read(); 
+
+            Assert.AreEqual(OperationResult.Success, result.Result);
+        }
+
+        [TestMethod]
+        public void Read_LocationNotFound_ReturnFailedOperationResult()
+        {
+            Mock<IConfiguration> configurationMock = new Mock<IConfiguration>();
+
+            Mock<IApplicationConfigurationService> appConfigServiceMock = new Mock<IApplicationConfigurationService>();
+
+            var gacService = new GacutilLocationService(appConfigServiceMock.Object);
+            var result = gacService.Read();
+
+            Assert.AreEqual(OperationResult.Failed, result.Result);
+        }
     }
 }
