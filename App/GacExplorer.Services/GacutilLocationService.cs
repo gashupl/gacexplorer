@@ -26,8 +26,20 @@ namespace GacExplorer.Services
 
         public GacutilLocationReadResult Read()
         {
-            throw new NotImplementedException();
+            try
+            {
+                IConfiguration appConfig = this.appConfigurationService.GetConfiguration();
+                var appSettings = this.appConfigurationService.GetSettings(appConfig);
+                var result = new GacutilLocationReadResult(OperationResult.Success);
+                result.Location = appSettings[locationKey] != null ? appSettings[locationKey].Value : null; 
+                return result;
+            }
+            catch(Exception ex)
+            {
+                return new GacutilLocationReadResult(OperationResult.Failed, "GacutilLocationService.Read operation failed", ex);
+            }
         }
+
 
         public ServiceOperationResult Save(string fileLocation)
         {
@@ -54,10 +66,15 @@ namespace GacExplorer.Services
                     return this.appConfigurationService.RefreshConfigurationSettings();
                 }
             }
+            catch(ConfigurationErrorsException ex)
+            {
+                return new ServiceOperationResult(
+                    OperationResult.Failed, "GacutilLocationService.Save operation failed", ex);
+            }
             catch(Exception ex)
             {
                 return new ServiceOperationResult(
-                    OperationResult.Failed, "ConfigurationService.SaveGacutilLocation operation failed", ex);
+                    OperationResult.Failed, "GacutilLocationService.Save operation failed", ex);
             }
         }
 
