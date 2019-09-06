@@ -50,7 +50,9 @@
     <Compile Include="OperationResults\ServiceOperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wrappers\ConfigurationWrapper.cs" />
+    <Compile Include="Wrappers\FileWrapper.cs" />
     <Compile Include="Wrappers\IConfiguration.cs" />
+    <Compile Include="Wrappers\IFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GacExplorer.CommandProxy\GacExplorer.CommandProxy.csproj">

@@ -21,7 +21,7 @@ namespace GacExplorer.Services.Tests
             appConfigServiceMock.Setup(a => a.SaveConfiguration(It.IsAny<IConfiguration>())).Returns(new ServiceOperationResult(OperationResult.Success));
             appConfigServiceMock.Setup(a => a.RefreshConfigurationSettings()).Returns(new ServiceOperationResult(OperationResult.Success));
 
-            var gacService = new GacutilLocationService(appConfigServiceMock.Object);
+            var gacService = new GacutilLocationService(appConfigServiceMock.Object, null);
             var result = gacService.Save(String.Empty);
 
             Assert.AreEqual(OperationResult.Success, result.Result); 
@@ -39,7 +39,7 @@ namespace GacExplorer.Services.Tests
             appConfigServiceMock.Setup(a => a.SaveConfiguration(It.IsAny<IConfiguration>())).Returns(new ServiceOperationResult(OperationResult.Success));
             appConfigServiceMock.Setup(a => a.RefreshConfigurationSettings()).Returns(new ServiceOperationResult(OperationResult.Success));
 
-            var gacService = new GacutilLocationService(appConfigServiceMock.Object);
+            var gacService = new GacutilLocationService(appConfigServiceMock.Object, null);
             var result = gacService.Save(String.Empty);
 
             Assert.AreEqual(OperationResult.Success, result.Result);
@@ -56,7 +56,7 @@ namespace GacExplorer.Services.Tests
             appConfigServiceMock.Setup(a => a.SaveConfiguration(It.IsAny<IConfiguration>())).Returns(new ServiceOperationResult(OperationResult.Failed));
             appConfigServiceMock.Setup(a => a.RefreshConfigurationSettings()).Returns(new ServiceOperationResult(OperationResult.Success));
 
-            var gacService = new GacutilLocationService(appConfigServiceMock.Object);
+            var gacService = new GacutilLocationService(appConfigServiceMock.Object, null);
             var result = gacService.Save(String.Empty);
 
             Assert.AreEqual(OperationResult.Failed, result.Result);
@@ -73,7 +73,7 @@ namespace GacExplorer.Services.Tests
             appConfigServiceMock.Setup(a => a.SaveConfiguration(It.IsAny<IConfiguration>())).Returns(new ServiceOperationResult(OperationResult.Success));
             appConfigServiceMock.Setup(a => a.RefreshConfigurationSettings()).Returns(new ServiceOperationResult(OperationResult.Failed));
 
-            var gacService = new GacutilLocationService(appConfigServiceMock.Object);
+            var gacService = new GacutilLocationService(appConfigServiceMock.Object, null);
             var result = gacService.Save(String.Empty);
 
             Assert.AreEqual(OperationResult.Failed, result.Result);
@@ -92,7 +92,7 @@ namespace GacExplorer.Services.Tests
             appConfigServiceMock.Setup(a => a.SaveConfiguration(It.IsAny<IConfiguration>())).Returns(new ServiceOperationResult(OperationResult.Success));
             appConfigServiceMock.Setup(a => a.RefreshConfigurationSettings()).Returns(new ServiceOperationResult(OperationResult.Success));
 
-            var gacService = new GacutilLocationService(appConfigServiceMock.Object);
+            var gacService = new GacutilLocationService(appConfigServiceMock.Object, null);
             var result = gacService.Read(); 
 
             Assert.AreEqual(OperationResult.Success, result.Result);
@@ -110,11 +110,35 @@ namespace GacExplorer.Services.Tests
             appConfigServiceMock.Setup(a => a.SaveConfiguration(It.IsAny<IConfiguration>())).Returns(new ServiceOperationResult(OperationResult.Success));
             appConfigServiceMock.Setup(a => a.RefreshConfigurationSettings()).Returns(new ServiceOperationResult(OperationResult.Failed));
 
-            var gacService = new GacutilLocationService(appConfigServiceMock.Object);
+            var gacService = new GacutilLocationService(appConfigServiceMock.Object, null);
             var result = gacService.Read();
 
             Assert.AreEqual(OperationResult.Success, result.Result);
             Assert.IsNull(result.Location);
+        }
+
+        [TestMethod]
+        public void FileExists_ReturnsTrue()
+        {
+            Mock<IFile> fileMock = new Mock<IFile>();
+            fileMock.Setup(f => f.FileExists(It.IsAny<string>())).Returns(true); 
+
+            var gacService = new GacutilLocationService(null, fileMock.Object);
+            var result = gacService.FileExists(@"C:\File\gacutil.exe");
+
+            Assert.IsTrue(result); 
+        }
+
+        [TestMethod]
+        public void FileExists_ReturnsFalse()
+        {
+            Mock<IFile> fileMock = new Mock<IFile>();
+            fileMock.Setup(f => f.FileExists(It.IsAny<string>())).Returns(false);
+
+            var gacService = new GacutilLocationService(null, fileMock.Object);
+            var result = gacService.FileExists(@"C:\File\gacutil.exe");
+
+            Assert.IsFalse(result);
         }
     }
 }

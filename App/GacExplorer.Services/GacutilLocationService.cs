@@ -18,10 +18,12 @@ namespace GacExplorer.Services
         }
 
         private IApplicationConfigurationService appConfigurationService;
+        private IFile file; 
 
-        public GacutilLocationService(IApplicationConfigurationService appConfigurationService)
+        public GacutilLocationService(IApplicationConfigurationService appConfigurationService, IFile file)
         {
             this.appConfigurationService = appConfigurationService;
+            this.file = file; 
         }
 
         public GacutilLocationReadResult Read()
@@ -80,7 +82,7 @@ namespace GacExplorer.Services
 
         public bool FileExists(string location)
         {
-            throw new NotImplementedException();
+            return this.file.FileExists(location); 
         }
     }
 }
