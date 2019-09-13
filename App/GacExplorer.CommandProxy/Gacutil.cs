@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace GacExplorer.CommandProxy
 {
-    public class Gacutil : IGacutil
+    public sealed class Gacutil : IGacutil
     {
-        private string location; 
+        private string location;
+
         public Gacutil(string location)
         {
             this.location = location; 
         }
-    }
+
+    }   
 }
