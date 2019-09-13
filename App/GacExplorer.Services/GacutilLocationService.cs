@@ -1,4 +1,5 @@
-﻿using GacExplorer.Services.Wrappers;
+﻿using GacExplorer.Services.OperationResults;
+using GacExplorer.Services.Wrappers;
 using System;
 using System.Configuration;
 
@@ -17,16 +18,30 @@ namespace GacExplorer.Services
         }
 
         private IApplicationConfigurationService appConfigurationService;
+        private IFile file; 
 
-        public GacutilLocationService(IApplicationConfigurationService appConfigurationService)
+        public GacutilLocationService(IApplicationConfigurationService appConfigurationService, IFile file)
         {
             this.appConfigurationService = appConfigurationService;
+            this.file = file; 
         }
 
-        public ServiceOperationResult Read()
+        public GacutilLocationReadResult Read()
         {
-            throw new NotImplementedException();
+            try
+            {
+                IConfiguration appConfig = this.appConfigurationService.GetConfiguration();
+                var appSettings = this.appConfigurationService.GetSettings(appConfig);
+                var result = new GacutilLocationReadResult(OperationResult.Success);
+                result.Location = appSettings[locationKey] != null ? appSettings[locationKey].Value : null; 
+                return result;
+            }
+            catch(Exception ex)
+            {
+                return new GacutilLocationReadResult(OperationResult.Failed, "GacutilLocationService.Read operation failed", ex);
+            }
         }
+
 
         public ServiceOperationResult Save(string fileLocation)
         {
@@ -53,11 +68,21 @@ namespace GacExplorer.Services
                     return this.appConfigurationService.RefreshConfigurationSettings();
                 }
             }
+            catch(ConfigurationErrorsException ex)
+            {
+                return new ServiceOperationResult(
+                    OperationResult.Failed, "GacutilLocationService.Save operation failed", ex);
+            }
             catch(Exception ex)
             {
                 return new ServiceOperationResult(
-                    OperationResult.Failed, "ConfigurationService.SaveGacutilLocation operation failed", ex);
+                    OperationResult.Failed, "GacutilLocationService.Save operation failed", ex);
             }
+        }
+
+        public bool FileExists(string location)
+        {
+            return this.file.FileExists(location); 
         }
     }
 }

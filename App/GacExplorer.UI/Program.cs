@@ -1,4 +1,5 @@
 ﻿using GacExplorer.Services;
+using GacExplorer.Services.Wrappers;
 using SimpleInjector;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace GacExplorer.UI
 {
     static class Program
     {
-        private static Container container;
+        public static Container container;
 
 
         [STAThread]
@@ -25,10 +26,13 @@ namespace GacExplorer.UI
         private static void Bootstrap()
         {
             container = new Container();
+            container.Register<IFile, FileWrapper>();
+
             container.Register<IApplicationConfigurationService, ApplicationConfigurationService>();
             container.Register<IGacutilLocationService, GacutilLocationService>();
 
             container.Verify();
         }
+
     }
 }
