@@ -43,9 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationConfigurationService.cs" />
+    <Compile Include="DTO\AssemblyLineDto.cs" />
+    <Compile Include="GlobalAssemblyCacheService.cs" />
     <Compile Include="GacutilLocationService.cs" />
     <Compile Include="IApplicationConfigurationService.cs" />
-    <Compile Include="IApplicationService.cs" />
+    <Compile Include="IGlobalAssemblyCacheService.cs" />
     <Compile Include="IGacutilLocationService.cs" />
     <Compile Include="OperationResults\GacutilLocationReadResult.cs" />
     <Compile Include="OperationResults\ServiceOperationResult.cs" />
@@ -61,5 +63,6 @@
       <Name>GacExplorer.CommandProxy</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
