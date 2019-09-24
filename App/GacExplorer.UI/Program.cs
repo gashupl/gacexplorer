@@ -1,10 +1,8 @@
-﻿using GacExplorer.Services;
+﻿using GacExplorer.CommandProxy;
+using GacExplorer.Services;
 using GacExplorer.Services.Wrappers;
 using SimpleInjector;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GacExplorer.UI
@@ -27,9 +25,11 @@ namespace GacExplorer.UI
         {
             container = new Container();
             container.Register<IFile, FileWrapper>();
+            container.Register<IGacutil, Gacutil>(); 
 
             container.Register<IApplicationConfigurationService, ApplicationConfigurationService>();
             container.Register<IGacutilLocationService, GacutilLocationService>();
+            container.Register<IGlobalAssemblyCacheService, GlobalAssemblyCacheService>(); 
 
             container.Verify();
         }
