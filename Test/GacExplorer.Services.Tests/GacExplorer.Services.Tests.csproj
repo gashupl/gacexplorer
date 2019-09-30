@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GacutilLocationServiceTest.cs" />
+    <Compile Include="GacutilOutputParserServiceTest.cs" />
     <Compile Include="GlobalAssemblyCacheServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,10 +74,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\App\GacExplorer.CommandProxy\GacExplorer.CommandProxy.csproj">
+      <Project>{f02ccfda-c8e5-4df6-8098-7a0b66705d76}</Project>
+      <Name>GacExplorer.CommandProxy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\App\GacExplorer.Services\GacExplorer.Services.csproj">
       <Project>{097eea7d-23ca-426e-9f74-4985f699fcdc}</Project>
       <Name>GacExplorer.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

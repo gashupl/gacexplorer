@@ -44,12 +44,15 @@
   <ItemGroup>
     <Compile Include="ApplicationConfigurationService.cs" />
     <Compile Include="DTO\AssemblyLineDto.cs" />
+    <Compile Include="GacutilOutputParserService.cs" />
     <Compile Include="GlobalAssemblyCacheService.cs" />
     <Compile Include="GacutilLocationService.cs" />
     <Compile Include="IApplicationConfigurationService.cs" />
+    <Compile Include="IGacutilOutputParserService.cs" />
     <Compile Include="IGlobalAssemblyCacheService.cs" />
     <Compile Include="IGacutilLocationService.cs" />
     <Compile Include="OperationResults\GacutilLocationReadResult.cs" />
+    <Compile Include="OperationResults\GacutilOutputParserResult.cs" />
     <Compile Include="OperationResults\GetAssemblyLinesOperationResult.cs" />
     <Compile Include="OperationResults\ServiceOperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

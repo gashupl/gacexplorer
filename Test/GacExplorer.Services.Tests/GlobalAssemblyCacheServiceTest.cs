@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GacExplorer.CommandProxy;
+using GacExplorer.Services.OperationResults;
 
 namespace GacExplorer.Services.Tests
 {
@@ -13,6 +15,13 @@ namespace GacExplorer.Services.Tests
         [TestMethod]
         public void GetAssemblyLines_ValidOutput_ReturnSucessGetAssemblyLinesOperationResult()
         {
+            //var expectedLines = 50;
+            //var location = ""; 
+            //var gacProxy = new Gacutil(location); 
+            //var service = new GlobalAssemblyCacheService(gacProxy);
+            //var response = service.GetAssemblyLines();
+            //Assert.AreEqual(OperationResult.Success, response.Result);
+            //Assert.AreEqual(expectedLines, response.AssemblyLines.Count); 
             throw new NotImplementedException(); 
         }
 

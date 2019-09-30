@@ -11,15 +11,19 @@ namespace GacExplorer.Services
 {
     public class GlobalAssemblyCacheService : IGlobalAssemblyCacheService
     {
-        private IGacutil commandProxy; 
-        public GlobalAssemblyCacheService(IGacutil commandProxy)
+        private IGacutil commandProxy;
+        private IGacutilOutputParserService outputParserService; 
+        public GlobalAssemblyCacheService(IGacutil commandProxy, IGacutilOutputParserService outputParserService)
         {
-            this.commandProxy = commandProxy; 
+            this.commandProxy = commandProxy;
+            this.outputParserService = outputParserService; 
         }
 
         public GetAssemblyLinesOperationResult GetAssemblyLines()
         {
-            throw new NotImplementedException(); 
+            // var gacutilOutput = this.commandProxy.ListAssemblies(); 
+            throw new NotFiniteNumberException(); 
+           
         }
     }
 }

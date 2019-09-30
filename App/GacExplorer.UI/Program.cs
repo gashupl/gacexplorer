@@ -29,6 +29,7 @@ namespace GacExplorer.UI
 
             container.Register<IApplicationConfigurationService, ApplicationConfigurationService>();
             container.Register<IGacutilLocationService, GacutilLocationService>();
+            container.Register<IGacutilOutputParserService, GacutilOutputParserService>();
             container.Register<IGlobalAssemblyCacheService, GlobalAssemblyCacheService>(); 
 
             container.Verify();
