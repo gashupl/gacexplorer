@@ -10,6 +10,7 @@ namespace GacExplorer.Services.DTO
     {
         public string Name { get; set; }
         public string Version { get; set; }
+        public string Culture { get; set; }
         public string PublicKeyToken { get; set; }
         public string ProcessorArchitecture { get; set; }
     }

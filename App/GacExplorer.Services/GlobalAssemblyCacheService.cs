@@ -21,9 +21,9 @@ namespace GacExplorer.Services
 
         public GetAssemblyLinesOperationResult GetAssemblyLines()
         {
-            // var gacutilOutput = this.commandProxy.ListAssemblies(); 
-            throw new NotFiniteNumberException(); 
-           
+            var gacutilOutput = this.commandProxy.ListAssemblies();
+            return new GetAssemblyLinesOperationResult(OperationResult.Success); 
+
         }
     }
 }

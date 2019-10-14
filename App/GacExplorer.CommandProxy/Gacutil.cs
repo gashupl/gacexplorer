@@ -27,7 +27,9 @@ namespace GacExplorer.CommandProxy
                 gacutilProcess.StartInfo.FileName = this.location;
                 gacutilProcess.StartInfo.Arguments = "-l";
                 gacutilProcess.StartInfo.CreateNoWindow = true;
-                gacutilProcess.Start();
+                gacutilProcess.StartInfo.UseShellExecute = false;
+                gacutilProcess.StartInfo.RedirectStandardOutput = true;
+                var result = gacutilProcess.Start();
 
                 StreamReader reader = gacutilProcess.StandardOutput;
                 output = reader.ReadToEnd();
