@@ -35,7 +35,7 @@ namespace GacExplorer.Services.Tests
                 Culture = "neutral",
                 PublicKeyToken = "b03f5f7f11d50a3a",
                 ProcessorArchitecture = "AMD64"
-            }; 
+            };
 
             var service = new GacutilOutputParserService();
             var result = service.ParseListOutput(output);
@@ -54,22 +54,34 @@ namespace GacExplorer.Services.Tests
         }
 
         [TestMethod]
-        public void ParseListOutput_InvalidOutput_ReturnFailedResultWithEmptyList()
+        public void ParseListOutput_InvalidOutput_ReturnNullAssemblyList()
         {
             string output = "Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.1\r\n" +
                          "Copyright (c) Microsoft Corporation.  All rights reserved.\r\n\r\n" +
                          "The Global Assembly Cache contains the following assemblies:\r\n  " +
-                         "CustomMarshalers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=AMD64\r\n  " +
-                         "Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=AMD64\r\n  "; 
+                         "Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=AMD64\r\n  ";
 
             var expectedResult = OperationResult.Failed;
-            var expectedAssemblyLinesCount = 0;
 
             var service = new GacutilOutputParserService();
             var result = service.ParseListOutput(output);
 
-            Assert.IsNotNull(result.AssemblyLines);
-            Assert.AreEqual(expectedAssemblyLinesCount, result.AssemblyLines.Count);
+            Assert.AreEqual(expectedResult, OperationResult.Failed);
+            Assert.IsNull(result.AssemblyLines);
+        }
+
+        [TestMethod]
+        public void ParseListOutput_emptyOutput_ReturnFailedResult()
+        {
+            string output = String.Empty; 
+
+            var expectedResult = OperationResult.Failed;
+
+            var service = new GacutilOutputParserService();
+            var result = service.ParseListOutput(output);
+
+            Assert.AreEqual(expectedResult, OperationResult.Failed);
+            Assert.IsNull(result.AssemblyLines);
         }
     }
 }

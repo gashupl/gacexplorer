@@ -13,5 +13,18 @@ namespace GacExplorer.Services.DTO
         public string Culture { get; set; }
         public string PublicKeyToken { get; set; }
         public string ProcessorArchitecture { get; set; }
+
+        public bool IsValid()
+        {
+            if(String.IsNullOrEmpty(Name) || String.IsNullOrEmpty(Version) || String.IsNullOrEmpty(Culture)
+                || String.IsNullOrEmpty(PublicKeyToken) || String.IsNullOrEmpty(ProcessorArchitecture))
+            {
+                return false; 
+            }
+            else
+            {
+                return true; 
+            }
+        }
     }
 }
