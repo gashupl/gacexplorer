@@ -71,7 +71,7 @@ namespace GacExplorer.Services.Tests
         }
 
         [TestMethod]
-        public void ParseListOutput_emptyOutput_ReturnFailedResult()
+        public void ParseListOutput_EmptyOutput_ReturnFailedResult()
         {
             string output = String.Empty; 
 

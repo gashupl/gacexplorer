@@ -21,8 +21,23 @@ namespace GacExplorer.Services
 
         public GetAssemblyLinesOperationResult GetAssemblyLines()
         {
-            var gacutilOutput = this.commandProxy.ListAssemblies();
-            return new GetAssemblyLinesOperationResult(OperationResult.Success); 
+            try
+            {
+                var output = this.commandProxy.ListAssemblies();
+                var outputParseResult = this.outputParserService.ParseListOutput(output);
+
+                return new GetAssemblyLinesOperationResult(outputParseResult.Result)
+                {
+                    AssemblyLines = outputParseResult.AssemblyLines
+                };
+            }
+            catch (Exception ex)
+            {
+                return new GetAssemblyLinesOperationResult(OperationResult.Failed, "GlobalAssemblyCacheService.GetAssemblyLines failed", ex); 
+       
+            }
+
+
 
         }
     }

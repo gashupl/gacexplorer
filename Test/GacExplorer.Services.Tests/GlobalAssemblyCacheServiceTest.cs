@@ -16,7 +16,6 @@ namespace GacExplorer.Services.Tests
         [TestMethod]
         public void GetAssemblyLines_ValidOutput_ReturnSucessGetAssemblyLinesOperationResult()
         {
-            var expectedLines = 50;
 
             string output = "Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.1\r\n" +
                 "Copyright (c) Microsoft Corporation.  All rights reserved.\r\n\r\n" +
@@ -32,24 +31,49 @@ namespace GacExplorer.Services.Tests
             var gacProxyMock = new Mock<IGacutil>();
             gacProxyMock.Setup(m => m.ListAssemblies()).Returns(output); 
 
-            var outputParser = new GacutilOutputParserService(); 
-            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParser);
+            var outputParserMock = new Mock<IGacutilOutputParserService>();
+            outputParserMock.Setup(m => m.ParseListOutput(It.IsAny<string>()))
+                .Returns(new GacutilOutputParserResult(OperationResult.Success));
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+
             var response = service.GetAssemblyLines();
             Assert.AreEqual(OperationResult.Success, response.Result);
-            Assert.AreEqual(expectedLines, response.AssemblyLines.Count);
-            throw new NotImplementedException(); 
         }
 
         [TestMethod]
         public void GetAssemblyLines_InvalidOutput_ReturnFailedGetAssemblyLinesOperationResult()
         {
-            throw new NotImplementedException();
+            string output = "Invalid output";
+
+            var gacProxyMock = new Mock<IGacutil>();
+            gacProxyMock.Setup(m => m.ListAssemblies()).Returns(output);
+
+            var outputParserMock = new Mock<IGacutilOutputParserService>();
+            outputParserMock.Setup(m => m.ParseListOutput(It.IsAny<string>()))
+                .Returns(new GacutilOutputParserResult(OperationResult.Failed));
+
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+
+            var response = service.GetAssemblyLines();
+            Assert.AreEqual(OperationResult.Failed, response.Result);
         }
 
         [TestMethod]
         public void GetAssemblyLines_EmptyOutput_ReturnFailedGetAssemblyLinesOperationResult()
         {
-            throw new NotImplementedException();
+            string output = String.Empty; 
+
+            var gacProxyMock = new Mock<IGacutil>();
+            gacProxyMock.Setup(m => m.ListAssemblies()).Returns(output);
+
+            var outputParserMock = new Mock<IGacutilOutputParserService>();
+            outputParserMock.Setup(m => m.ParseListOutput(It.IsAny<string>()))
+                .Returns(new GacutilOutputParserResult(OperationResult.Failed));
+
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+
+            var response = service.GetAssemblyLines();
+            Assert.AreEqual(OperationResult.Failed, response.Result);
         }
     }
 }
