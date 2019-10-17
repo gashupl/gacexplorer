@@ -62,6 +62,9 @@ namespace GacExplorer.UI
             this.openGacFileDialog.Dispose();
         }
 
+        private void ListAssembliesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

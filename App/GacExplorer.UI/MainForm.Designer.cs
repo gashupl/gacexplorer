@@ -41,6 +41,7 @@
             this.colPublicKeyToken = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProcessorArchitecture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.openGacFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.listAssembliesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +50,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.listAssembliesToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -145,6 +147,13 @@
             this.openGacFileDialog.FileName = "gacutil.exe";
             this.openGacFileDialog.Title = "Show me where the gacutil.exe is";
             // 
+            // listAssembliesToolStripMenuItem
+            // 
+            this.listAssembliesToolStripMenuItem.Name = "listAssembliesToolStripMenuItem";
+            this.listAssembliesToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            this.listAssembliesToolStripMenuItem.Text = "List Assemblies";
+            this.listAssembliesToolStripMenuItem.Click += new System.EventHandler(this.ListAssembliesToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,6 +188,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublicKeyToken;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProcessorArchitecture;
         private System.Windows.Forms.OpenFileDialog openGacFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem listAssembliesToolStripMenuItem;
     }
 }
 

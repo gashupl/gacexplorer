@@ -25,12 +25,10 @@ namespace GacExplorer.UI
         {
             container = new Container();
             container.Register<IFile, FileWrapper>();
-            container.Register<IGacutil, Gacutil>(); 
 
             container.Register<IApplicationConfigurationService, ApplicationConfigurationService>();
             container.Register<IGacutilLocationService, GacutilLocationService>();
             container.Register<IGacutilOutputParserService, GacutilOutputParserService>();
-            container.Register<IGlobalAssemblyCacheService, GlobalAssemblyCacheService>(); 
 
             container.Verify();
         }
