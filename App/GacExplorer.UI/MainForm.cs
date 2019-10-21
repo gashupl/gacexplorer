@@ -28,9 +28,10 @@ namespace GacExplorer.UI
             this.parserService = parserService; 
         }
 
+        #region EventHandlers
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            InitializeGacUtilProxy(); 
+            ListAssemblies(); 
         }
 
         private void ConfigureGacutilLocationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -43,15 +44,27 @@ namespace GacExplorer.UI
             Application.Exit(); 
         }
 
-        private void ShowGacFileDialog()
+        private void ListAssembliesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListAssemblies();
+        }
+        #endregion
+
+
+
+        #region Private methods
+        private DialogResult ShowGacFileDialog()
         {
             var result = this.openGacFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
                 var fileLocation = this.openGacFileDialog.FileName;
                 this.gacutilLocationService.Save(fileLocation);
+                this.gacUtilProxy = new Gacutil(fileLocation);
+              
             }
             this.openGacFileDialog.Dispose();
+            return result;
         }
 
         private void InitializeGacUtilProxy()
@@ -71,17 +84,31 @@ namespace GacExplorer.UI
             }
         }
 
-        private void ListAssembliesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ListAssemblies()
         {
-         
             if (gacUtilProxy == null)
             {
                 InitializeGacUtilProxy();
             }
 
             this.gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService);
-            var bindingList = new BindingList<AssemblyLineDto>(gacService.GetAssemblyLines().AssemblyLines);
-            this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
+            var assemblyLineList = gacService.GetAssemblyLines().AssemblyLines; 
+            if(assemblyLineList != null)
+            {
+                var bindingList = new BindingList<AssemblyLineDto>(assemblyLineList);
+                this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
+            }
+            else
+            {
+                if(ShowGacFileDialog() == DialogResult.OK)
+                {
+                    ListAssemblies();
+                }
+
+            }
+
         }
+        #endregion
+
     }
 }
