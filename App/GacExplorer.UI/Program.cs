@@ -1,10 +1,8 @@
-﻿using GacExplorer.Services;
+﻿using GacExplorer.CommandProxy;
+using GacExplorer.Services;
 using GacExplorer.Services.Wrappers;
 using SimpleInjector;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GacExplorer.UI
@@ -30,6 +28,7 @@ namespace GacExplorer.UI
 
             container.Register<IApplicationConfigurationService, ApplicationConfigurationService>();
             container.Register<IGacutilLocationService, GacutilLocationService>();
+            container.Register<IGacutilOutputParserService, GacutilOutputParserService>();
 
             container.Verify();
         }

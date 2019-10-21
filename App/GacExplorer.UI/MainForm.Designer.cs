@@ -32,15 +32,16 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureGacutilLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listAssembliesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridViewAssemblies = new System.Windows.Forms.DataGridView();
+            this.openGacFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCulture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublicKeyToken = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProcessorArchitecture = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.openGacFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +50,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.listAssembliesToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -79,6 +81,13 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
+            // listAssembliesToolStripMenuItem
+            // 
+            this.listAssembliesToolStripMenuItem.Name = "listAssembliesToolStripMenuItem";
+            this.listAssembliesToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            this.listAssembliesToolStripMenuItem.Text = "List Assemblies";
+            this.listAssembliesToolStripMenuItem.Click += new System.EventHandler(this.ListAssembliesToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -108,8 +117,14 @@
             this.gridViewAssemblies.Size = new System.Drawing.Size(800, 426);
             this.gridViewAssemblies.TabIndex = 1;
             // 
+            // openGacFileDialog
+            // 
+            this.openGacFileDialog.FileName = "gacutil.exe";
+            this.openGacFileDialog.Title = "Show me where the gacutil.exe is";
+            // 
             // colName
             // 
+            this.colName.DataPropertyName = "Name";
             this.colName.HeaderText = "Name";
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
@@ -117,18 +132,21 @@
             // 
             // colVersion
             // 
+            this.colVersion.DataPropertyName = "Version";
             this.colVersion.HeaderText = "Version";
             this.colVersion.Name = "colVersion";
             this.colVersion.ReadOnly = true;
             // 
             // colCulture
             // 
+            this.colCulture.DataPropertyName = "Culture";
             this.colCulture.HeaderText = "Culture";
             this.colCulture.Name = "colCulture";
             this.colCulture.ReadOnly = true;
             // 
             // colPublicKeyToken
             // 
+            this.colPublicKeyToken.DataPropertyName = "PublicKeyToken";
             this.colPublicKeyToken.HeaderText = "PublicKeyToken";
             this.colPublicKeyToken.Name = "colPublicKeyToken";
             this.colPublicKeyToken.ReadOnly = true;
@@ -136,14 +154,10 @@
             // 
             // colProcessorArchitecture
             // 
+            this.colProcessorArchitecture.DataPropertyName = "ProcessorArchitecture";
             this.colProcessorArchitecture.HeaderText = "Architecture";
             this.colProcessorArchitecture.Name = "colProcessorArchitecture";
             this.colProcessorArchitecture.ReadOnly = true;
-            // 
-            // openGacFileDialog
-            // 
-            this.openGacFileDialog.FileName = "gacutil.exe";
-            this.openGacFileDialog.Title = "Show me where the gacutil.exe is";
             // 
             // MainForm
             // 
@@ -173,12 +187,13 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.DataGridView gridViewAssemblies;
+        private System.Windows.Forms.OpenFileDialog openGacFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem listAssembliesToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVersion;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCulture;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublicKeyToken;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProcessorArchitecture;
-        private System.Windows.Forms.OpenFileDialog openGacFileDialog;
     }
 }
 

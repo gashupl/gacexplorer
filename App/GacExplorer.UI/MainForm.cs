@@ -10,21 +10,64 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GacExplorer.Services.OperationResults;
 using GacExplorer.CommandProxy;
+using GacExplorer.Services.DTO;
 
 namespace GacExplorer.UI
 {
     public partial class MainForm : Form
     {
         private IGacutilLocationService gacutilLocationService;
+        private IGacutilOutputParserService parserService;
+        private IGlobalAssemblyCacheService gacService; 
         private IGacutil gacUtilProxy; 
 
-        public MainForm(IGacutilLocationService configurationService)
+        public MainForm(IGacutilLocationService configurationService, IGacutilOutputParserService parserService)
         {
             InitializeComponent();
-            this.gacutilLocationService = configurationService; 
+            this.gacutilLocationService = configurationService;
+            this.parserService = parserService; 
         }
 
+        #region EventHandlers
         private void MainForm_Shown(object sender, EventArgs e)
+        {
+            ListAssemblies(); 
+        }
+
+        private void ConfigureGacutilLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowGacFileDialog(); 
+        }
+
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit(); 
+        }
+
+        private void ListAssembliesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListAssemblies();
+        }
+        #endregion
+
+
+
+        #region Private methods
+        private DialogResult ShowGacFileDialog()
+        {
+            var result = this.openGacFileDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                var fileLocation = this.openGacFileDialog.FileName;
+                this.gacutilLocationService.Save(fileLocation);
+                this.gacUtilProxy = new Gacutil(fileLocation);
+              
+            }
+            this.openGacFileDialog.Dispose();
+            return result;
+        }
+
+        private void InitializeGacUtilProxy()
         {
             var result = this.gacutilLocationService.Read();
             if (result.Result == OperationResult.Success)
@@ -41,27 +84,31 @@ namespace GacExplorer.UI
             }
         }
 
-        private void ConfigureGacutilLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ListAssemblies()
         {
-            ShowGacFileDialog(); 
-        }
-
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit(); 
-        }
-
-        private void ShowGacFileDialog()
-        {
-            var result = this.openGacFileDialog.ShowDialog();
-            if (result == DialogResult.OK)
+            if (gacUtilProxy == null)
             {
-                var fileLocation = this.openGacFileDialog.FileName;
-                this.gacutilLocationService.Save(fileLocation);
+                InitializeGacUtilProxy();
             }
-            this.openGacFileDialog.Dispose();
-        }
 
+            this.gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService);
+            var assemblyLineList = gacService.GetAssemblyLines().AssemblyLines; 
+            if(assemblyLineList != null)
+            {
+                var bindingList = new BindingList<AssemblyLineDto>(assemblyLineList);
+                this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
+            }
+            else
+            {
+                if(ShowGacFileDialog() == DialogResult.OK)
+                {
+                    ListAssemblies();
+                }
+
+            }
+
+        }
+        #endregion
 
     }
 }
