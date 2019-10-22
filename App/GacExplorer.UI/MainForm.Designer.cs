@@ -36,14 +36,17 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridViewAssemblies = new System.Windows.Forms.DataGridView();
-            this.openGacFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCulture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublicKeyToken = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProcessorArchitecture = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.openGacFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.lblAssemblyListCount = new System.Windows.Forms.Label();
+            this.tlbPanel = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).BeginInit();
+            this.tlbPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -112,15 +115,10 @@
             this.colPublicKeyToken,
             this.colProcessorArchitecture});
             this.gridViewAssemblies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridViewAssemblies.Location = new System.Drawing.Point(0, 24);
+            this.gridViewAssemblies.Location = new System.Drawing.Point(3, 17);
             this.gridViewAssemblies.Name = "gridViewAssemblies";
-            this.gridViewAssemblies.Size = new System.Drawing.Size(800, 426);
+            this.gridViewAssemblies.Size = new System.Drawing.Size(794, 406);
             this.gridViewAssemblies.TabIndex = 1;
-            // 
-            // openGacFileDialog
-            // 
-            this.openGacFileDialog.FileName = "gacutil.exe";
-            this.openGacFileDialog.Title = "Show me where the gacutil.exe is";
             // 
             // colName
             // 
@@ -159,12 +157,43 @@
             this.colProcessorArchitecture.Name = "colProcessorArchitecture";
             this.colProcessorArchitecture.ReadOnly = true;
             // 
+            // openGacFileDialog
+            // 
+            this.openGacFileDialog.FileName = "gacutil.exe";
+            this.openGacFileDialog.Title = "Show me where the gacutil.exe is";
+            // 
+            // lblAssemblyListCount
+            // 
+            this.lblAssemblyListCount.AutoSize = true;
+            this.lblAssemblyListCount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAssemblyListCount.Location = new System.Drawing.Point(10, 0);
+            this.lblAssemblyListCount.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
+            this.lblAssemblyListCount.Name = "lblAssemblyListCount";
+            this.lblAssemblyListCount.Size = new System.Drawing.Size(787, 14);
+            this.lblAssemblyListCount.TabIndex = 2;
+            this.lblAssemblyListCount.Text = "AssemblyListCount: ";
+            // 
+            // tlbPanel
+            // 
+            this.tlbPanel.ColumnCount = 1;
+            this.tlbPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlbPanel.Controls.Add(this.lblAssemblyListCount, 0, 0);
+            this.tlbPanel.Controls.Add(this.gridViewAssemblies, 0, 1);
+            this.tlbPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlbPanel.Location = new System.Drawing.Point(0, 24);
+            this.tlbPanel.Name = "tlbPanel";
+            this.tlbPanel.RowCount = 2;
+            this.tlbPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.286385F));
+            this.tlbPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 96.71362F));
+            this.tlbPanel.Size = new System.Drawing.Size(800, 426);
+            this.tlbPanel.TabIndex = 3;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.gridViewAssemblies);
+            this.Controls.Add(this.tlbPanel);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
@@ -173,6 +202,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).EndInit();
+            this.tlbPanel.ResumeLayout(false);
+            this.tlbPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,6 +225,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCulture;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublicKeyToken;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProcessorArchitecture;
+        private System.Windows.Forms.Label lblAssemblyListCount;
+        private System.Windows.Forms.TableLayoutPanel tlbPanel;
     }
 }
 

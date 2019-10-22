@@ -50,8 +50,6 @@ namespace GacExplorer.UI
         }
         #endregion
 
-
-
         #region Private methods
         private DialogResult ShowGacFileDialog()
         {
@@ -97,6 +95,7 @@ namespace GacExplorer.UI
             {
                 var bindingList = new BindingList<AssemblyLineDto>(assemblyLineList);
                 this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
+                this.lblAssemblyListCount.Text += assemblyLineList.Count.ToString(); 
             }
             else
             {
