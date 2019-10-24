@@ -40,5 +40,10 @@ namespace GacExplorer.Services
 
 
         }
+
+        public ServiceOperationResult RegisterAssembly(string path)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

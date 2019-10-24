@@ -40,5 +40,9 @@ namespace GacExplorer.CommandProxy
             return output;
         }
 
+        public string RegisterAssembly(string path)
+        {
+            throw new NotImplementedException();
+        }
     }   
 }
