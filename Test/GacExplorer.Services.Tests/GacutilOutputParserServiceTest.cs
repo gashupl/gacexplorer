@@ -12,6 +12,7 @@ namespace GacExplorer.Services.Tests
     [TestClass]
     public class GacutilOutputParserServiceTest
     {
+        #region ParseListOutput tests
         [TestMethod]
         public void ParseListOutput_ValidOutput_ReturnSuccessfullResult()
         {
@@ -66,7 +67,7 @@ namespace GacExplorer.Services.Tests
             var service = new GacutilOutputParserService();
             var result = service.ParseListOutput(output);
 
-            Assert.AreEqual(expectedResult, OperationResult.Failed);
+            Assert.AreEqual(expectedResult, result.Result);
             Assert.IsNull(result.AssemblyLines);
         }
 
@@ -80,8 +81,37 @@ namespace GacExplorer.Services.Tests
             var service = new GacutilOutputParserService();
             var result = service.ParseListOutput(output);
 
-            Assert.AreEqual(expectedResult, OperationResult.Failed);
+            Assert.AreEqual(expectedResult, result.Result);
             Assert.IsNull(result.AssemblyLines);
         }
+        #endregion
+
+        #region ParseRegisterOutput tests
+        [TestMethod]
+        public void ParseRegisterOutput_ValidOutput_ReturnSuccessfullResult()
+        {
+            string output = String.Empty; //TODO - Add value to be parsed
+
+            var expectedResult = OperationResult.Success;
+
+            var service = new GacutilOutputParserService();
+            var result = service.ParseRegisterOutput(output);
+
+            Assert.AreEqual(expectedResult, result.Result);
+        }
+
+        [TestMethod]
+        public void ParseRegisterOutput_InvalidOutput_ReturnFailedResult()
+        {
+            string output = String.Empty; //TODO - Add value to be parsed
+
+            var expectedResult = OperationResult.Failed;
+
+            var service = new GacutilOutputParserService();
+            var result = service.ParseRegisterOutput(output);
+
+            Assert.AreEqual(expectedResult, result.Result);
+        }
+        #endregion
     }
 }
