@@ -50,5 +50,10 @@ namespace GacExplorer.Services
                 };
             }
         }
+
+        public ServiceOperationResult ParseRegisterOutput(string output)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
