@@ -106,6 +106,19 @@ namespace GacExplorer.Services.Tests
         }
 
         [TestMethod]
+        public void ParseRegisterOutput_EmptyOutput_ReturnFailedResult()
+        {
+            string output = String.Empty; 
+
+            var expectedResult = OperationResult.Failed;
+
+            var service = new GacutilOutputParserService();
+            var result = service.ParseRegisterOutput(output);
+
+            Assert.AreEqual(expectedResult, result.Result);
+        }
+
+        [TestMethod]
         public void ParseRegisterOutput_InvalidOutput_ReturnFailedResult()
         {
             string output = "Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.1\r\n"
