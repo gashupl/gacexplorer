@@ -42,6 +42,13 @@ namespace GacExplorer.CommandProxy
 
         public string RegisterAssembly(string path)
         {
+            //Sample command for registering:  .\gacutil.exe /i C:\Users\piog\Source\GitHub\gacexplorer\Assets\GacExplorer.TestLibrary\bin\Debug\GacExplorer.TestLibrary.dll
+            throw new NotImplementedException();
+        }
+
+        public string UnregisterAssembly(string name)
+        {
+            //Sample command for unregister:  .\gacutil.exe /u GacExplorer.TestLibrary
             throw new NotImplementedException();
         }
     }   

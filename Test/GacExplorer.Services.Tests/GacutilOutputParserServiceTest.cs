@@ -90,7 +90,12 @@ namespace GacExplorer.Services.Tests
         [TestMethod]
         public void ParseRegisterOutput_ValidOutput_ReturnSuccessfullResult()
         {
-            string output = String.Empty; //TODO - Add value to be parsed
+            string output = "Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.1\r\n"
+                + "\r\n"
+                + "Copyright(c) Microsoft Corporation.  All rights reserved.\r\n"
+                + "Assembly successfully added to the cache";
+
+
 
             var expectedResult = OperationResult.Success;
 
@@ -103,7 +108,10 @@ namespace GacExplorer.Services.Tests
         [TestMethod]
         public void ParseRegisterOutput_InvalidOutput_ReturnFailedResult()
         {
-            string output = String.Empty; //TODO - Add value to be parsed
+            string output = "Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.1\r\n"
+                + "Copyright(c) Microsoft Corporation.  All rights reserved.\r\n"
+                + "\r\n"
+                + "Failure adding assembly to the cache: Attempt to install an assembly without a strong name\r\n"; 
 
             var expectedResult = OperationResult.Failed;
 
@@ -113,5 +121,26 @@ namespace GacExplorer.Services.Tests
             Assert.AreEqual(expectedResult, result.Result);
         }
         #endregion
+
+        #region ParseUnregisterOutput tests
+
+        //TODO: Sample failure output
+        //        Microsoft(R) .NET Global Assembly Cache Utility.Version 4.0.30319.1\r\n
+        //Copyright(c) Microsoft Corporation.All rights reserved.\r\n
+        //\r\n
+        //No assemblies found matching: GacExplorer.TestLibrary.dll\r\n
+        //Number of assemblies uninstalled = 0\r\n
+        //Number of failures = 0\r\n
+
+        //TODO: Sample sucessfull output:
+        //        Microsoft(R) .NET Global Assembly Cache Utility.Version 4.0.30319.1\r\n
+        //Copyright(c) Microsoft Corporation.All rights reserved.\r\n
+        //\r\n
+        //Assembly: GacExplorer.TestLibrary, Version= 1.0.0.0, Culture= neutral, PublicKeyToken= a5a2561c243b4c06, processorArchitecture= MSIL\r\n
+        //Uninstalled: GacExplorer.TestLibrary, Version= 1.0.0.0, Culture= neutral, PublicKeyToken= a5a2561c243b4c06, processorArchitecture= MSIL\r\n
+        //Number of assemblies uninstalled = 1\r\n
+        //Number of failures = 0
+        #endregion
+
     }
 }
