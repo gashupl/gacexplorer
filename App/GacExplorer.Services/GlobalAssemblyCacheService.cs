@@ -35,7 +35,6 @@ namespace GacExplorer.Services
             {
                 return new GetAssemblyLinesOperationResult(OperationResult.Failed, "GlobalAssemblyCacheService.GetAssemblyLines failed", ex); 
             }
-
         }
 
         public ServiceOperationResult RegisterAssembly(string path)
