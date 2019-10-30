@@ -45,6 +45,7 @@
             this.lblAssemblyListCount = new System.Windows.Forms.Label();
             this.tlbPanel = new System.Windows.Forms.TableLayoutPanel();
             this.btnRegisterAssembly = new System.Windows.Forms.Button();
+            this.addAssemblyFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).BeginInit();
             this.tlbPanel.SuspendLayout();
@@ -199,6 +200,12 @@
             this.btnRegisterAssembly.TabIndex = 3;
             this.btnRegisterAssembly.Text = "Register Assembly";
             this.btnRegisterAssembly.UseVisualStyleBackColor = true;
+            this.btnRegisterAssembly.Click += new System.EventHandler(this.BtnRegisterAssembly_Click);
+            // 
+            // addAssemblyFileDialog
+            // 
+            this.addAssemblyFileDialog.FileName = "openFileDialog1";
+            this.addAssemblyFileDialog.Title = "Select assembly to be registered";
             // 
             // MainForm
             // 
@@ -240,6 +247,7 @@
         private System.Windows.Forms.Label lblAssemblyListCount;
         private System.Windows.Forms.TableLayoutPanel tlbPanel;
         private System.Windows.Forms.Button btnRegisterAssembly;
+        private System.Windows.Forms.OpenFileDialog addAssemblyFileDialog;
     }
 }
 

@@ -44,7 +44,7 @@ namespace GacExplorer.Services
                 var output = this.commandProxy.RegisterAssembly(path); 
                 var outputParseResult = this.outputParserService.ParseRegisterOutput(output);
 
-                return new ServiceOperationResult(outputParseResult.Result); 
+                return new ServiceOperationResult(outputParseResult.Result, outputParseResult.Message); 
             }
             catch (Exception ex)
             {
