@@ -40,5 +40,38 @@ namespace GacExplorer.CommandProxy
             return output;
         }
 
+        public string RegisterAssembly(string path)
+        {
+            //Sample command for registering:  .\gacutil.exe /i C:\Users\piog\Source\GitHub\gacexplorer\Assets\GacExplorer.TestLibrary\bin\Debug\GacExplorer.TestLibrary.dll
+
+            string output;
+            using (Process gacutilProcess = new Process())
+            {
+                gacutilProcess.StartInfo.UseShellExecute = false;
+
+                gacutilProcess.StartInfo.FileName = this.location;
+                gacutilProcess.StartInfo.Arguments = $"/i {path}";
+                gacutilProcess.StartInfo.CreateNoWindow = true;
+                gacutilProcess.StartInfo.UseShellExecute = false;
+                gacutilProcess.StartInfo.RedirectStandardOutput = true;
+                gacutilProcess.StartInfo.Verb = "runas";
+                var result = gacutilProcess.Start();
+
+                StreamReader reader = gacutilProcess.StandardOutput;
+                output = reader.ReadToEnd();
+
+                gacutilProcess.WaitForExit();
+            }
+
+            return output;
+        }
+
+        public string UnregisterAssembly(string name)
+        {
+            //Sample command for unregister:  .\gacutil.exe /u GacExplorer.TestLibrary
+            throw new NotImplementedException();
+        }
+
+
     }   
 }

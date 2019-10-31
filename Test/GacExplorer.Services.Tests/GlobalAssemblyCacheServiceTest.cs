@@ -13,6 +13,7 @@ namespace GacExplorer.Services.Tests
     [TestClass]
     public class GlobalAssemblyCacheServiceTest
     {
+        #region GetAssemblyLines tests
         [TestMethod]
         public void GetAssemblyLines_ValidOutput_ReturnSucessGetAssemblyLinesOperationResult()
         {
@@ -75,5 +76,52 @@ namespace GacExplorer.Services.Tests
             var response = service.GetAssemblyLines();
             Assert.AreEqual(OperationResult.Failed, response.Result);
         }
+        #endregion
+
+        #region RegisterAssembly tests
+        [TestMethod]
+        public void RegisterAssembly_ValidAssembly_ReturnSuccessfullServiceResult()
+        {
+            string output = String.Empty;
+            string path = String.Empty;
+
+            var expectedResult = OperationResult.Success; 
+
+            var gacProxyMock = new Mock<IGacutil>();
+            gacProxyMock.Setup(m => m.RegisterAssembly(It.IsAny<string>())).Returns(output);
+
+            var outputParserMock = new Mock<IGacutilOutputParserService>();
+            outputParserMock.Setup(m => m.ParseRegisterOutput(It.IsAny<string>()))
+                .Returns(new ServiceOperationResult(OperationResult.Success));
+
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+
+            var response = service.RegisterAssembly(path);
+
+            Assert.AreEqual(expectedResult, response.Result); 
+        }
+
+        [TestMethod]
+        public void RegisterAssembly_InvalidAssembly_ReturnFailedServiceResult()
+        {
+            string output = String.Empty;
+            string path = String.Empty;
+
+            var expectedResult = OperationResult.Failed;
+
+            var gacProxyMock = new Mock<IGacutil>();
+            gacProxyMock.Setup(m => m.RegisterAssembly(It.IsAny<string>())).Returns(output);
+
+            var outputParserMock = new Mock<IGacutilOutputParserService>();
+            outputParserMock.Setup(m => m.ParseRegisterOutput(It.IsAny<string>()))
+                .Returns(new ServiceOperationResult(OperationResult.Failed));
+
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+
+            var response = service.RegisterAssembly(path);
+
+            Assert.AreEqual(expectedResult, response.Result);
+        }
+        #endregion
     }
 }

@@ -12,6 +12,7 @@ namespace GacExplorer.Services.Tests
     [TestClass]
     public class GacutilOutputParserServiceTest
     {
+        #region ParseListOutput tests
         [TestMethod]
         public void ParseListOutput_ValidOutput_ReturnSuccessfullResult()
         {
@@ -66,7 +67,7 @@ namespace GacExplorer.Services.Tests
             var service = new GacutilOutputParserService();
             var result = service.ParseListOutput(output);
 
-            Assert.AreEqual(expectedResult, OperationResult.Failed);
+            Assert.AreEqual(expectedResult, result.Result);
             Assert.IsNull(result.AssemblyLines);
         }
 
@@ -80,8 +81,79 @@ namespace GacExplorer.Services.Tests
             var service = new GacutilOutputParserService();
             var result = service.ParseListOutput(output);
 
-            Assert.AreEqual(expectedResult, OperationResult.Failed);
+            Assert.AreEqual(expectedResult, result.Result);
             Assert.IsNull(result.AssemblyLines);
         }
+        #endregion
+
+        #region ParseRegisterOutput tests
+        [TestMethod]
+        public void ParseRegisterOutput_ValidOutput_ReturnSuccessfullResult()
+        {
+            string output = "Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.1\r\n"
+                + "\r\n"
+                + "Copyright(c) Microsoft Corporation.  All rights reserved.\r\n"
+                + "Assembly successfully added to the cache";
+
+
+
+            var expectedResult = OperationResult.Success;
+
+            var service = new GacutilOutputParserService();
+            var result = service.ParseRegisterOutput(output);
+
+            Assert.AreEqual(expectedResult, result.Result);
+        }
+
+        [TestMethod]
+        public void ParseRegisterOutput_EmptyOutput_ReturnFailedResult()
+        {
+            string output = String.Empty; 
+
+            var expectedResult = OperationResult.Failed;
+
+            var service = new GacutilOutputParserService();
+            var result = service.ParseRegisterOutput(output);
+
+            Assert.AreEqual(expectedResult, result.Result);
+        }
+
+        [TestMethod]
+        public void ParseRegisterOutput_InvalidOutput_ReturnFailedResult()
+        {
+            string output = "Microsoft (R) .NET Global Assembly Cache Utility.  Version 4.0.30319.1\r\n"
+                + "Copyright(c) Microsoft Corporation.  All rights reserved.\r\n"
+                + "\r\n"
+                + "Failure adding assembly to the cache: Attempt to install an assembly without a strong name\r\n"; 
+
+            var expectedResult = OperationResult.Failed;
+
+            var service = new GacutilOutputParserService();
+            var result = service.ParseRegisterOutput(output);
+
+            Assert.AreEqual(expectedResult, result.Result);
+        }
+        #endregion
+
+        #region ParseUnregisterOutput tests
+
+        //TODO: Sample failure output
+        //        Microsoft(R) .NET Global Assembly Cache Utility.Version 4.0.30319.1\r\n
+        //Copyright(c) Microsoft Corporation.All rights reserved.\r\n
+        //\r\n
+        //No assemblies found matching: GacExplorer.TestLibrary.dll\r\n
+        //Number of assemblies uninstalled = 0\r\n
+        //Number of failures = 0\r\n
+
+        //TODO: Sample sucessfull output:
+        //        Microsoft(R) .NET Global Assembly Cache Utility.Version 4.0.30319.1\r\n
+        //Copyright(c) Microsoft Corporation.All rights reserved.\r\n
+        //\r\n
+        //Assembly: GacExplorer.TestLibrary, Version= 1.0.0.0, Culture= neutral, PublicKeyToken= a5a2561c243b4c06, processorArchitecture= MSIL\r\n
+        //Uninstalled: GacExplorer.TestLibrary, Version= 1.0.0.0, Culture= neutral, PublicKeyToken= a5a2561c243b4c06, processorArchitecture= MSIL\r\n
+        //Number of assemblies uninstalled = 1\r\n
+        //Number of failures = 0
+        #endregion
+
     }
 }

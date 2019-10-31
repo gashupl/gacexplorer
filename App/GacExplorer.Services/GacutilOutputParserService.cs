@@ -50,5 +50,25 @@ namespace GacExplorer.Services
                 };
             }
         }
+
+        public ServiceOperationResult ParseRegisterOutput(string output)
+        {
+            if (String.IsNullOrWhiteSpace(output))
+            {
+                return new ServiceOperationResult(OperationResult.Failed, "GacutilOutputParserService.ParseRegisterOutput operation failed. Empty output string");
+            }
+            else
+            {
+                string successText = "Assembly successfully added to the cache"; 
+                if (output.Contains(successText))
+                {
+                    return new ServiceOperationResult(OperationResult.Success, successText);
+                }
+                else
+                {
+                    return new ServiceOperationResult(OperationResult.Failed, output);
+                }
+            }
+        }
     }
 }

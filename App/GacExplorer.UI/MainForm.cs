@@ -48,6 +48,34 @@ namespace GacExplorer.UI
         {
             ListAssemblies();
         }
+
+        private void BtnRegisterAssembly_Click(object sender, EventArgs e)
+        {
+            if (this.gacUtilProxy == null)
+            {
+                MessageBox.Show("You need to configure localization of GacUtil.exe tool before performing registration"); 
+            }
+            else
+            {
+                var result = this.addAssemblyFileDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                { 
+                    if(this.gacService == null)
+                    {
+                        gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService);
+                    }
+                    var response = this.gacService.RegisterAssembly(this.addAssemblyFileDialog.FileName);
+                    if (response.Result == OperationResult.Success)
+                    {
+                        MessageBox.Show("Assembly successfully registered in GAC"); 
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Error when registering assembly in GAC: {response.Message}");
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Private methods
@@ -108,6 +136,7 @@ namespace GacExplorer.UI
 
         }
         #endregion
+
 
     }
 }

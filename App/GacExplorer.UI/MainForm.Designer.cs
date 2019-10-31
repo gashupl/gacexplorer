@@ -44,6 +44,8 @@
             this.openGacFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.lblAssemblyListCount = new System.Windows.Forms.Label();
             this.tlbPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.btnRegisterAssembly = new System.Windows.Forms.Button();
+            this.addAssemblyFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).BeginInit();
             this.tlbPanel.SuspendLayout();
@@ -115,9 +117,9 @@
             this.colPublicKeyToken,
             this.colProcessorArchitecture});
             this.gridViewAssemblies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridViewAssemblies.Location = new System.Drawing.Point(3, 17);
+            this.gridViewAssemblies.Location = new System.Drawing.Point(3, 43);
             this.gridViewAssemblies.Name = "gridViewAssemblies";
-            this.gridViewAssemblies.Size = new System.Drawing.Size(794, 406);
+            this.gridViewAssemblies.Size = new System.Drawing.Size(794, 360);
             this.gridViewAssemblies.TabIndex = 1;
             // 
             // colName
@@ -166,27 +168,44 @@
             // 
             this.lblAssemblyListCount.AutoSize = true;
             this.lblAssemblyListCount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAssemblyListCount.Location = new System.Drawing.Point(10, 0);
+            this.lblAssemblyListCount.Location = new System.Drawing.Point(10, 406);
             this.lblAssemblyListCount.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
             this.lblAssemblyListCount.Name = "lblAssemblyListCount";
-            this.lblAssemblyListCount.Size = new System.Drawing.Size(787, 14);
+            this.lblAssemblyListCount.Size = new System.Drawing.Size(787, 20);
             this.lblAssemblyListCount.TabIndex = 2;
             this.lblAssemblyListCount.Text = "AssemblyListCount: ";
             // 
             // tlbPanel
             // 
             this.tlbPanel.ColumnCount = 1;
-            this.tlbPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlbPanel.Controls.Add(this.lblAssemblyListCount, 0, 0);
+            this.tlbPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlbPanel.Controls.Add(this.lblAssemblyListCount, 0, 2);
             this.tlbPanel.Controls.Add(this.gridViewAssemblies, 0, 1);
+            this.tlbPanel.Controls.Add(this.btnRegisterAssembly, 0, 0);
             this.tlbPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlbPanel.Location = new System.Drawing.Point(0, 24);
             this.tlbPanel.Name = "tlbPanel";
-            this.tlbPanel.RowCount = 2;
-            this.tlbPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.286385F));
-            this.tlbPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 96.71362F));
+            this.tlbPanel.RowCount = 3;
+            this.tlbPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlbPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlbPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlbPanel.Size = new System.Drawing.Size(800, 426);
             this.tlbPanel.TabIndex = 3;
+            // 
+            // btnRegisterAssembly
+            // 
+            this.btnRegisterAssembly.Location = new System.Drawing.Point(3, 3);
+            this.btnRegisterAssembly.Name = "btnRegisterAssembly";
+            this.btnRegisterAssembly.Size = new System.Drawing.Size(111, 27);
+            this.btnRegisterAssembly.TabIndex = 3;
+            this.btnRegisterAssembly.Text = "Register Assembly";
+            this.btnRegisterAssembly.UseVisualStyleBackColor = true;
+            this.btnRegisterAssembly.Click += new System.EventHandler(this.BtnRegisterAssembly_Click);
+            // 
+            // addAssemblyFileDialog
+            // 
+            this.addAssemblyFileDialog.FileName = "openFileDialog1";
+            this.addAssemblyFileDialog.Title = "Select assembly to be registered";
             // 
             // MainForm
             // 
@@ -227,6 +246,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colProcessorArchitecture;
         private System.Windows.Forms.Label lblAssemblyListCount;
         private System.Windows.Forms.TableLayoutPanel tlbPanel;
+        private System.Windows.Forms.Button btnRegisterAssembly;
+        private System.Windows.Forms.OpenFileDialog addAssemblyFileDialog;
     }
 }
 

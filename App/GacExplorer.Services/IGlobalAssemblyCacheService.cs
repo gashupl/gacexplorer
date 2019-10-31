@@ -1,11 +1,11 @@
-﻿using GacExplorer.Services.DTO;
-using GacExplorer.Services.OperationResults;
-using System.Collections.Generic;
+﻿using GacExplorer.Services.OperationResults;
 
 namespace GacExplorer.Services
 {
     public interface IGlobalAssemblyCacheService
     {
-        GetAssemblyLinesOperationResult GetAssemblyLines(); 
+        GetAssemblyLinesOperationResult GetAssemblyLines();
+
+        ServiceOperationResult RegisterAssembly(string path); 
     }
 }

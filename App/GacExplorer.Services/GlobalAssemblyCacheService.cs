@@ -1,11 +1,6 @@
 ﻿using GacExplorer.CommandProxy;
-using GacExplorer.Services.DTO;
 using GacExplorer.Services.OperationResults;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GacExplorer.Services
 {
@@ -34,11 +29,22 @@ namespace GacExplorer.Services
             catch (Exception ex)
             {
                 return new GetAssemblyLinesOperationResult(OperationResult.Failed, "GlobalAssemblyCacheService.GetAssemblyLines failed", ex); 
-       
             }
+        }
 
+        public ServiceOperationResult RegisterAssembly(string path)
+        {
+            try
+            {
+                var output = this.commandProxy.RegisterAssembly(path); 
+                var outputParseResult = this.outputParserService.ParseRegisterOutput(output);
 
-
+                return new ServiceOperationResult(outputParseResult.Result, outputParseResult.Message); 
+            }
+            catch (Exception ex)
+            {
+                return new GetAssemblyLinesOperationResult(OperationResult.Failed, "GlobalAssemblyCacheService.GetAssemblyLines failed", ex);
+            }
         }
     }
 }
