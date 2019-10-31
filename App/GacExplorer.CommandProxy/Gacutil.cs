@@ -54,6 +54,7 @@ namespace GacExplorer.CommandProxy
                 gacutilProcess.StartInfo.CreateNoWindow = true;
                 gacutilProcess.StartInfo.UseShellExecute = false;
                 gacutilProcess.StartInfo.RedirectStandardOutput = true;
+                gacutilProcess.StartInfo.Verb = "runas";
                 var result = gacutilProcess.Start();
 
                 StreamReader reader = gacutilProcess.StandardOutput;
