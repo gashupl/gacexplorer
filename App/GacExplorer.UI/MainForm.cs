@@ -76,6 +76,31 @@ namespace GacExplorer.UI
                 }
             }
         }
+
+        private void GridViewAssemblies_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (this.gridViewAssemblies.SelectedRows.Count == 1)
+                {
+                    var selectedRow = this.gridViewAssemblies.SelectedRows[0];
+                    var hitRowIndex = this.gridViewAssemblies.HitTest(e.X, e.Y).RowIndex;
+                    int selectedRowIndex = selectedRow.Index;
+                    if (hitRowIndex == selectedRowIndex)
+                    {
+                        var name = Convert.ToString(selectedRow.Cells[0].Value);
+                        MessageBox.Show($"Assembly '{name}' will be removed from Global Assembly Cache. Continue?",
+                                     "Please confirm uninstallaiton",
+                                     MessageBoxButtons.YesNo);
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Select single assembly to be uninstalled from GAC");
+                }
+            }
+        }
         #endregion
 
         #region Private methods
@@ -135,6 +160,7 @@ namespace GacExplorer.UI
             }
 
         }
+
         #endregion
 
 
