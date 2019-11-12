@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using GacExplorer.Services.DTO;
 using GacExplorer.Services.OperationResults;
@@ -53,13 +54,23 @@ namespace GacExplorer.Services
 
         public ServiceOperationResult ParseRegisterOutput(string output)
         {
+            return this.ParseOutput(output, "Assembly successfully added to the cache");
+        }
+
+        public ServiceOperationResult ParseUnregisterOutput(string output)
+        {
+            return this.ParseOutput(output, "Number of assemblies uninstalled = 1"); 
+        }
+
+        private ServiceOperationResult ParseOutput(string output, string requiredSuccessText)
+        {
             if (String.IsNullOrWhiteSpace(output))
             {
-                return new ServiceOperationResult(OperationResult.Failed, "GacutilOutputParserService.ParseRegisterOutput operation failed. Empty output string");
+                return new ServiceOperationResult(OperationResult.Failed, $"{MethodBase.GetCurrentMethod().Name} operation failed. Empty output string");
             }
             else
             {
-                string successText = "Assembly successfully added to the cache"; 
+                string successText = requiredSuccessText;
                 if (output.Contains(successText))
                 {
                     return new ServiceOperationResult(OperationResult.Success, successText);
