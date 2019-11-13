@@ -8,6 +8,19 @@ namespace GacExplorer.Services.Tests
     [TestClass]
     public class GacutilOutputParserServiceTest
     {
+        private GacutilOutputParserService testedService; 
+
+        [TestInitialize]
+        public void OnBeforeMethodExecution()
+        {
+            this.testedService = new GacutilOutputParserService(); 
+        }
+
+        public void OnAfterMethodExecution()
+        {
+            this.testedService = null; 
+        }
+
         #region ParseListOutput tests
         [TestMethod]
         public void ParseListOutput_ValidOutput_ReturnSuccessfullResult()
@@ -34,8 +47,7 @@ namespace GacExplorer.Services.Tests
                 ProcessorArchitecture = "AMD64"
             };
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseListOutput(output);
+            var result = testedService.ParseListOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
 
@@ -60,8 +72,7 @@ namespace GacExplorer.Services.Tests
 
             var expectedResult = OperationResult.Failed;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseListOutput(output);
+            var result = testedService.ParseListOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
             Assert.IsNull(result.AssemblyLines);
@@ -74,8 +85,7 @@ namespace GacExplorer.Services.Tests
 
             var expectedResult = OperationResult.Failed;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseListOutput(output);
+            var result = testedService.ParseListOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
             Assert.IsNull(result.AssemblyLines);
@@ -93,8 +103,7 @@ namespace GacExplorer.Services.Tests
 
             var expectedResult = OperationResult.Success;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseRegisterOutput(output);
+            var result = testedService.ParseRegisterOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
         }
@@ -106,8 +115,7 @@ namespace GacExplorer.Services.Tests
 
             var expectedResult = OperationResult.Failed;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseRegisterOutput(output);
+            var result = testedService.ParseRegisterOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
         }
@@ -122,8 +130,7 @@ namespace GacExplorer.Services.Tests
 
             var expectedResult = OperationResult.Failed;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseRegisterOutput(output);
+            var result = testedService.ParseRegisterOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
         }
@@ -138,8 +145,7 @@ namespace GacExplorer.Services.Tests
 
             var expectedResult = OperationResult.Failed;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseUnregisterOutput(output);
+            var result = testedService.ParseUnregisterOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
         }
@@ -156,8 +162,7 @@ namespace GacExplorer.Services.Tests
 
             var expectedResult = OperationResult.Failed;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseRegisterOutput(output);
+            var result = testedService.ParseRegisterOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
         }
@@ -175,8 +180,7 @@ namespace GacExplorer.Services.Tests
 
             var expectedResult = OperationResult.Success;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseUnregisterOutput(output);
+            var result = testedService.ParseUnregisterOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
         }
