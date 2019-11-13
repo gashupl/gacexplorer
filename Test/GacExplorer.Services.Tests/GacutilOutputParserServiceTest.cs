@@ -16,6 +16,7 @@ namespace GacExplorer.Services.Tests
             this.testedService = new GacutilOutputParserService(); 
         }
 
+        [TestCleanup]
         public void OnAfterMethodExecution()
         {
             this.testedService = null; 
