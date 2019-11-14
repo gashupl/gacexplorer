@@ -46,5 +46,20 @@ namespace GacExplorer.Services
                 return new GetAssemblyLinesOperationResult(OperationResult.Failed, "GlobalAssemblyCacheService.GetAssemblyLines failed", ex);
             }
         }
+
+        public ServiceOperationResult UnregisterAssembly(string path)
+        {
+            try
+            {
+                var output = this.commandProxy.UnregisterAssembly(path);
+                var outputParseResult = this.outputParserService.ParseUnregisterOutput(output);
+
+                return new ServiceOperationResult(outputParseResult.Result, outputParseResult.Message);
+            }
+            catch (Exception ex)
+            {
+                return new GetAssemblyLinesOperationResult(OperationResult.Failed, "GlobalAssemblyCacheService.GetAssemblyLines failed", ex);
+            }
+        }
     }
 }
