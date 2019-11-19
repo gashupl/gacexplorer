@@ -26,7 +26,7 @@ namespace GacExplorer.Services
 
                 return new GetAssemblyLinesOperationResult(outputParseResult.Result)
                 {
-                    AssemblyLines = outputParseResult.AssemblyLines.OrderBy(a => a.Name).ToList<AssemblyLineDto>() 
+                    AssemblyLines = outputParseResult.AssemblyLines?.OrderBy(a => a.Name).ToList<AssemblyLineDto>() 
                 };
             }
             catch (Exception ex)
