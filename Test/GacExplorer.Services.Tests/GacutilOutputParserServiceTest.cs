@@ -2,16 +2,26 @@
 using GacExplorer.Services.OperationResults;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GacExplorer.Services.Tests
 {
     [TestClass]
     public class GacutilOutputParserServiceTest
     {
+        private GacutilOutputParserService testedService; 
+
+        [TestInitialize]
+        public void OnBeforeMethodExecution()
+        {
+            this.testedService = new GacutilOutputParserService(); 
+        }
+
+        [TestCleanup]
+        public void OnAfterMethodExecution()
+        {
+            this.testedService = null; 
+        }
+
         #region ParseListOutput tests
         [TestMethod]
         public void ParseListOutput_ValidOutput_ReturnSuccessfullResult()
@@ -38,8 +48,7 @@ namespace GacExplorer.Services.Tests
                 ProcessorArchitecture = "AMD64"
             };
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseListOutput(output);
+            var result = testedService.ParseListOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
 
@@ -64,8 +73,7 @@ namespace GacExplorer.Services.Tests
 
             var expectedResult = OperationResult.Failed;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseListOutput(output);
+            var result = testedService.ParseListOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
             Assert.IsNull(result.AssemblyLines);
@@ -78,8 +86,7 @@ namespace GacExplorer.Services.Tests
 
             var expectedResult = OperationResult.Failed;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseListOutput(output);
+            var result = testedService.ParseListOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
             Assert.IsNull(result.AssemblyLines);
@@ -95,12 +102,9 @@ namespace GacExplorer.Services.Tests
                 + "Copyright(c) Microsoft Corporation.  All rights reserved.\r\n"
                 + "Assembly successfully added to the cache";
 
-
-
             var expectedResult = OperationResult.Success;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseRegisterOutput(output);
+            var result = testedService.ParseRegisterOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
         }
@@ -112,8 +116,7 @@ namespace GacExplorer.Services.Tests
 
             var expectedResult = OperationResult.Failed;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseRegisterOutput(output);
+            var result = testedService.ParseRegisterOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
         }
@@ -128,8 +131,7 @@ namespace GacExplorer.Services.Tests
 
             var expectedResult = OperationResult.Failed;
 
-            var service = new GacutilOutputParserService();
-            var result = service.ParseRegisterOutput(output);
+            var result = testedService.ParseRegisterOutput(output);
 
             Assert.AreEqual(expectedResult, result.Result);
         }
@@ -137,22 +139,52 @@ namespace GacExplorer.Services.Tests
 
         #region ParseUnregisterOutput tests
 
-        //TODO: Sample failure output
-        //        Microsoft(R) .NET Global Assembly Cache Utility.Version 4.0.30319.1\r\n
-        //Copyright(c) Microsoft Corporation.All rights reserved.\r\n
-        //\r\n
-        //No assemblies found matching: GacExplorer.TestLibrary.dll\r\n
-        //Number of assemblies uninstalled = 0\r\n
-        //Number of failures = 0\r\n
+        [TestMethod]
+        public void ParseUnregisterOutput_EmptyOutput_ReturnFailedResult()
+        {
+            string output = String.Empty;
 
-        //TODO: Sample sucessfull output:
-        //        Microsoft(R) .NET Global Assembly Cache Utility.Version 4.0.30319.1\r\n
-        //Copyright(c) Microsoft Corporation.All rights reserved.\r\n
-        //\r\n
-        //Assembly: GacExplorer.TestLibrary, Version= 1.0.0.0, Culture= neutral, PublicKeyToken= a5a2561c243b4c06, processorArchitecture= MSIL\r\n
-        //Uninstalled: GacExplorer.TestLibrary, Version= 1.0.0.0, Culture= neutral, PublicKeyToken= a5a2561c243b4c06, processorArchitecture= MSIL\r\n
-        //Number of assemblies uninstalled = 1\r\n
-        //Number of failures = 0
+            var expectedResult = OperationResult.Failed;
+
+            var result = testedService.ParseUnregisterOutput(output);
+
+            Assert.AreEqual(expectedResult, result.Result);
+        }
+
+        [TestMethod]
+        public void ParseUnegisterOutput_InvalidOutput_ReturnFailedResult()
+        {
+            string output = "Microsoft(R) .NET Global Assembly Cache Utility.Version 4.0.30319.1\r\n" 
+                + "Copyright(c) Microsoft Corporation.All rights reserved.\r\n" 
+                + "\r\n" 
+                + "No assemblies found matching: GacExplorer.TestLibrary.dll\r\n" 
+                + "Number of assemblies uninstalled = 0\r\n" 
+                + "Number of failures = 0\r\n";
+
+            var expectedResult = OperationResult.Failed;
+
+            var result = testedService.ParseRegisterOutput(output);
+
+            Assert.AreEqual(expectedResult, result.Result);
+        }
+
+        [TestMethod]
+        public void ParseUnregisterOutput_ValidOutput_ReturnSuccessfullResult()
+        {
+            string output = "Microsoft(R) .NET Global Assembly Cache Utility.Version 4.0.30319.1\r\n"
+                + "Copyright(c) Microsoft Corporation.All rights reserved.\r\n"
+                + "\r\n"
+                + "Assembly: GacExplorer.TestLibrary, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = a5a2561c243b4c06, processorArchitecture = MSIL\r\n"
+                + "Uninstalled: GacExplorer.TestLibrary, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = a5a2561c243b4c06, processorArchitecture = MSIL\r\n"
+                + "Number of assemblies uninstalled = 1\r\n"
+                + "Number of failures = 0";
+
+            var expectedResult = OperationResult.Success;
+
+            var result = testedService.ParseUnregisterOutput(output);
+
+            Assert.AreEqual(expectedResult, result.Result);
+        }
         #endregion
 
     }

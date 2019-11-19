@@ -123,5 +123,51 @@ namespace GacExplorer.Services.Tests
             Assert.AreEqual(expectedResult, response.Result);
         }
         #endregion
+
+        #region UnregisterAssembly tests
+        [TestMethod]
+        public void UnregisterAssembly_ValidAssembly_ReturnSuccessfullServiceResult()
+        {
+            string output = String.Empty;
+            string path = String.Empty;
+
+            var expectedResult = OperationResult.Success;
+
+            var gacProxyMock = new Mock<IGacutil>();
+            gacProxyMock.Setup(m => m.UnregisterAssembly(It.IsAny<string>())).Returns(output);
+
+            var outputParserMock = new Mock<IGacutilOutputParserService>();
+            outputParserMock.Setup(m => m.ParseUnregisterOutput(It.IsAny<string>()))
+                .Returns(new ServiceOperationResult(OperationResult.Success));
+
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+
+            var response = service.UnregisterAssembly(path);
+
+            Assert.AreEqual(expectedResult, response.Result);
+        }
+
+        [TestMethod]
+        public void UnregisterAssembly_InvalidAssembly_ReturnFailedServiceResult()
+        {
+            string output = String.Empty;
+            string path = String.Empty;
+
+            var expectedResult = OperationResult.Failed;
+
+            var gacProxyMock = new Mock<IGacutil>();
+            gacProxyMock.Setup(m => m.UnregisterAssembly(It.IsAny<string>())).Returns(output);
+
+            var outputParserMock = new Mock<IGacutilOutputParserService>();
+            outputParserMock.Setup(m => m.ParseUnregisterOutput(It.IsAny<string>()))
+                .Returns(new ServiceOperationResult(OperationResult.Failed));
+
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+
+            var response = service.UnregisterAssembly(path);
+
+            Assert.AreEqual(expectedResult, response.Result);
+        }
+        #endregion
     }
 }

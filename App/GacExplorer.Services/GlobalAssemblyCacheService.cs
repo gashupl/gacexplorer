@@ -1,6 +1,8 @@
 ﻿using GacExplorer.CommandProxy;
+using GacExplorer.Services.DTO;
 using GacExplorer.Services.OperationResults;
 using System;
+using System.Linq; 
 
 namespace GacExplorer.Services
 {
@@ -21,9 +23,10 @@ namespace GacExplorer.Services
                 var output = this.commandProxy.ListAssemblies();
                 var outputParseResult = this.outputParserService.ParseListOutput(output);
 
+
                 return new GetAssemblyLinesOperationResult(outputParseResult.Result)
                 {
-                    AssemblyLines = outputParseResult.AssemblyLines
+                    AssemblyLines = outputParseResult.AssemblyLines.OrderBy(a => a.Name).ToList<AssemblyLineDto>() 
                 };
             }
             catch (Exception ex)
@@ -40,6 +43,21 @@ namespace GacExplorer.Services
                 var outputParseResult = this.outputParserService.ParseRegisterOutput(output);
 
                 return new ServiceOperationResult(outputParseResult.Result, outputParseResult.Message); 
+            }
+            catch (Exception ex)
+            {
+                return new GetAssemblyLinesOperationResult(OperationResult.Failed, "GlobalAssemblyCacheService.GetAssemblyLines failed", ex);
+            }
+        }
+
+        public ServiceOperationResult UnregisterAssembly(string path)
+        {
+            try
+            {
+                var output = this.commandProxy.UnregisterAssembly(path);
+                var outputParseResult = this.outputParserService.ParseUnregisterOutput(output);
+
+                return new ServiceOperationResult(outputParseResult.Result, outputParseResult.Message);
             }
             catch (Exception ex)
             {

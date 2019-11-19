@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.components = new System.ComponentModel.Container();
+            this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureGacutilLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,22 +47,23 @@
             this.tlbPanel = new System.Windows.Forms.TableLayoutPanel();
             this.btnRegisterAssembly = new System.Windows.Forms.Button();
             this.addAssemblyFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.menuStrip1.SuspendLayout();
+            this.assembliesContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).BeginInit();
             this.tlbPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // mainMenuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.listAssembliesToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.mainMenuStrip.Name = "mainMenuStrip";
+            this.mainMenuStrip.Size = new System.Drawing.Size(800, 24);
+            this.mainMenuStrip.TabIndex = 0;
+            this.mainMenuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -121,6 +123,7 @@
             this.gridViewAssemblies.Name = "gridViewAssemblies";
             this.gridViewAssemblies.Size = new System.Drawing.Size(794, 360);
             this.gridViewAssemblies.TabIndex = 1;
+            this.gridViewAssemblies.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridViewAssemblies_MouseClick);
             // 
             // colName
             // 
@@ -207,19 +210,24 @@
             this.addAssemblyFileDialog.FileName = "openFileDialog1";
             this.addAssemblyFileDialog.Title = "Select assembly to be registered";
             // 
+            // assembliesContextMenuStrip
+            // 
+            this.assembliesContextMenuStrip.Name = "assembliesContextMenuStrip";
+            this.assembliesContextMenuStrip.Size = new System.Drawing.Size(61, 4);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tlbPanel);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.mainMenuStrip);
+            this.MainMenuStrip = this.mainMenuStrip;
             this.Name = "MainForm";
             this.Text = "GAC Explorer";
             this.Shown += new System.EventHandler(this.MainForm_Shown);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.mainMenuStrip.ResumeLayout(false);
+            this.mainMenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).EndInit();
             this.tlbPanel.ResumeLayout(false);
             this.tlbPanel.PerformLayout();
@@ -230,7 +238,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip mainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem configureGacutilLocationToolStripMenuItem;
@@ -248,6 +256,7 @@
         private System.Windows.Forms.TableLayoutPanel tlbPanel;
         private System.Windows.Forms.Button btnRegisterAssembly;
         private System.Windows.Forms.OpenFileDialog addAssemblyFileDialog;
+        private System.Windows.Forms.ContextMenuStrip assembliesContextMenuStrip;
     }
 }
 

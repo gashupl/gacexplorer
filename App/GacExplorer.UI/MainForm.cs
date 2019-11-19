@@ -67,12 +67,61 @@ namespace GacExplorer.UI
                     var response = this.gacService.RegisterAssembly(this.addAssemblyFileDialog.FileName);
                     if (response.Result == OperationResult.Success)
                     {
-                        MessageBox.Show("Assembly successfully registered in GAC"); 
+                        MessageBox.Show("Assembly successfully registered in GAC");
+                        ListAssemblies(); 
                     }
                     else
                     {
                         MessageBox.Show($"Error when registering assembly in GAC: {response.Message}");
                     }
+                }
+            }
+        }
+
+        private void GridViewAssemblies_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (this.gridViewAssemblies.SelectedRows.Count == 1)
+                {
+                    var selectedRow = this.gridViewAssemblies.SelectedRows[0];
+                    var hitRowIndex = this.gridViewAssemblies.HitTest(e.X, e.Y).RowIndex;
+                    int selectedRowIndex = selectedRow.Index;
+                    if (hitRowIndex == selectedRowIndex)
+                    {
+                        var assemblyName = Convert.ToString(selectedRow.Cells[0].Value);
+                        var result = MessageBox.Show($"Assembly '{assemblyName}' will be removed from Global Assembly Cache. Continue?",
+                                     "Please confirm uninstallaiton",
+                                     MessageBoxButtons.YesNo);
+                        if(result == DialogResult.Yes)
+                        {
+                            if (this.gacUtilProxy == null)
+                            {
+                                MessageBox.Show("You need to configure localization of GacUtil.exe tool before performing registration");
+                            }
+                            else
+                            {
+                                if (this.gacService == null)
+                                {
+                                    gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService);
+                                }
+                                var response = this.gacService.UnregisterAssembly(assemblyName);
+                                if (response.Result == OperationResult.Success)
+                                {
+                                    MessageBox.Show("Assembly successfully unregistered from GAC");
+                                    ListAssemblies(); 
+                                }
+                                else
+                                {
+                                    MessageBox.Show($"Error when unregistering assembly from GAC: {response.Message}");
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Select single assembly to be uninstalled from GAC");
                 }
             }
         }
@@ -117,7 +166,11 @@ namespace GacExplorer.UI
                 InitializeGacUtilProxy();
             }
 
-            this.gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService);
+            if(this.gacService == null)
+            {
+                this.gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService);
+            }
+
             var assemblyLineList = gacService.GetAssemblyLines().AssemblyLines; 
             if(assemblyLineList != null)
             {

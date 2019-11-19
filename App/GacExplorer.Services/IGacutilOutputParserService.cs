@@ -6,6 +6,8 @@ namespace GacExplorer.Services
     {
         GacutilOutputParserResult ParseListOutput(string output);
 
-        ServiceOperationResult ParseRegisterOutput(string output); 
+        ServiceOperationResult ParseRegisterOutput(string output);
+
+        ServiceOperationResult ParseUnregisterOutput(string output);
     }
 }

@@ -6,6 +6,8 @@ namespace GacExplorer.Services
     {
         GetAssemblyLinesOperationResult GetAssemblyLines();
 
-        ServiceOperationResult RegisterAssembly(string path); 
+        ServiceOperationResult RegisterAssembly(string path);
+
+        ServiceOperationResult UnregisterAssembly(string path);
     }
 }
