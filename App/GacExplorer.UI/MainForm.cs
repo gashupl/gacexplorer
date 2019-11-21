@@ -188,8 +188,8 @@ namespace GacExplorer.UI
             }
 
         }
-        #endregion
 
+        #endregion
 
     }
 }

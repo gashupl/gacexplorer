@@ -45,12 +45,16 @@
             this.openGacFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.lblAssemblyListCount = new System.Windows.Forms.Label();
             this.tlbPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.lblFilter = new System.Windows.Forms.Label();
+            this.tbFilter = new System.Windows.Forms.TextBox();
             this.btnRegisterAssembly = new System.Windows.Forms.Button();
             this.addAssemblyFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.assembliesContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).BeginInit();
             this.tlbPanel.SuspendLayout();
+            this.panelTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -184,7 +188,7 @@
             this.tlbPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlbPanel.Controls.Add(this.lblAssemblyListCount, 0, 2);
             this.tlbPanel.Controls.Add(this.gridViewAssemblies, 0, 1);
-            this.tlbPanel.Controls.Add(this.btnRegisterAssembly, 0, 0);
+            this.tlbPanel.Controls.Add(this.panelTop, 0, 0);
             this.tlbPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlbPanel.Location = new System.Drawing.Point(0, 24);
             this.tlbPanel.Name = "tlbPanel";
@@ -195,12 +199,43 @@
             this.tlbPanel.Size = new System.Drawing.Size(800, 426);
             this.tlbPanel.TabIndex = 3;
             // 
+            // panelTop
+            // 
+            this.panelTop.Controls.Add(this.lblFilter);
+            this.panelTop.Controls.Add(this.tbFilter);
+            this.panelTop.Controls.Add(this.btnRegisterAssembly);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTop.Location = new System.Drawing.Point(3, 3);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(794, 34);
+            this.panelTop.TabIndex = 3;
+            // 
+            // lblFilter
+            // 
+            this.lblFilter.AutoSize = true;
+            this.lblFilter.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblFilter.Location = new System.Drawing.Point(509, 0);
+            this.lblFilter.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.lblFilter.Name = "lblFilter";
+            this.lblFilter.Size = new System.Drawing.Size(63, 13);
+            this.lblFilter.TabIndex = 1;
+            this.lblFilter.Text = "Filter List     ";
+            // 
+            // tbFilter
+            // 
+            this.tbFilter.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tbFilter.Location = new System.Drawing.Point(572, 0);
+            this.tbFilter.Name = "tbFilter";
+            this.tbFilter.Size = new System.Drawing.Size(222, 20);
+            this.tbFilter.TabIndex = 2;
+            // 
             // btnRegisterAssembly
             // 
-            this.btnRegisterAssembly.Location = new System.Drawing.Point(3, 3);
+            this.btnRegisterAssembly.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRegisterAssembly.Location = new System.Drawing.Point(0, 0);
             this.btnRegisterAssembly.Name = "btnRegisterAssembly";
-            this.btnRegisterAssembly.Size = new System.Drawing.Size(111, 27);
-            this.btnRegisterAssembly.TabIndex = 3;
+            this.btnRegisterAssembly.Size = new System.Drawing.Size(101, 34);
+            this.btnRegisterAssembly.TabIndex = 0;
             this.btnRegisterAssembly.Text = "Register Assembly";
             this.btnRegisterAssembly.UseVisualStyleBackColor = true;
             this.btnRegisterAssembly.Click += new System.EventHandler(this.BtnRegisterAssembly_Click);
@@ -231,6 +266,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewAssemblies)).EndInit();
             this.tlbPanel.ResumeLayout(false);
             this.tlbPanel.PerformLayout();
+            this.panelTop.ResumeLayout(false);
+            this.panelTop.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,9 +291,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colProcessorArchitecture;
         private System.Windows.Forms.Label lblAssemblyListCount;
         private System.Windows.Forms.TableLayoutPanel tlbPanel;
-        private System.Windows.Forms.Button btnRegisterAssembly;
         private System.Windows.Forms.OpenFileDialog addAssemblyFileDialog;
         private System.Windows.Forms.ContextMenuStrip assembliesContextMenuStrip;
+        private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.Label lblFilter;
+        private System.Windows.Forms.Button btnRegisterAssembly;
+        private System.Windows.Forms.TextBox tbFilter;
     }
 }
 
