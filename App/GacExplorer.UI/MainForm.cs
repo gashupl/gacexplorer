@@ -189,7 +189,25 @@ namespace GacExplorer.UI
 
         }
 
+        private void TbFilter_TextChanged(object sender, EventArgs e)
+        {
+            var source = this.gridViewAssemblies.DataSource as BindingSource;
+            if (source != null)
+            {
+                if (this.textFilter.Text.Length > 2)
+                {
+                    source.Filter = $"Name like '%{this.textFilter.Text}%'";      
+                }
+                else
+                {
+                    source.Filter = null;
+                }
+            }
+            this.gridViewAssemblies.DataSource = source;
+        }
+
         #endregion
+
 
     }
 }

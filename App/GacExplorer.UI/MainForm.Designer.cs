@@ -47,7 +47,7 @@
             this.tlbPanel = new System.Windows.Forms.TableLayoutPanel();
             this.panelTop = new System.Windows.Forms.Panel();
             this.lblFilter = new System.Windows.Forms.Label();
-            this.tbFilter = new System.Windows.Forms.TextBox();
+            this.textFilter = new System.Windows.Forms.TextBox();
             this.btnRegisterAssembly = new System.Windows.Forms.Button();
             this.addAssemblyFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.assembliesContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -202,7 +202,7 @@
             // panelTop
             // 
             this.panelTop.Controls.Add(this.lblFilter);
-            this.panelTop.Controls.Add(this.tbFilter);
+            this.panelTop.Controls.Add(this.textFilter);
             this.panelTop.Controls.Add(this.btnRegisterAssembly);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTop.Location = new System.Drawing.Point(3, 3);
@@ -221,13 +221,14 @@
             this.lblFilter.TabIndex = 1;
             this.lblFilter.Text = "Filter List     ";
             // 
-            // tbFilter
+            // textFilter
             // 
-            this.tbFilter.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tbFilter.Location = new System.Drawing.Point(572, 0);
-            this.tbFilter.Name = "tbFilter";
-            this.tbFilter.Size = new System.Drawing.Size(222, 20);
-            this.tbFilter.TabIndex = 2;
+            this.textFilter.Dock = System.Windows.Forms.DockStyle.Right;
+            this.textFilter.Location = new System.Drawing.Point(572, 0);
+            this.textFilter.Name = "textFilter";
+            this.textFilter.Size = new System.Drawing.Size(222, 20);
+            this.textFilter.TabIndex = 2;
+            this.textFilter.TextChanged += new System.EventHandler(this.TbFilter_TextChanged);
             // 
             // btnRegisterAssembly
             // 
@@ -296,7 +297,7 @@
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.Button btnRegisterAssembly;
-        private System.Windows.Forms.TextBox tbFilter;
+        private System.Windows.Forms.TextBox textFilter;
     }
 }
 
