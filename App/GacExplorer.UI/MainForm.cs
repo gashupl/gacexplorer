@@ -1,16 +1,12 @@
 ﻿using GacExplorer.Services;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GacExplorer.Services.OperationResults;
 using GacExplorer.CommandProxy;
 using GacExplorer.Services.DTO;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace GacExplorer.UI
 {
@@ -19,7 +15,8 @@ namespace GacExplorer.UI
         private IGacutilLocationService gacutilLocationService;
         private IGacutilOutputParserService parserService;
         private IGlobalAssemblyCacheService gacService; 
-        private IGacutil gacUtilProxy; 
+        private IGacutil gacUtilProxy;
+        private List<AssemblyLineDto> assemblyLineList; 
 
         public MainForm(IGacutilLocationService configurationService, IGacutilOutputParserService parserService)
         {
@@ -171,10 +168,10 @@ namespace GacExplorer.UI
                 this.gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService);
             }
 
-            var assemblyLineList = gacService.GetAssemblyLines().AssemblyLines; 
-            if(assemblyLineList != null)
+            this.assemblyLineList = gacService.GetAssemblyLines().AssemblyLines; 
+            if(this.assemblyLineList != null)
             {
-                var bindingList = new BindingList<AssemblyLineDto>(assemblyLineList);
+                var bindingList = new BindingList<AssemblyLineDto>(this.assemblyLineList);
                 this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
                 this.lblAssemblyListCount.Text += assemblyLineList.Count.ToString(); 
             }
@@ -186,8 +183,32 @@ namespace GacExplorer.UI
                 }
 
             }
+        }
+
+        private void TbFilter_TextChanged(object sender, EventArgs e)
+        {
+            if (this.gridViewAssemblies.DataSource is BindingSource data)
+            {
+                if (data.DataSource is BindingList<AssemblyLineDto> source)
+                {
+                    if (this.textFilter.Text.Length > 2)
+                    {
+                        var filteredBindingList = new BindingList<AssemblyLineDto>(source.Where(x => x.Name.Contains(this.textFilter.Text)).ToList());
+                        var bindingList = new BindingList<AssemblyLineDto>(filteredBindingList);
+                        this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
+                    }
+                    else
+                    {
+                        var bindingList = new BindingList<AssemblyLineDto>(assemblyLineList);
+                        this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
+                    }
+                    this.gridViewAssemblies.Refresh();
+                }
+
+            }
 
         }
+
         #endregion
 
 
