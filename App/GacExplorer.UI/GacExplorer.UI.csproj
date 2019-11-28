@@ -97,6 +97,10 @@
       <Project>{097eea7d-23ca-426e-9f74-4985f699fcdc}</Project>
       <Name>GacExplorer.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="GacExplorer.Logging\GacExplorer.Logging.csproj">
+      <Project>{876997eb-b898-4ad9-9d9f-ab2388c18a53}</Project>
+      <Name>GacExplorer.Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
