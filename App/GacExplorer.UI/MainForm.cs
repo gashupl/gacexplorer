@@ -23,6 +23,7 @@ namespace GacExplorer.UI
             InitializeComponent();
             this.gacutilLocationService = configurationService;
             this.parserService = parserService;
+
         }
 
         #region EventHandlers

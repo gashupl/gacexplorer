@@ -32,6 +32,17 @@ namespace GacExplorer.Logging
             Logger.Error(message);
         }
 
+        public void Error(Exception ex, string message)
+        {
+            Logger.Error(message);
+            Logger.Error(ex.Message);
+            Logger.Error(ex.StackTrace);
+            if (ex.InnerException != null)
+            {
+                Logger.Error(ex.InnerException.Message);
+            }
+        }
+
         public void Fatal(string message)
         {
             Logger.Fatal(message);

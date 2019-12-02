@@ -13,6 +13,7 @@ namespace GacExplorer.Logging
         void Info(string message);
         void Warning(string message);
         void Error(string message);
+        void Error(Exception ex, string message); 
         void Fatal(string message);
     }
 }

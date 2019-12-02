@@ -39,19 +39,24 @@ namespace GacExplorer.UI
 
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
+            Log.Error(e.Exception, nameof(Application_ThreadException));
             ShowExceptionDetails(e.Exception);
         }
 
         static void CurrentDomain_UnhandledException (object sender, UnhandledExceptionEventArgs e)
         {
-            ShowExceptionDetails(e.ExceptionObject as Exception);
-            Thread.CurrentThread.Suspend();
+            var exception = e.ExceptionObject as Exception;
+            if (exception != null)
+            {
+                Log.Error(exception, nameof(Program.CurrentDomain_UnhandledException));
+                ShowExceptionDetails(e.ExceptionObject as Exception);
+                Thread.CurrentThread.Suspend();
+            }
         }
 
-        static void ShowExceptionDetails(Exception Ex)
+        static void ShowExceptionDetails(Exception ex)
         {
-            Log.Error(Ex.Message); 
-            MessageBox.Show(Ex.Message, Ex.TargetSite.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, ex.TargetSite.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
     }
