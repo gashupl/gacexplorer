@@ -2,10 +2,11 @@
 using GacExplorer.Services.Wrappers;
 using System;
 using System.Configuration;
+using GacExplorer.Logging;
 
 namespace GacExplorer.Services
 {
-    public class GacutilLocationService : IGacutilLocationService
+    public class GacutilLocationService : ServiceBase, IGacutilLocationService
     {
         private const string locationKey  =  "GacUtilLocation";
 
@@ -20,7 +21,7 @@ namespace GacExplorer.Services
         private IApplicationConfigurationService appConfigurationService;
         private IFile file; 
 
-        public GacutilLocationService(IApplicationConfigurationService appConfigurationService, IFile file)
+        public GacutilLocationService(IApplicationConfigurationService appConfigurationService, IFile file, ILog log) : base(log)
         {
             this.appConfigurationService = appConfigurationService;
             this.file = file; 

@@ -2,15 +2,16 @@
 using GacExplorer.Services.DTO;
 using GacExplorer.Services.OperationResults;
 using System;
-using System.Linq; 
+using System.Linq;
+using GacExplorer.Logging;
 
 namespace GacExplorer.Services
 {
-    public class GlobalAssemblyCacheService : IGlobalAssemblyCacheService
+    public class GlobalAssemblyCacheService : ServiceBase, IGlobalAssemblyCacheService
     {
         private IGacutil commandProxy;
         private IGacutilOutputParserService outputParserService; 
-        public GlobalAssemblyCacheService(IGacutil commandProxy, IGacutilOutputParserService outputParserService)
+        public GlobalAssemblyCacheService(IGacutil commandProxy, IGacutilOutputParserService outputParserService, ILog log) : base(log)
         {
             this.commandProxy = commandProxy;
             this.outputParserService = outputParserService; 

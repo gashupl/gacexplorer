@@ -42,7 +42,6 @@ namespace GacExplorer.Logging
                 Logger.Error(ex.InnerException.Message);
             }
         }
-
         public void Fatal(string message)
         {
             Logger.Fatal(message);

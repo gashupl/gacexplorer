@@ -7,6 +7,7 @@ using GacExplorer.CommandProxy;
 using GacExplorer.Services.DTO;
 using System.Linq;
 using System.Collections.Generic;
+using GacExplorer.Logging;
 
 namespace GacExplorer.UI
 {
@@ -16,11 +17,13 @@ namespace GacExplorer.UI
         private IGacutilOutputParserService parserService;
         private IGlobalAssemblyCacheService gacService; 
         private IGacutil gacUtilProxy;
-        private List<AssemblyLineDto> assemblyLineList; 
+        private List<AssemblyLineDto> assemblyLineList;
+        private ILog log; 
 
-        public MainForm(IGacutilLocationService configurationService, IGacutilOutputParserService parserService)
+        public MainForm(IGacutilLocationService configurationService, IGacutilOutputParserService parserService, ILog log)
         {
             InitializeComponent();
+            this.log = log; 
             this.gacutilLocationService = configurationService;
             this.parserService = parserService;
 
@@ -60,7 +63,7 @@ namespace GacExplorer.UI
                 { 
                     if(this.gacService == null)
                     {
-                        gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService);
+                        gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService, log);
                     }
                     var response = this.gacService.RegisterAssembly(this.addAssemblyFileDialog.FileName);
                     if (response.Result == OperationResult.Success)
@@ -101,7 +104,7 @@ namespace GacExplorer.UI
                             {
                                 if (this.gacService == null)
                                 {
-                                    gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService);
+                                    gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService, log);
                                 }
                                 var response = this.gacService.UnregisterAssembly(assemblyName);
                                 if (response.Result == OperationResult.Success)
@@ -166,7 +169,7 @@ namespace GacExplorer.UI
 
             if(this.gacService == null)
             {
-                this.gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService);
+                this.gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService, log);
             }
 
             this.assemblyLineList = gacService.GetAssemblyLines().AssemblyLines; 

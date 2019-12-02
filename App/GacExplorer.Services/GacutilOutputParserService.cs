@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using GacExplorer.Logging;
 using GacExplorer.Services.DTO;
 using GacExplorer.Services.OperationResults;
 
 namespace GacExplorer.Services
 {
-    public class GacutilOutputParserService : IGacutilOutputParserService
+    public class GacutilOutputParserService : ServiceBase, IGacutilOutputParserService
     {
+
+        public GacutilOutputParserService(ILog log) : base(log)
+        {
+        }
+
         public GacutilOutputParserResult ParseListOutput(string output)
         {
             if (String.IsNullOrWhiteSpace(output))

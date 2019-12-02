@@ -56,6 +56,7 @@
     <Compile Include="OperationResults\GetAssemblyLinesOperationResult.cs" />
     <Compile Include="OperationResults\ServiceOperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceBase.cs" />
     <Compile Include="Wrappers\ConfigurationWrapper.cs" />
     <Compile Include="Wrappers\FileWrapper.cs" />
     <Compile Include="Wrappers\IConfiguration.cs" />

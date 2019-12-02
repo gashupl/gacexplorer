@@ -31,6 +31,7 @@ namespace GacExplorer.UI
         {
             Container = new Container();
             Container.Register<IFile, FileWrapper>();
+            Container.Register<ILog, Log>();
             Container.Register<IApplicationConfigurationService, ApplicationConfigurationService>();
             Container.Register<IGacutilLocationService, GacutilLocationService>();
             Container.Register<IGacutilOutputParserService, GacutilOutputParserService>();

@@ -2,11 +2,15 @@
 using GacExplorer.Services.Wrappers;
 using System;
 using System.Configuration;
+using GacExplorer.Logging;
 
 namespace GacExplorer.Services
 {
-    public class ApplicationConfigurationService : IApplicationConfigurationService
+    public class ApplicationConfigurationService : ServiceBase, IApplicationConfigurationService
     {
+        public ApplicationConfigurationService(Log log) : base(log)
+        {
+        }
 
         public IConfiguration GetConfiguration()
         {
@@ -55,5 +59,7 @@ namespace GacExplorer.Services
                 return null;
             }
         }
+
+
     }
 }

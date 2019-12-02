@@ -11,7 +11,7 @@ using Moq;
 namespace GacExplorer.Services.Tests
 {
     [TestClass]
-    public class GlobalAssemblyCacheServiceTest
+    public class GlobalAssemblyCacheServiceTest: ServiceTestBase
     {
         #region GetAssemblyLines tests
         [TestMethod]
@@ -35,7 +35,7 @@ namespace GacExplorer.Services.Tests
             var outputParserMock = new Mock<IGacutilOutputParserService>();
             outputParserMock.Setup(m => m.ParseListOutput(It.IsAny<string>()))
                 .Returns(new GacutilOutputParserResult(OperationResult.Success));
-            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object, Log);
 
             var response = service.GetAssemblyLines();
             Assert.AreEqual(OperationResult.Success, response.Result);
@@ -53,7 +53,7 @@ namespace GacExplorer.Services.Tests
             outputParserMock.Setup(m => m.ParseListOutput(It.IsAny<string>()))
                 .Returns(new GacutilOutputParserResult(OperationResult.Failed));
 
-            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object, Log);
 
             var response = service.GetAssemblyLines();
             Assert.AreEqual(OperationResult.Failed, response.Result);
@@ -71,7 +71,7 @@ namespace GacExplorer.Services.Tests
             outputParserMock.Setup(m => m.ParseListOutput(It.IsAny<string>()))
                 .Returns(new GacutilOutputParserResult(OperationResult.Failed));
 
-            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object, Log);
 
             var response = service.GetAssemblyLines();
             Assert.AreEqual(OperationResult.Failed, response.Result);
@@ -94,7 +94,7 @@ namespace GacExplorer.Services.Tests
             outputParserMock.Setup(m => m.ParseRegisterOutput(It.IsAny<string>()))
                 .Returns(new ServiceOperationResult(OperationResult.Success));
 
-            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object, Log);
 
             var response = service.RegisterAssembly(path);
 
@@ -116,7 +116,7 @@ namespace GacExplorer.Services.Tests
             outputParserMock.Setup(m => m.ParseRegisterOutput(It.IsAny<string>()))
                 .Returns(new ServiceOperationResult(OperationResult.Failed));
 
-            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object, Log);
 
             var response = service.RegisterAssembly(path);
 
@@ -140,7 +140,7 @@ namespace GacExplorer.Services.Tests
             outputParserMock.Setup(m => m.ParseUnregisterOutput(It.IsAny<string>()))
                 .Returns(new ServiceOperationResult(OperationResult.Success));
 
-            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object, Log);
 
             var response = service.UnregisterAssembly(path);
 
@@ -162,7 +162,7 @@ namespace GacExplorer.Services.Tests
             outputParserMock.Setup(m => m.ParseUnregisterOutput(It.IsAny<string>()))
                 .Returns(new ServiceOperationResult(OperationResult.Failed));
 
-            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object);
+            var service = new GlobalAssemblyCacheService(gacProxyMock.Object, outputParserMock.Object, Log);
 
             var response = service.UnregisterAssembly(path);
 
