@@ -1,5 +1,4 @@
-﻿using GacExplorer.CommandProxy;
-using GacExplorer.Services;
+﻿using GacExplorer.Services;
 using GacExplorer.Services.Wrappers;
 using SimpleInjector;
 using System;

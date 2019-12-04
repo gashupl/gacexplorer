@@ -8,7 +8,7 @@ namespace GacExplorer.Services
 {
     public class ApplicationConfigurationService : ServiceBase, IApplicationConfigurationService
     {
-        public ApplicationConfigurationService(Log log) : base(log)
+        public ApplicationConfigurationService(ILog log) : base(log)
         {
         }
 
