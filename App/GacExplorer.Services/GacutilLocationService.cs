@@ -23,12 +23,14 @@ namespace GacExplorer.Services
 
         public GacutilLocationService(IApplicationConfigurationService appConfigurationService, IFile file, ILog log) : base(log)
         {
+            this.log.Trace($"{nameof(GacutilLocationService)} initialized");
             this.appConfigurationService = appConfigurationService;
             this.file = file; 
         }
 
         public GacutilLocationReadResult Read()
         {
+            this.log.Trace($"{nameof(GacutilLocationReadResult)} method executed");
             try
             {
                 IConfiguration appConfig = this.appConfigurationService.GetConfiguration();
@@ -46,6 +48,7 @@ namespace GacExplorer.Services
 
         public ServiceOperationResult Save(string fileLocation)
         {
+            this.log.Trace($"{nameof(Save)} method executed with parameter fileLocation: {fileLocation}");
             try
             {
                 IConfiguration appConfig = this.appConfigurationService.GetConfiguration();
@@ -83,6 +86,7 @@ namespace GacExplorer.Services
 
         public bool FileExists(string location)
         {
+            this.log.Trace($"{nameof(FileExists)} method executed with parameter location: {location}");
             return this.file.FileExists(location); 
         }
     }

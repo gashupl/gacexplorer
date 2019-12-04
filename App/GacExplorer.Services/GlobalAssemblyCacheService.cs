@@ -13,12 +13,14 @@ namespace GacExplorer.Services
         private IGacutilOutputParserService outputParserService; 
         public GlobalAssemblyCacheService(IGacutil commandProxy, IGacutilOutputParserService outputParserService, ILog log) : base(log)
         {
+            this.log.Trace($"{nameof(GlobalAssemblyCacheService)} initialized");
             this.commandProxy = commandProxy;
             this.outputParserService = outputParserService; 
         }
 
         public GetAssemblyLinesOperationResult GetAssemblyLines()
         {
+            this.log.Trace($"{nameof(GetAssemblyLinesOperationResult)} method executed");
             try
             {
                 var output = this.commandProxy.ListAssemblies();
@@ -38,6 +40,7 @@ namespace GacExplorer.Services
 
         public ServiceOperationResult RegisterAssembly(string path)
         {
+            this.log.Trace($"{nameof(RegisterAssembly)} method executed with parameter path: {path}");
             try
             {
                 var output = this.commandProxy.RegisterAssembly(path); 
@@ -53,6 +56,7 @@ namespace GacExplorer.Services
 
         public ServiceOperationResult UnregisterAssembly(string path)
         {
+            this.log.Trace($"{nameof(UnregisterAssembly)} method executed with parameter path: {path}");
             try
             {
                 var output = this.commandProxy.UnregisterAssembly(path);

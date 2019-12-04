@@ -13,10 +13,12 @@ namespace GacExplorer.Services
 
         public GacutilOutputParserService(ILog log) : base(log)
         {
+            this.log.Trace($"{nameof(GacutilOutputParserService)} initialized");
         }
 
         public GacutilOutputParserResult ParseListOutput(string output)
         {
+            this.log.Trace($"{nameof(ParseListOutput)} method executed with parameter path: {output}");
             if (String.IsNullOrWhiteSpace(output))
             {
                 return new GacutilOutputParserResult(OperationResult.Failed, "GacutilOutputParserService.ParseListOutput operation failed. Empty output string");
@@ -60,16 +62,19 @@ namespace GacExplorer.Services
 
         public ServiceOperationResult ParseRegisterOutput(string output)
         {
+            this.log.Trace($"{nameof(ParseRegisterOutput)} method executed with parameter path: {output}");
             return this.ParseOutput(output, "Assembly successfully added to the cache");
         }
 
         public ServiceOperationResult ParseUnregisterOutput(string output)
         {
+            this.log.Trace($"{nameof(ParseUnregisterOutput)} method executed with parameter path: {output}");
             return this.ParseOutput(output, "Number of assemblies uninstalled = 1"); 
         }
 
         private ServiceOperationResult ParseOutput(string output, string requiredSuccessText)
         {
+            this.log.Trace($"{nameof(ParseOutput)} method executed with parameters path: {output}, requiredSuccessText: {requiredSuccessText}");
             if (String.IsNullOrWhiteSpace(output))
             {
                 return new ServiceOperationResult(OperationResult.Failed, $"{MethodBase.GetCurrentMethod().Name} operation failed. Empty output string");

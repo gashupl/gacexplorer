@@ -10,6 +10,7 @@ namespace GacExplorer.Services
     {
         public ApplicationConfigurationService(ILog log) : base(log)
         {
+            this.log.Trace($"{nameof(ApplicationConfigurationService)} initialized"); 
         }
 
         public IConfiguration GetConfiguration()
@@ -21,6 +22,7 @@ namespace GacExplorer.Services
 
         public ServiceOperationResult RefreshConfigurationSettings()
         {
+            this.log.Trace($"{nameof(ServiceOperationResult)} method executed");
             try
             {
                 ConfigurationManager.RefreshSection("appSettings");
@@ -35,6 +37,7 @@ namespace GacExplorer.Services
 
         public ServiceOperationResult SaveConfiguration(IConfiguration configuration)
         {
+            this.log.Trace($"{nameof(SaveConfiguration)} method executed");
             try
             {
                 configuration.Save(ConfigurationSaveMode.Modified);
@@ -49,6 +52,7 @@ namespace GacExplorer.Services
 
         public KeyValueConfigurationCollection GetSettings(IConfiguration configuration)
         {
+            this.log.Trace($"{nameof(GetSettings)} method executed");
             var appSettingsSection = configuration.GetSection("appSettings") as AppSettingsSection;
             if (appSettingsSection != null)
             {
