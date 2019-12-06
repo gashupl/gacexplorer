@@ -6,14 +6,14 @@ using System;
 namespace GacExplorer.Services.Tests
 {
     [TestClass]
-    public class GacutilOutputParserServiceTest
+    public class GacutilOutputParserServiceTest :ServiceTestBase
     {
         private GacutilOutputParserService testedService; 
 
         [TestInitialize]
         public void OnBeforeMethodExecution()
         {
-            this.testedService = new GacutilOutputParserService(); 
+            this.testedService = new GacutilOutputParserService(Log); 
         }
 
         [TestCleanup]

@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{097EEA7D-23CA-426E-9F74-4985F699FCDC}</ProjectGuid>
+    <ProjectGuid>{876997EB-B898-4AD9-9D9F-AB2388C18A53}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GacExplorer.Services</RootNamespace>
-    <AssemblyName>GacExplorer.Services</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <RootNamespace>GacExplorer.Logging</RootNamespace>
+    <AssemblyName>GacExplorer.Logging</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -31,9 +31,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NLog.4.6.8\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,36 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationConfigurationService.cs" />
-    <Compile Include="DTO\AssemblyLineDto.cs" />
-    <Compile Include="GacutilOutputParserService.cs" />
-    <Compile Include="GlobalAssemblyCacheService.cs" />
-    <Compile Include="GacutilLocationService.cs" />
-    <Compile Include="IApplicationConfigurationService.cs" />
-    <Compile Include="IGacutilOutputParserService.cs" />
-    <Compile Include="IGlobalAssemblyCacheService.cs" />
-    <Compile Include="IGacutilLocationService.cs" />
-    <Compile Include="OperationResults\GacutilLocationReadResult.cs" />
-    <Compile Include="OperationResults\GacutilOutputParserResult.cs" />
-    <Compile Include="OperationResults\GetAssemblyLinesOperationResult.cs" />
-    <Compile Include="OperationResults\ServiceOperationResult.cs" />
+    <Compile Include="ILog.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceBase.cs" />
-    <Compile Include="Wrappers\ConfigurationWrapper.cs" />
-    <Compile Include="Wrappers\FileWrapper.cs" />
-    <Compile Include="Wrappers\IConfiguration.cs" />
-    <Compile Include="Wrappers\IFile.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GacExplorer.CommandProxy\GacExplorer.CommandProxy.csproj">
-      <Project>{f02ccfda-c8e5-4df6-8098-7a0b66705d76}</Project>
-      <Name>GacExplorer.CommandProxy</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GacExplorer.UI\GacExplorer.Logging\GacExplorer.Logging.csproj">
-      <Project>{876997eb-b898-4ad9-9d9f-ab2388c18a53}</Project>
-      <Name>GacExplorer.Logging</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

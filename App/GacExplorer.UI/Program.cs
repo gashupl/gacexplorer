@@ -1,36 +1,62 @@
-﻿using GacExplorer.CommandProxy;
-using GacExplorer.Services;
+﻿using GacExplorer.Services;
 using GacExplorer.Services.Wrappers;
 using SimpleInjector;
 using System;
+using System.Threading;
 using System.Windows.Forms;
+using GacExplorer.Logging;
 
 namespace GacExplorer.UI
 {
     static class Program
     {
-        public static Container container;
-
+        public static Container Container;
+        public static Log Log; 
 
         [STAThread]
         static void Main()
         {
+            Log = new Log(); 
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+
             Bootstrap(); 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(container.GetInstance<MainForm>());
+            Application.Run(Container.GetInstance<MainForm>());
         }
 
         private static void Bootstrap()
         {
-            container = new Container();
-            container.Register<IFile, FileWrapper>();
+            Container = new Container();
+            Container.Register<IFile, FileWrapper>();
+            Container.Register<ILog, Log>();
+            Container.Register<IApplicationConfigurationService, ApplicationConfigurationService>();
+            Container.Register<IGacutilLocationService, GacutilLocationService>();
+            Container.Register<IGacutilOutputParserService, GacutilOutputParserService>();
+            Container.Verify();
+        }
 
-            container.Register<IApplicationConfigurationService, ApplicationConfigurationService>();
-            container.Register<IGacutilLocationService, GacutilLocationService>();
-            container.Register<IGacutilOutputParserService, GacutilOutputParserService>();
+        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            Log.Error(e.Exception, nameof(Application_ThreadException));
+            ShowExceptionDetails(e.Exception);
+        }
 
-            container.Verify();
+        static void CurrentDomain_UnhandledException (object sender, UnhandledExceptionEventArgs e)
+        {
+            var exception = e.ExceptionObject as Exception;
+            if (exception != null)
+            {
+                Log.Error(exception, nameof(Program.CurrentDomain_UnhandledException));
+                ShowExceptionDetails(e.ExceptionObject as Exception);
+                Thread.CurrentThread.Suspend();
+            }
+        }
+
+        static void ShowExceptionDetails(Exception ex)
+        {
+            MessageBox.Show(ex.Message, ex.TargetSite.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
     }

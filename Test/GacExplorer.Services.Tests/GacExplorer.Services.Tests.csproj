@@ -69,6 +69,7 @@
     <Compile Include="GacutilOutputParserServiceTest.cs" />
     <Compile Include="GlobalAssemblyCacheServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -81,6 +82,10 @@
     <ProjectReference Include="..\..\App\GacExplorer.Services\GacExplorer.Services.csproj">
       <Project>{097eea7d-23ca-426e-9f74-4985f699fcdc}</Project>
       <Name>GacExplorer.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\App\GacExplorer.UI\GacExplorer.Logging\GacExplorer.Logging.csproj">
+      <Project>{876997EB-B898-4AD9-9D9F-AB2388C18A53}</Project>
+      <Name>GacExplorer.Logging</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
