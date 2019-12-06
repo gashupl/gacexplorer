@@ -30,6 +30,7 @@ namespace GacExplorer.Services
             }
             catch(Exception ex)
             {
+                log.Error(ex, $"{nameof(RefreshConfigurationSettings)} failed");
                 return new ServiceOperationResult(OperationResult.Failed, "Cannot refresh application configuration", ex); 
             }
       
@@ -45,6 +46,7 @@ namespace GacExplorer.Services
             }
             catch (Exception ex)
             {
+                log.Error(ex, $"{nameof(SaveConfiguration)} failed");
                 return new ServiceOperationResult(OperationResult.Failed, "Cannot save application configuration", ex);
             }
            

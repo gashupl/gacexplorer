@@ -34,6 +34,7 @@ namespace GacExplorer.Services
             }
             catch (Exception ex)
             {
+                log.Error(ex, $"{nameof(GetAssemblyLines)} failed");
                 return new GetAssemblyLinesOperationResult(OperationResult.Failed, "GlobalAssemblyCacheService.GetAssemblyLines failed", ex); 
             }
         }
@@ -50,6 +51,7 @@ namespace GacExplorer.Services
             }
             catch (Exception ex)
             {
+                log.Error(ex, $"{nameof(RegisterAssembly)} failed");
                 return new GetAssemblyLinesOperationResult(OperationResult.Failed, "GlobalAssemblyCacheService.GetAssemblyLines failed", ex);
             }
         }
@@ -66,6 +68,7 @@ namespace GacExplorer.Services
             }
             catch (Exception ex)
             {
+                log.Error(ex, $"{nameof(UnregisterAssembly)} failed"); 
                 return new GetAssemblyLinesOperationResult(OperationResult.Failed, "GlobalAssemblyCacheService.GetAssemblyLines failed", ex);
             }
         }

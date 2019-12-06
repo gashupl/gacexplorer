@@ -41,6 +41,7 @@ namespace GacExplorer.Services
             }
             catch(Exception ex)
             {
+                log.Error(ex, $"{nameof(Read)} failed");
                 return new GacutilLocationReadResult(OperationResult.Failed, "GacutilLocationService.Read operation failed", ex);
             }
         }
@@ -74,11 +75,13 @@ namespace GacExplorer.Services
             }
             catch(ConfigurationErrorsException ex)
             {
+                log.Error(ex, $"{nameof(Save)} failed");
                 return new ServiceOperationResult(
                     OperationResult.Failed, "GacutilLocationService.Save operation failed", ex);
             }
             catch(Exception ex)
             {
+                log.Error(ex, $"{nameof(Save)} failed");
                 return new ServiceOperationResult(
                     OperationResult.Failed, "GacutilLocationService.Save operation failed", ex);
             }
