@@ -24,8 +24,10 @@ namespace GacExplorer.Services
             try
             {
                 var output = this.commandProxy.ListAssemblies();
-                var outputParseResult = this.outputParserService.ParseListOutput(output);
+                this.log.Info($"Successfully listing assemblies");
 
+                var outputParseResult = this.outputParserService.ParseListOutput(output);
+                this.log.Info($"outputParseResult: {outputParseResult}");
 
                 return new GetAssemblyLinesOperationResult(outputParseResult.Result)
                 {
@@ -44,8 +46,11 @@ namespace GacExplorer.Services
             this.log.Trace($"{nameof(RegisterAssembly)} method executed with parameter path: {path}");
             try
             {
-                var output = this.commandProxy.RegisterAssembly(path); 
+                var output = this.commandProxy.RegisterAssembly(path);
+                this.log.Info($"Registering assembly completed");
+
                 var outputParseResult = this.outputParserService.ParseRegisterOutput(output);
+                this.log.Info($"outputParseResult: {outputParseResult}");
 
                 return new ServiceOperationResult(outputParseResult.Result, outputParseResult.Message); 
             }
@@ -62,7 +67,10 @@ namespace GacExplorer.Services
             try
             {
                 var output = this.commandProxy.UnregisterAssembly(path);
+                this.log.Info($"Unregistering assembly completed");
+
                 var outputParseResult = this.outputParserService.ParseUnregisterOutput(output);
+                this.log.Info($"outputParseResult: {outputParseResult}");
 
                 return new ServiceOperationResult(outputParseResult.Result, outputParseResult.Message);
             }

@@ -36,7 +36,8 @@ namespace GacExplorer.Services
                 IConfiguration appConfig = this.appConfigurationService.GetConfiguration();
                 var appSettings = this.appConfigurationService.GetSettings(appConfig);
                 var result = new GacutilLocationReadResult(OperationResult.Success);
-                result.Location = appSettings[locationKey] != null ? appSettings[locationKey].Value : null; 
+                result.Location = appSettings[locationKey] != null ? appSettings[locationKey].Value : null;
+                this.log.Info($"Location found: { result.Location}");
                 return result;
             }
             catch(Exception ex)
@@ -57,15 +58,18 @@ namespace GacExplorer.Services
                 if (appSettings[locationKey] == null)
                 {
                     appSettings.Add(locationKey, fileLocation);
+                    this.log.Info($"New appSettings key added: {fileLocation}");
                 }
                 else
                 {
                     appSettings[locationKey].Value = fileLocation;
+                    this.log.Info($"AppSettings key updated. New value: {fileLocation}");
                 }
 
                 var result = this.appConfigurationService.SaveConfiguration(appConfig);
                 if(result.Result == OperationResult.Failed)
                 {
+                    this.log.Warning($"Saving configuration failed");
                     return result; 
                 }
                 else
@@ -90,7 +94,11 @@ namespace GacExplorer.Services
         public bool FileExists(string location)
         {
             this.log.Trace($"{nameof(FileExists)} method executed with parameter location: {location}");
-            return this.file.FileExists(location); 
+
+            var fileExists = this.file.FileExists(location);
+            this.log.Info($"File exists value: {fileExists}");
+
+            return fileExists;
         }
     }
 }

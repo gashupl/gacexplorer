@@ -15,6 +15,7 @@ namespace GacExplorer.Services
 
         public IConfiguration GetConfiguration()
         {
+            this.log.Trace($"{nameof(GetConfiguration)} method executed");
             var assemblyLocation = System.Reflection.Assembly.GetEntryAssembly().Location;
             var appConfig = ConfigurationManager.OpenExeConfiguration(assemblyLocation);
             return new ConfigurationWrapper(appConfig); 
@@ -26,6 +27,8 @@ namespace GacExplorer.Services
             try
             {
                 ConfigurationManager.RefreshSection("appSettings");
+                this.log.Info("Refreshing section completed"); 
+
                 return new ServiceOperationResult(OperationResult.Success); 
             }
             catch(Exception ex)
@@ -42,6 +45,8 @@ namespace GacExplorer.Services
             try
             {
                 configuration.Save(ConfigurationSaveMode.Modified);
+                this.log.Info("Save Configuration completed");
+
                 return new ServiceOperationResult(OperationResult.Success);
             }
             catch (Exception ex)
@@ -62,6 +67,7 @@ namespace GacExplorer.Services
             }
             else
             {
+                this.log.Info("Cannot find appSetting section");
                 return null;
             }
         }
