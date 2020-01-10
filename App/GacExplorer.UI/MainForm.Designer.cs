@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureGacutilLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -206,9 +207,11 @@
             // btnListAssemblies
             // 
             this.btnListAssemblies.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnListAssemblies.Location = new System.Drawing.Point(101, 0);
+            this.btnListAssemblies.Image = ((System.Drawing.Image)(resources.GetObject("btnListAssemblies.Image")));
+            this.btnListAssemblies.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnListAssemblies.Location = new System.Drawing.Point(140, 0);
             this.btnListAssemblies.Name = "btnListAssemblies";
-            this.btnListAssemblies.Size = new System.Drawing.Size(101, 34);
+            this.btnListAssemblies.Size = new System.Drawing.Size(140, 34);
             this.btnListAssemblies.TabIndex = 3;
             this.btnListAssemblies.Text = "List Assemblies";
             this.btnListAssemblies.UseVisualStyleBackColor = true;
@@ -237,9 +240,11 @@
             // btnRegisterAssembly
             // 
             this.btnRegisterAssembly.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRegisterAssembly.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterAssembly.Image")));
+            this.btnRegisterAssembly.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRegisterAssembly.Location = new System.Drawing.Point(0, 0);
             this.btnRegisterAssembly.Name = "btnRegisterAssembly";
-            this.btnRegisterAssembly.Size = new System.Drawing.Size(101, 34);
+            this.btnRegisterAssembly.Size = new System.Drawing.Size(140, 34);
             this.btnRegisterAssembly.TabIndex = 0;
             this.btnRegisterAssembly.Text = "Register Assembly";
             this.btnRegisterAssembly.UseVisualStyleBackColor = true;

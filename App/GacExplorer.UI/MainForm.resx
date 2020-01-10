@@ -138,6 +138,24 @@
   <metadata name="openGacFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnListAssemblies.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAACbSURBVEhL7ZI9DsMgDEb5J1OVqwAnAJZegNt068SJO6aO
+        hTcikSFSIvGkJ+sbDJJtNplch5Ryg4LGGFelVKV84Dku/0BrvXHO0ZTSaoyplHu2tnG898o5h5ZSRAhB
+        UO7Z2saBEX2goDCiBUaUKB94jucv2Vpb90d3c84L8Kbcs7XdCDjTnxAChTN9wZl+KfdsbeM8f8mTySCM
+        /QH3Bm/b7lZcNgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnRegisterAssembly.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAABYSURBVEhLYxgFo4CuoACI/0NxDUiA2mDUAgwAMhAZrwdi
+        mAVboWLImGQAM4xYTDLAZgg+TDIAhTMyBgULzLDdUDFkTDEAhTPMAqoYiA5GLRgFo4AswMAAALI8PWlY
+        hkTqAAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="addAssemblyFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>286, 17</value>
   </metadata>
