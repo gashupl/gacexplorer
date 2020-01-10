@@ -33,7 +33,6 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureGacutilLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listAssembliesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridViewAssemblies = new System.Windows.Forms.DataGridView();
@@ -46,6 +45,7 @@
             this.lblAssemblyListCount = new System.Windows.Forms.Label();
             this.tlbPanel = new System.Windows.Forms.TableLayoutPanel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.btnListAssemblies = new System.Windows.Forms.Button();
             this.lblFilter = new System.Windows.Forms.Label();
             this.textFilter = new System.Windows.Forms.TextBox();
             this.btnRegisterAssembly = new System.Windows.Forms.Button();
@@ -61,7 +61,6 @@
             // 
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.listAssembliesToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
@@ -92,13 +91,6 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
-            // listAssembliesToolStripMenuItem
-            // 
-            this.listAssembliesToolStripMenuItem.Name = "listAssembliesToolStripMenuItem";
-            this.listAssembliesToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
-            this.listAssembliesToolStripMenuItem.Text = "List Assemblies";
-            this.listAssembliesToolStripMenuItem.Click += new System.EventHandler(this.ListAssembliesToolStripMenuItem_Click);
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -110,7 +102,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // gridViewAssemblies
@@ -201,6 +193,7 @@
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.btnListAssemblies);
             this.panelTop.Controls.Add(this.lblFilter);
             this.panelTop.Controls.Add(this.textFilter);
             this.panelTop.Controls.Add(this.btnRegisterAssembly);
@@ -209,6 +202,17 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(794, 34);
             this.panelTop.TabIndex = 3;
+            // 
+            // btnListAssemblies
+            // 
+            this.btnListAssemblies.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnListAssemblies.Location = new System.Drawing.Point(101, 0);
+            this.btnListAssemblies.Name = "btnListAssemblies";
+            this.btnListAssemblies.Size = new System.Drawing.Size(101, 34);
+            this.btnListAssemblies.TabIndex = 3;
+            this.btnListAssemblies.Text = "List Assemblies";
+            this.btnListAssemblies.UseVisualStyleBackColor = true;
+            this.btnListAssemblies.Click += new System.EventHandler(this.btnListAssemblies_Click);
             // 
             // lblFilter
             // 
@@ -284,7 +288,6 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.DataGridView gridViewAssemblies;
         private System.Windows.Forms.OpenFileDialog openGacFileDialog;
-        private System.Windows.Forms.ToolStripMenuItem listAssembliesToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVersion;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCulture;
@@ -298,6 +301,7 @@
         private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.Button btnRegisterAssembly;
         private System.Windows.Forms.TextBox textFilter;
+        private System.Windows.Forms.Button btnListAssemblies;
     }
 }
 

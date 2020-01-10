@@ -45,7 +45,7 @@ namespace GacExplorer.UI
             Application.Exit(); 
         }
 
-        private void ListAssembliesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnListAssemblies_Click(object sender, EventArgs e)
         {
             ListAssemblies();
         }
@@ -212,6 +212,7 @@ namespace GacExplorer.UI
             }
 
         }
+
 
         #endregion
 
