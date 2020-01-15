@@ -126,6 +126,11 @@ namespace GacExplorer.UI
                 }
             }
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutForm().ShowDialog(); 
+        }
         #endregion
 
         #region Private methods
@@ -212,6 +217,7 @@ namespace GacExplorer.UI
             }
 
         }
+
 
 
         #endregion
