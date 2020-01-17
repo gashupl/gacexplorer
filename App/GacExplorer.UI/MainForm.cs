@@ -8,6 +8,7 @@ using GacExplorer.Services.DTO;
 using System.Linq;
 using System.Collections.Generic;
 using GacExplorer.Logging;
+using GacExplorer.UI.Properties;
 
 namespace GacExplorer.UI
 {
@@ -68,12 +69,12 @@ namespace GacExplorer.UI
                     var response = this.gacService.RegisterAssembly(this.addAssemblyFileDialog.FileName);
                     if (response.Result == OperationResult.Success)
                     {
-                        MessageBox.Show("Assembly successfully registered in GAC");
+                        MessageBox.Show(Resources.AssemblySuccessfullyRegisteredInGac);
                         ListAssemblies(); 
                     }
                     else
                     {
-                        MessageBox.Show($"Error when registering assembly in GAC: {response.Message}");
+                        MessageBox.Show($"{Resources.ErrorWhenRegisteringAssemblyInGac}: {response.Message}");
                     }
                 }
             }
@@ -91,14 +92,14 @@ namespace GacExplorer.UI
                     if (hitRowIndex == selectedRowIndex)
                     {
                         var assemblyName = Convert.ToString(selectedRow.Cells[0].Value);
-                        var result = MessageBox.Show($"Assembly '{assemblyName}' will be removed from Global Assembly Cache. Continue?",
-                                     "Please confirm uninstallaiton",
+                        var result = MessageBox.Show(String.Format(Resources.AssemblyWillBeRemovedFromGlobalAssemblyCacheContinue, assemblyName),
+                                     Resources.PleaseConfirmUninstalling,
                                      MessageBoxButtons.YesNo);
                         if(result == DialogResult.Yes)
                         {
                             if (this.gacUtilProxy == null)
                             {
-                                MessageBox.Show("You need to configure localization of GacUtil.exe tool before performing registration");
+                                MessageBox.Show(Resources.YouNeedToConfigureLocalizationOfGacUtilToolBeforePerformingRegistration);
                             }
                             else
                             {
@@ -109,12 +110,12 @@ namespace GacExplorer.UI
                                 var response = this.gacService.UnregisterAssembly(assemblyName);
                                 if (response.Result == OperationResult.Success)
                                 {
-                                    MessageBox.Show("Assembly successfully unregistered from GAC");
+                                    MessageBox.Show(Resources.AssemblySuccessfullyUnregisteredFromGac);
                                     ListAssemblies(); 
                                 }
                                 else
                                 {
-                                    MessageBox.Show($"Error when unregistering assembly from GAC: {response.Message}");
+                                    MessageBox.Show($"{Resources.ErrorWhenUnregisteringAssemblyFromGac}: {response.Message}");
                                 }
                             }
                         }
@@ -122,7 +123,7 @@ namespace GacExplorer.UI
                 }
                 else
                 {
-                    MessageBox.Show("Select single assembly to be uninstalled from GAC");
+                    MessageBox.Show(Resources.SelectSingleAssemblyToBeUninstalledFromGac);
                 }
             }
         }
