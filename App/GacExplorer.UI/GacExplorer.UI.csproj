@@ -70,6 +70,19 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Commands\ApplicationExitCommand.cs" />
+    <Compile Include="Commands\Base\Command.cs" />
+    <Compile Include="Commands\Base\ICommand.cs" />
+    <Compile Include="Commands\FilterAssemblyGridCommand.cs" />
+    <Compile Include="Commands\GridViewAssembliesClickCommand.cs" />
+    <Compile Include="Commands\InitializeGacUtilProxyCommand.cs" />
+    <Compile Include="Commands\ListAssembliesCommand.cs" />
+    <Compile Include="Commands\RegisterAssemblyCommand.cs" />
+    <Compile Include="Commands\Settings\GridViewAssembliesClickCommandSettings.cs" />
+    <Compile Include="Commands\Settings\ListAssembliesCommandSettings.cs" />
+    <Compile Include="Commands\Settings\RegisterAssemblyCommandSettings.cs" />
+    <Compile Include="Commands\ShowAboutFormCommand.cs" />
+    <Compile Include="Commands\ShowGacFileDialogCommand.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -8,7 +8,10 @@ using GacExplorer.Services.DTO;
 using System.Linq;
 using System.Collections.Generic;
 using GacExplorer.Logging;
+using GacExplorer.UI.Commands;
+using GacExplorer.UI.Commands.Base;
 using GacExplorer.UI.Properties;
+using GacExplorer.UI.Commands.Settings;
 
 namespace GacExplorer.UI
 {
@@ -19,7 +22,13 @@ namespace GacExplorer.UI
         private IGlobalAssemblyCacheService gacService; 
         private IGacutil gacUtilProxy;
         private List<AssemblyLineDto> assemblyLineList;
-        private ILog log; 
+        private ILog log;
+
+        private ShowGacFileDialogCommand showGacFileDialogCommand;
+        private InitializeGacUtilProxyCommand initializeGacUtilProxyCommand;
+        private ListAssembliesCommand listAssembliesCommand;
+        private ApplicationExitCommand applicationExitCommand;
+        private ShowAboutFormCommand showAboutFormCommand; 
 
         public MainForm(IGacutilLocationService configurationService, IGacutilOutputParserService parserService, ILog log)
         {
@@ -28,199 +37,84 @@ namespace GacExplorer.UI
             this.gacutilLocationService = configurationService;
             this.parserService = parserService;
 
+            this.showGacFileDialogCommand = new ShowGacFileDialogCommand(this.openGacFileDialog, this.gacutilLocationService, this.gacUtilProxy);
+            this.initializeGacUtilProxyCommand = new InitializeGacUtilProxyCommand(this.showGacFileDialogCommand, this.gacutilLocationService, this.gacUtilProxy);
+            this.listAssembliesCommand = new ListAssembliesCommand(new ListAssembliesCommandSettings()
+            {
+                GacutilLocationService = this.gacutilLocationService, 
+                ParserService = this.parserService, 
+                GacService = this.gacService, 
+                GacUtilProxy = this.gacUtilProxy,  
+                AssemblyLineList = this.assemblyLineList, 
+                Log = this.log, 
+                ShowGacFileDialogCommand = this.showGacFileDialogCommand, 
+                InitializeGacUtilProxyCommand = this.initializeGacUtilProxyCommand,
+                GridViewAssemblies = this.gridViewAssemblies, 
+                LblAssemblyListCount = this.lblAssemblyListCount
+            });
+
+            this.applicationExitCommand = new ApplicationExitCommand();
+            this.showAboutFormCommand = new ShowAboutFormCommand(); 
         }
 
         #region EventHandlers
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            ListAssemblies(); 
+            Command.Invoke(listAssembliesCommand);
         }
 
         private void ConfigureGacutilLocationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowGacFileDialog(); 
+            Command.Invoke(showGacFileDialogCommand); 
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit(); 
+            Command.Invoke(applicationExitCommand); 
         }
 
         private void btnListAssemblies_Click(object sender, EventArgs e)
         {
-            ListAssemblies();
+            Command.Invoke(listAssembliesCommand);
         }
 
         private void BtnRegisterAssembly_Click(object sender, EventArgs e)
         {
-            if (this.gacUtilProxy == null)
+            Command.Invoke(new RegisterAssemblyCommand(new RegisterAssemblyCommandSettings()
             {
-                MessageBox.Show("You need to configure localization of GacUtil.exe tool before performing registration"); 
-            }
-            else
-            {
-                var result = this.addAssemblyFileDialog.ShowDialog();
-                if (result == DialogResult.OK)
-                { 
-                    if(this.gacService == null)
-                    {
-                        gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService, log);
-                    }
-                    var response = this.gacService.RegisterAssembly(this.addAssemblyFileDialog.FileName);
-                    if (response.Result == OperationResult.Success)
-                    {
-                        MessageBox.Show(Resources.AssemblySuccessfullyRegisteredInGac);
-                        ListAssemblies(); 
-                    }
-                    else
-                    {
-                        MessageBox.Show($"{Resources.ErrorWhenRegisteringAssemblyInGac}: {response.Message}");
-                    }
-                }
-            }
+                GacService = this.gacService,
+                GacUtilProxy = this.gacUtilProxy,
+                ListAssembliesCommand = this.listAssembliesCommand,
+                AddAssemblyFileDialog = this.addAssemblyFileDialog,
+                ParserService = this.parserService,
+                Log = this.log
+            })); 
         }
 
         private void GridViewAssemblies_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            Command.Invoke(new GridViewAssembliesClickCommand(new GridViewAssembliesClickCommandSettings()
             {
-                if (this.gridViewAssemblies.SelectedRows.Count == 1)
-                {
-                    var selectedRow = this.gridViewAssemblies.SelectedRows[0];
-                    var hitRowIndex = this.gridViewAssemblies.HitTest(e.X, e.Y).RowIndex;
-                    int selectedRowIndex = selectedRow.Index;
-                    if (hitRowIndex == selectedRowIndex)
-                    {
-                        var assemblyName = Convert.ToString(selectedRow.Cells[0].Value);
-                        var result = MessageBox.Show(String.Format(Resources.AssemblyWillBeRemovedFromGlobalAssemblyCacheContinue, assemblyName),
-                                     Resources.PleaseConfirmUninstalling,
-                                     MessageBoxButtons.YesNo);
-                        if(result == DialogResult.Yes)
-                        {
-                            if (this.gacUtilProxy == null)
-                            {
-                                MessageBox.Show(Resources.YouNeedToConfigureLocalizationOfGacUtilToolBeforePerformingRegistration);
-                            }
-                            else
-                            {
-                                if (this.gacService == null)
-                                {
-                                    gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService, log);
-                                }
-                                var response = this.gacService.UnregisterAssembly(assemblyName);
-                                if (response.Result == OperationResult.Success)
-                                {
-                                    MessageBox.Show(Resources.AssemblySuccessfullyUnregisteredFromGac);
-                                    ListAssemblies(); 
-                                }
-                                else
-                                {
-                                    MessageBox.Show($"{Resources.ErrorWhenUnregisteringAssemblyFromGac}: {response.Message}");
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(Resources.SelectSingleAssemblyToBeUninstalledFromGac);
-                }
-            }
+                GacService = this.gacService, 
+                GacUtilProxy = this.gacUtilProxy, 
+                ParserService = this.parserService,
+                ListAssembliesCommand = this.listAssembliesCommand, 
+                Log = this.log,
+                GridViewAssemblies = this.gridViewAssemblies,
+                MouseEventArguments = e
+            }));
         }
 
         private void TbFilter_TextChanged(object sender, EventArgs e)
         {
-            if (this.gridViewAssemblies.DataSource is BindingSource data)
-            {
-                if (data.DataSource is BindingList<AssemblyLineDto> source)
-                {
-                    if (this.textFilter.Text.Length > 2)
-                    {
-                        var filteredBindingList = new BindingList<AssemblyLineDto>(source.Where(x => x.Name.ToLower().Contains(this.textFilter.Text.ToLower())).ToList());
-                        var bindingList = new BindingList<AssemblyLineDto>(filteredBindingList);
-                        this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
-                    }
-                    else
-                    {
-                        var bindingList = new BindingList<AssemblyLineDto>(assemblyLineList);
-                        this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
-                    }
-                    this.gridViewAssemblies.Refresh();
-                }
-
-            }
-
+            Command.Invoke(new FilterAssemblyGridCommand(this.gridViewAssemblies, this.textFilter, this.assemblyLineList));
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new AboutForm().ShowDialog(); 
+            Command.Invoke(showAboutFormCommand);
         }
         #endregion
-
-        #region Private methods
-        private DialogResult ShowGacFileDialog()
-        {
-            var result = this.openGacFileDialog.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                var fileLocation = this.openGacFileDialog.FileName;
-                this.gacutilLocationService.Save(fileLocation);
-                this.gacUtilProxy = new Gacutil(fileLocation);
-              
-            }
-            this.openGacFileDialog.Dispose();
-            return result;
-        }
-
-        private void InitializeGacUtilProxy()
-        {
-            var result = this.gacutilLocationService.Read();
-            if (result.Result == OperationResult.Success)
-            {
-                var location = result.Location;
-                if (this.gacutilLocationService.FileExists(location))
-                {
-                    this.gacUtilProxy = new Gacutil(location);
-                }
-                else
-                {
-                    ShowGacFileDialog();
-                }
-            }
-        }
-
-        private void ListAssemblies()
-        {
-            if (gacUtilProxy == null)
-            {
-                InitializeGacUtilProxy();
-            }
-
-            if(this.gacService == null)
-            {
-                this.gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService, log);
-            }
-
-            this.assemblyLineList = gacService.GetAssemblyLines().AssemblyLines; 
-            if(this.assemblyLineList != null)
-            {
-                var bindingList = new BindingList<AssemblyLineDto>(this.assemblyLineList);
-                this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
-                this.lblAssemblyListCount.Text += assemblyLineList.Count.ToString(); 
-            }
-            else
-            {
-                if(ShowGacFileDialog() == DialogResult.OK)
-                {
-                    ListAssemblies();
-                }
-
-            }
-        }
-
-        #endregion
-
 
     }
 }
