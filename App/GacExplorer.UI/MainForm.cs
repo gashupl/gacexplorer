@@ -127,6 +127,30 @@ namespace GacExplorer.UI
             }
         }
 
+        private void TbFilter_TextChanged(object sender, EventArgs e)
+        {
+            if (this.gridViewAssemblies.DataSource is BindingSource data)
+            {
+                if (data.DataSource is BindingList<AssemblyLineDto> source)
+                {
+                    if (this.textFilter.Text.Length > 2)
+                    {
+                        var filteredBindingList = new BindingList<AssemblyLineDto>(source.Where(x => x.Name.ToLower().Contains(this.textFilter.Text.ToLower())).ToList());
+                        var bindingList = new BindingList<AssemblyLineDto>(filteredBindingList);
+                        this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
+                    }
+                    else
+                    {
+                        var bindingList = new BindingList<AssemblyLineDto>(assemblyLineList);
+                        this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
+                    }
+                    this.gridViewAssemblies.Refresh();
+                }
+
+            }
+
+        }
+
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new AboutForm().ShowDialog(); 
@@ -193,32 +217,6 @@ namespace GacExplorer.UI
 
             }
         }
-
-        private void TbFilter_TextChanged(object sender, EventArgs e)
-        {
-            if (this.gridViewAssemblies.DataSource is BindingSource data)
-            {
-                if (data.DataSource is BindingList<AssemblyLineDto> source)
-                {
-                    if (this.textFilter.Text.Length > 2)
-                    {
-                        var filteredBindingList = new BindingList<AssemblyLineDto>(source.Where(x => x.Name.Contains(this.textFilter.Text)).ToList());
-                        var bindingList = new BindingList<AssemblyLineDto>(filteredBindingList);
-                        this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
-                    }
-                    else
-                    {
-                        var bindingList = new BindingList<AssemblyLineDto>(assemblyLineList);
-                        this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
-                    }
-                    this.gridViewAssemblies.Refresh();
-                }
-
-            }
-
-        }
-
-
 
         #endregion
 
