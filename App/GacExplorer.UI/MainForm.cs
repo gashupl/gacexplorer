@@ -21,7 +21,6 @@ namespace GacExplorer.UI
         private IGacutilOutputParserService parserService;
         private IGlobalAssemblyCacheService gacService; 
         private IGacutil gacUtilProxy;
-        private List<AssemblyLineDto> assemblyLineList;
         private ILog log;
 
         private ShowGacFileDialogCommand showGacFileDialogCommand;
@@ -45,8 +44,7 @@ namespace GacExplorer.UI
                 GacutilLocationService = this.gacutilLocationService, 
                 ParserService = this.parserService, 
                 GacService = this.gacService, 
-                GacUtilProxy = this.gacUtilProxy,  
-                AssemblyLineList = this.assemblyLineList, 
+                GacUtilProxy = this.gacUtilProxy,
                 Log = this.log, 
                 ShowGacFileDialogCommand = this.showGacFileDialogCommand, 
                 InitializeGacUtilProxyCommand = this.initializeGacUtilProxyCommand,
@@ -108,7 +106,7 @@ namespace GacExplorer.UI
 
         private void TbFilter_TextChanged(object sender, EventArgs e)
         {
-            Command.Invoke(new FilterAssemblyGridCommand(this.gridViewAssemblies, this.textFilter, ref this.assemblyLineList));
+            Command.Invoke(new FilterAssemblyGridCommand(this.gridViewAssemblies, this.textFilter));
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

@@ -2,17 +2,20 @@
 using GacExplorer.Services.Wrappers;
 using SimpleInjector;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using GacExplorer.CommandProxy;
 using GacExplorer.Logging;
+using GacExplorer.Services.DTO;
 
 namespace GacExplorer.UI
 {
     static class Program
     {
         public static Container Container;
-        public static Log Log; 
+        public static Log Log;
+        public static List<AssemblyLineDto> AssemblyLineList;
 
         [STAThread]
         static void Main()

@@ -14,13 +14,12 @@ namespace GacExplorer.UI.Commands
     {
         private DataGridView gridViewAssemblies;
         private TextBox textFilter;
-        private List<AssemblyLineDto> assemblyLineList;
 
-        public FilterAssemblyGridCommand(DataGridView gridViewAssemblies, TextBox textFilter, ref List<AssemblyLineDto> assemblyLineList)
+        public FilterAssemblyGridCommand(DataGridView gridViewAssemblies, TextBox textFilter)
         {
             this.gridViewAssemblies = gridViewAssemblies;
             this.textFilter = textFilter;
-            this.assemblyLineList = assemblyLineList; 
+
         }
         public void Execute()
         {
@@ -36,7 +35,7 @@ namespace GacExplorer.UI.Commands
                     }
                     else
                     {
-                        var bindingList = new BindingList<AssemblyLineDto>(assemblyLineList);
+                        var bindingList = new BindingList<AssemblyLineDto>(Program.AssemblyLineList);
                         this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
                     }
                     this.gridViewAssemblies.Refresh();

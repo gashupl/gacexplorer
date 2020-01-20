@@ -20,7 +20,6 @@ namespace GacExplorer.UI.Commands
         private IGacutilOutputParserService parserService;
         private IGlobalAssemblyCacheService gacService;
         private IGacutil gacUtilProxy;
-        private List<AssemblyLineDto> assemblyLineList;
         private ILog log;
 
         private ShowGacFileDialogCommand showGacFileDialogCommand;
@@ -35,7 +34,6 @@ namespace GacExplorer.UI.Commands
             parserService = settings.ParserService;
             gacService = settings.GacService;
             gacUtilProxy = settings.GacUtilProxy;
-            assemblyLineList = settings.AssemblyLineList;
             log = settings.Log;
 
             showGacFileDialogCommand = settings.ShowGacFileDialogCommand;
@@ -56,12 +54,12 @@ namespace GacExplorer.UI.Commands
                 this.gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService, log);
             }
 
-            this.assemblyLineList = gacService.GetAssemblyLines().AssemblyLines;
-            if (this.assemblyLineList != null)
+            Program.AssemblyLineList = gacService.GetAssemblyLines().AssemblyLines;
+            if (Program.AssemblyLineList != null)
             {
-                var bindingList = new BindingList<AssemblyLineDto>(this.assemblyLineList);
+                var bindingList = new BindingList<AssemblyLineDto>(Program.AssemblyLineList);
                 this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
-                this.lblAssemblyListCount.Text += assemblyLineList.Count.ToString();
+                this.lblAssemblyListCount.Text += Program.AssemblyLineList.Count.ToString();
             }
             else
             {
