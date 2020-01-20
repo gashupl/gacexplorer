@@ -46,7 +46,7 @@ namespace GacExplorer.UI.Commands
         }
         public void Execute()
         {
-            if (gacUtilProxy == null)
+            if (String.IsNullOrEmpty(gacUtilProxy.Location))
             {
                 Command.Invoke(initializeGacUtilProxyCommand);
             }

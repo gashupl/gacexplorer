@@ -16,13 +16,12 @@ namespace GacExplorer.UI.Commands
         private TextBox textFilter;
         private List<AssemblyLineDto> assemblyLineList;
 
-        public FilterAssemblyGridCommand(DataGridView gridViewAssemblies, TextBox textFilter, List<AssemblyLineDto> assemblyLineList)
+        public FilterAssemblyGridCommand(DataGridView gridViewAssemblies, TextBox textFilter, ref List<AssemblyLineDto> assemblyLineList)
         {
             this.gridViewAssemblies = gridViewAssemblies;
             this.textFilter = textFilter;
             this.assemblyLineList = assemblyLineList; 
         }
-
         public void Execute()
         {
             if (this.gridViewAssemblies.DataSource is BindingSource data)

@@ -4,6 +4,7 @@ using SimpleInjector;
 using System;
 using System.Threading;
 using System.Windows.Forms;
+using GacExplorer.CommandProxy;
 using GacExplorer.Logging;
 
 namespace GacExplorer.UI
@@ -31,6 +32,7 @@ namespace GacExplorer.UI
             Container = new Container();
             Container.Register<IFile, FileWrapper>();
             Container.Register<ILog, Log>();
+            Container.Register<IGacutil, Gacutil>();
             Container.Register<IApplicationConfigurationService, ApplicationConfigurationService>();
             Container.Register<IGacutilLocationService, GacutilLocationService>();
             Container.Register<IGacutilOutputParserService, GacutilOutputParserService>();

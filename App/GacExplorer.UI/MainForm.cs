@@ -30,10 +30,11 @@ namespace GacExplorer.UI
         private ApplicationExitCommand applicationExitCommand;
         private ShowAboutFormCommand showAboutFormCommand; 
 
-        public MainForm(IGacutilLocationService configurationService, IGacutilOutputParserService parserService, ILog log)
+        public MainForm(IGacutilLocationService configurationService, IGacutilOutputParserService parserService, IGacutil gacUtilProxy, ILog log)
         {
             InitializeComponent();
-            this.log = log; 
+            this.log = log;
+            this.gacUtilProxy = gacUtilProxy; 
             this.gacutilLocationService = configurationService;
             this.parserService = parserService;
 
@@ -107,7 +108,7 @@ namespace GacExplorer.UI
 
         private void TbFilter_TextChanged(object sender, EventArgs e)
         {
-            Command.Invoke(new FilterAssemblyGridCommand(this.gridViewAssemblies, this.textFilter, this.assemblyLineList));
+            Command.Invoke(new FilterAssemblyGridCommand(this.gridViewAssemblies, this.textFilter, ref this.assemblyLineList));
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

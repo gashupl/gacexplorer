@@ -5,11 +5,11 @@ namespace GacExplorer.CommandProxy
 {
     public sealed class Gacutil : IGacutil
     {
-        private string location;
 
-        public Gacutil(string location)
+        public string Location { get ; set; }
+
+        public Gacutil()
         {
-            this.location = location; 
         }
 
         public string ListAssemblies()
@@ -53,7 +53,7 @@ namespace GacExplorer.CommandProxy
         private string StartProcess(Process gacutilProcess, string arguments, bool runas = false)
         {
             gacutilProcess.StartInfo.UseShellExecute = false;
-            gacutilProcess.StartInfo.FileName = this.location;
+            gacutilProcess.StartInfo.FileName = this.Location;
             gacutilProcess.StartInfo.Arguments = arguments;
             gacutilProcess.StartInfo.CreateNoWindow = true;
             gacutilProcess.StartInfo.UseShellExecute = false;

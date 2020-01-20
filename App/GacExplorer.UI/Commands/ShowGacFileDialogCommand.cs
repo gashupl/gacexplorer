@@ -26,7 +26,7 @@ namespace GacExplorer.UI.Commands
             {
                 var fileLocation = this.openGacFileDialog.FileName;
                 this.gacutilLocationService.Save(fileLocation);
-                this.gacUtilProxy = new Gacutil(fileLocation);
+                this.gacUtilProxy.Location = fileLocation; 
 
             }
             this.openGacFileDialog.Dispose();

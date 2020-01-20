@@ -30,7 +30,7 @@ namespace GacExplorer.UI.Commands
                 var location = result.Location;
                 if (this.gacutilLocationService.FileExists(location))
                 {
-                    this.gacUtilProxy = new Gacutil(location);
+                    this.gacUtilProxy.Location = location;
                 }
                 else
                 {

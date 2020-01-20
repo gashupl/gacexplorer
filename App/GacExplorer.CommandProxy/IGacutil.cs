@@ -2,6 +2,8 @@
 {
     public interface IGacutil
     {
+        string Location { get; set; }
+
         string ListAssemblies();
 
         string RegisterAssembly(string path);
