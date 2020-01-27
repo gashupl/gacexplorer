@@ -14,7 +14,16 @@ First-time run:
 2.	Run GacExplorer.exe file
 3.	When opened first time, you will need to select gacutil.exe file location
 
+![](http://piotrgaszewski.pl/img/gacexplorer/1.png)
+
 After installing Windows 10 SDK gacutil.exe should be available in by default:
 “C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools” folder. 
 
 4.	Have fun using GAC EXPLORER 😊. 
+
+![](http://piotrgaszewski.pl/img/gacexplorer/2.png)
+
+Application was tested on the following operating systems:
+Windows 10 PRO
+Windows 2019 Datacenter
+Windows 2016 Datacenter
