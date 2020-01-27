@@ -1,5 +1,8 @@
 GAC EXPLORER is a tool for managing Global Assembly Cache memory. It is visual frontend for gacutil.exe tool so it requires gacutil.exe tool’s availability on the local operating system. 
 
+Release build may be downloaded from:
+http://piotrgaszewski.pl/release/gacexplorer/GacExplorer-1.0.0.0.zip
+
 Prerequisites:
 
 GAC EXPLORER was created .NET on .NET Framework 4.7.2. so, it requires its runtime on local machine to be working correctly. Because it uses gacutil.exe tool internally – you need to have it also installed. The easiest way to obtain gacutil.exe tool is to install Windows SDK (the one mentioned below or other specific to your operating system).  
