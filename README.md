@@ -24,6 +24,6 @@ After installing Windows 10 SDK gacutil.exe should be available in by default:
 ![](http://piotrgaszewski.pl/img/gacexplorer/2.png)
 
 Application was tested on the following operating systems:
-Windows 10 PRO
-Windows 2019 Datacenter
-Windows 2016 Datacenter
+- Windows 10 PRO
+- Windows 2019 Datacenter
+- Windows 2016 Datacenter
