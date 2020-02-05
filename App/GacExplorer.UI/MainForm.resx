@@ -139,13 +139,14 @@
     <value>132, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnListAssemblies.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnRemoveAssembly.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        xAAADsQBlSsOGwAAAJtJREFUSEvtkj0OwyAMRvknU5WrACcAll6A23TrxIk7po6FNyKRIVIi8aQn6xsM
-        km02mVyHlHKDgsYYV6VUpXzgOS7/QGu9cc7RlNJqjKmUe7a2cbz3yjmHllJECEFQ7tnaxoERfaCgMKIF
-        RpQoH3iO5y/ZWlv3R3dzzgvwptyztd0IONOfEAKFM33BmX4p92xt4zx/yZPJIIz9AfcGb9vuVlw2AAAA
-        AElFTkSuQmCC
+        xAAADsQBlSsOGwAAANNJREFUSEtjGAWDHyQkJHAxMjL+BzIxsIGBgQyQJg1kZWUxqaioiMGwqampHC4L
+        NDU19ZDVOjg4sADF8YPMzEweIIXVQEJYV1dXDkjjB/SwgAlIgbxKMgZaANJLGBQWFrJwc3OnkYJNTExA
+        PicOFBUVsQEpmNf/MjMzfwdG9G+YGIgNFfsLE9PX1yc+RSFbwMLCshskBnRlBUyMnZ29GyQGlFsKExu1
+        YNQCVEBXC4Dp/SbQ8AIODo7NMDE2Nrb9IDGgBWdhYmRbQCwmyYJRQEfAwAAAFZmxjZP7JtsAAAAASUVO
+        RK5CYII=
 </value>
   </data>
   <data name="btnRegisterAssembly.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -154,6 +155,15 @@
         xAAADsQBlSsOGwAAAFhJREFUSEtjGAWjgK6gAIj/Q3ENSIDaYNQCDAAyEBmvB2KYBVuhYsiYZAAzjFhM
         MsBmCD5MMgCFMzIGBQvMsN1QMWRMMQCFM8wCqhiIDkYtGAWjgCzAwAAAsjw9aViGROoAAAAASUVORK5C
         YII=
+</value>
+  </data>
+  <data name="btnListAssemblies.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAAJtJREFUSEvtkj0OwyAMRvknU5WrACcAll6A23TrxIk7po6FNyKRIVIi8aQn6xsM
+        km02mVyHlHKDgsYYV6VUpXzgOS7/QGu9cc7RlNJqjKmUe7a2cbz3yjmHllJECEFQ7tnaxoERfaCgMKIF
+        RpQoH3iO5y/ZWlv3R3dzzgvwptyztd0IONOfEAKFM33BmX4p92xt4zx/yZPJIIz9AfcGb9vuVlw2AAAA
+        AElFTkSuQmCC
 </value>
   </data>
   <metadata name="addAssemblyFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

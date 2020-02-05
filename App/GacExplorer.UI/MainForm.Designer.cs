@@ -46,10 +46,11 @@
             this.lblAssemblyListCount = new System.Windows.Forms.Label();
             this.tlbPanel = new System.Windows.Forms.TableLayoutPanel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.btnRemoveAssembly = new System.Windows.Forms.Button();
+            this.btnRegisterAssembly = new System.Windows.Forms.Button();
             this.btnListAssemblies = new System.Windows.Forms.Button();
             this.lblFilter = new System.Windows.Forms.Label();
             this.textFilter = new System.Windows.Forms.TextBox();
-            this.btnRegisterAssembly = new System.Windows.Forms.Button();
             this.addAssemblyFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.assembliesContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mainMenuStrip.SuspendLayout();
@@ -195,22 +196,48 @@
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.btnRemoveAssembly);
+            this.panelTop.Controls.Add(this.btnRegisterAssembly);
             this.panelTop.Controls.Add(this.btnListAssemblies);
             this.panelTop.Controls.Add(this.lblFilter);
             this.panelTop.Controls.Add(this.textFilter);
-            this.panelTop.Controls.Add(this.btnRegisterAssembly);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTop.Location = new System.Drawing.Point(3, 3);
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(794, 34);
             this.panelTop.TabIndex = 3;
             // 
+            // btnRemoveAssembly
+            // 
+            this.btnRemoveAssembly.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRemoveAssembly.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveAssembly.Image")));
+            this.btnRemoveAssembly.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRemoveAssembly.Location = new System.Drawing.Point(280, 0);
+            this.btnRemoveAssembly.Name = "btnRemoveAssembly";
+            this.btnRemoveAssembly.Size = new System.Drawing.Size(140, 34);
+            this.btnRemoveAssembly.TabIndex = 5;
+            this.btnRemoveAssembly.Text = "Remove Assembly";
+            this.btnRemoveAssembly.UseVisualStyleBackColor = true;
+            // 
+            // btnRegisterAssembly
+            // 
+            this.btnRegisterAssembly.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRegisterAssembly.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterAssembly.Image")));
+            this.btnRegisterAssembly.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRegisterAssembly.Location = new System.Drawing.Point(140, 0);
+            this.btnRegisterAssembly.Name = "btnRegisterAssembly";
+            this.btnRegisterAssembly.Size = new System.Drawing.Size(140, 34);
+            this.btnRegisterAssembly.TabIndex = 0;
+            this.btnRegisterAssembly.Text = "Register Assembly";
+            this.btnRegisterAssembly.UseVisualStyleBackColor = true;
+            this.btnRegisterAssembly.Click += new System.EventHandler(this.BtnRegisterAssembly_Click);
+            // 
             // btnListAssemblies
             // 
             this.btnListAssemblies.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnListAssemblies.Image = ((System.Drawing.Image)(resources.GetObject("btnListAssemblies.Image")));
             this.btnListAssemblies.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnListAssemblies.Location = new System.Drawing.Point(140, 0);
+            this.btnListAssemblies.Location = new System.Drawing.Point(0, 0);
             this.btnListAssemblies.Name = "btnListAssemblies";
             this.btnListAssemblies.Size = new System.Drawing.Size(140, 34);
             this.btnListAssemblies.TabIndex = 3;
@@ -237,19 +264,6 @@
             this.textFilter.Size = new System.Drawing.Size(222, 20);
             this.textFilter.TabIndex = 2;
             this.textFilter.TextChanged += new System.EventHandler(this.TbFilter_TextChanged);
-            // 
-            // btnRegisterAssembly
-            // 
-            this.btnRegisterAssembly.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnRegisterAssembly.Image = ((System.Drawing.Image)(resources.GetObject("btnRegisterAssembly.Image")));
-            this.btnRegisterAssembly.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRegisterAssembly.Location = new System.Drawing.Point(0, 0);
-            this.btnRegisterAssembly.Name = "btnRegisterAssembly";
-            this.btnRegisterAssembly.Size = new System.Drawing.Size(140, 34);
-            this.btnRegisterAssembly.TabIndex = 0;
-            this.btnRegisterAssembly.Text = "Register Assembly";
-            this.btnRegisterAssembly.UseVisualStyleBackColor = true;
-            this.btnRegisterAssembly.Click += new System.EventHandler(this.BtnRegisterAssembly_Click);
             // 
             // addAssemblyFileDialog
             // 
@@ -309,6 +323,7 @@
         private System.Windows.Forms.Button btnRegisterAssembly;
         private System.Windows.Forms.TextBox textFilter;
         private System.Windows.Forms.Button btnListAssemblies;
+        private System.Windows.Forms.Button btnRemoveAssembly;
     }
 }
 
