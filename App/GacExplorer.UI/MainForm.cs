@@ -90,17 +90,16 @@ namespace GacExplorer.UI
             })); 
         }
 
-        private void GridViewAssemblies_MouseClick(object sender, MouseEventArgs e)
+        private void BtnRemoveAssembly_Click(object sender, EventArgs e)
         {
             Command.Invoke(new GridViewAssembliesClickCommand(new GridViewAssembliesClickCommandSettings()
             {
-                GacService = this.gacService, 
-                GacUtilProxy = this.gacUtilProxy, 
+                GacService = this.gacService,
+                GacUtilProxy = this.gacUtilProxy,
                 ParserService = this.parserService,
-                ListAssembliesCommand = this.listAssembliesCommand, 
+                ListAssembliesCommand = this.listAssembliesCommand,
                 Log = this.log,
-                GridViewAssemblies = this.gridViewAssemblies,
-                MouseEventArguments = e
+                GridViewAssemblies = this.gridViewAssemblies
             }));
         }
 
@@ -109,11 +108,12 @@ namespace GacExplorer.UI
             Command.Invoke(new FilterAssemblyGridCommand(this.gridViewAssemblies, this.textFilter));
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Command.Invoke(showAboutFormCommand);
         }
         #endregion
+
 
     }
 }

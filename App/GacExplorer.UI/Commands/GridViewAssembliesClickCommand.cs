@@ -21,8 +21,7 @@ namespace GacExplorer.UI.Commands
         private IGacutilOutputParserService parserService;
         private ICommand listAssembliesCommand;
         private ILog log; 
-        private DataGridView gridViewAssemblies; 
-        private MouseEventArgs e;
+        private DataGridView gridViewAssemblies;
 
         public GridViewAssembliesClickCommand(GridViewAssembliesClickCommandSettings settings)
         {
@@ -32,54 +31,46 @@ namespace GacExplorer.UI.Commands
             listAssembliesCommand = settings.ListAssembliesCommand;
             log = settings.Log;
             gridViewAssemblies = settings.GridViewAssemblies;
-            e = settings.MouseEventArguments; 
         }
 
         public void Execute()
         {
-            if (e.Button == MouseButtons.Right)
+            if (this.gridViewAssemblies.SelectedRows.Count == 1)
             {
-                if (this.gridViewAssemblies.SelectedRows.Count == 1)
+                var selectedRow = this.gridViewAssemblies.SelectedRows[0];
+
+                var assemblyName = Convert.ToString(selectedRow.Cells[0].Value);
+                var result = MessageBox.Show(String.Format(Resources.AssemblyWillBeRemovedFromGlobalAssemblyCacheContinue, assemblyName),
+                    Resources.PleaseConfirmUninstalling,
+                    MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
                 {
-                    var selectedRow = this.gridViewAssemblies.SelectedRows[0];
-                    var hitRowIndex = this.gridViewAssemblies.HitTest(e.X, e.Y).RowIndex;
-                    int selectedRowIndex = selectedRow.Index;
-                    if (hitRowIndex == selectedRowIndex)
+                    if (this.gacUtilProxy == null)
                     {
-                        var assemblyName = Convert.ToString(selectedRow.Cells[0].Value);
-                        var result = MessageBox.Show(String.Format(Resources.AssemblyWillBeRemovedFromGlobalAssemblyCacheContinue, assemblyName),
-                                     Resources.PleaseConfirmUninstalling,
-                                     MessageBoxButtons.YesNo);
-                        if (result == DialogResult.Yes)
+                        MessageBox.Show(Resources.YouNeedToConfigureLocalizationOfGacUtilToolBeforePerformingRegistration);
+                    }
+                    else
+                    {
+                        if (this.gacService == null)
                         {
-                            if (this.gacUtilProxy == null)
-                            {
-                                MessageBox.Show(Resources.YouNeedToConfigureLocalizationOfGacUtilToolBeforePerformingRegistration);
-                            }
-                            else
-                            {
-                                if (this.gacService == null)
-                                {
-                                    gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService, log);
-                                }
-                                var response = this.gacService.UnregisterAssembly(assemblyName);
-                                if (response.Result == OperationResult.Success)
-                                {
-                                    MessageBox.Show(Resources.AssemblySuccessfullyUnregisteredFromGac);
-                                    Command.Invoke(listAssembliesCommand);
-                                }
-                                else
-                                {
-                                    MessageBox.Show($"{Resources.ErrorWhenUnregisteringAssemblyFromGac}: {response.Message}");
-                                }
-                            }
+                            gacService = new GlobalAssemblyCacheService(this.gacUtilProxy, this.parserService, log);
+                        }
+                        var response = this.gacService.UnregisterAssembly(assemblyName);
+                        if (response.Result == OperationResult.Success)
+                        {
+                            MessageBox.Show(Resources.AssemblySuccessfullyUnregisteredFromGac);
+                            Command.Invoke(listAssembliesCommand);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"{Resources.ErrorWhenUnregisteringAssemblyFromGac}: {response.Message}");
                         }
                     }
                 }
-                else
-                {
-                    MessageBox.Show(Resources.SelectSingleAssemblyToBeUninstalledFromGac);
-                }
+            }
+            else
+            {
+                MessageBox.Show(Resources.SelectSingleAssemblyToBeUninstalledFromGac);
             }
         }
     }
