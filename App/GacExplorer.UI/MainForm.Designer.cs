@@ -106,7 +106,7 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // gridViewAssemblies
             // 
@@ -122,7 +122,6 @@
             this.gridViewAssemblies.Name = "gridViewAssemblies";
             this.gridViewAssemblies.Size = new System.Drawing.Size(794, 360);
             this.gridViewAssemblies.TabIndex = 1;
-            this.gridViewAssemblies.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GridViewAssemblies_MouseClick);
             // 
             // colName
             // 
@@ -218,6 +217,7 @@
             this.btnRemoveAssembly.TabIndex = 5;
             this.btnRemoveAssembly.Text = "Remove Assembly";
             this.btnRemoveAssembly.UseVisualStyleBackColor = true;
+            this.btnRemoveAssembly.Click += new System.EventHandler(this.BtnRemoveAssembly_Click);
             // 
             // btnRegisterAssembly
             // 
