@@ -61,14 +61,6 @@ namespace GacExplorer.UI.Commands
                 this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
                 this.lblAssemblyListCount.Text += Program.AssemblyLineList.Count.ToString();
             }
-            else
-            {
-                Command.Invoke(this.showGacFileDialogCommand);
-                if (this.showGacFileDialogCommand.ShowGacFileDialogResult == DialogResult.OK)
-                {
-                    Command.Invoke(this); 
-                }
-            }
         }
     }
 }
