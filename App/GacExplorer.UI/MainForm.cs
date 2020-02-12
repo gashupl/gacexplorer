@@ -92,7 +92,7 @@ namespace GacExplorer.UI
 
         private void BtnRemoveAssembly_Click(object sender, EventArgs e)
         {
-            Command.Invoke(new GridViewAssembliesClickCommand(new GridViewAssembliesClickCommandSettings()
+            Command.Invoke(new RemoveAssemblyCommand(new RemoveAssemblyCommandSettings()
             {
                 GacService = this.gacService,
                 GacUtilProxy = this.gacUtilProxy,

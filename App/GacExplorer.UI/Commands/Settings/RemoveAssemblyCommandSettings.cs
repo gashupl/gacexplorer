@@ -6,7 +6,7 @@ using GacExplorer.UI.Commands.Base;
 
 namespace GacExplorer.UI.Commands.Settings
 {
-    public class GridViewAssembliesClickCommandSettings
+    public class RemoveAssemblyCommandSettings
     {
         public IGlobalAssemblyCacheService GacService { get; set; }
         public IGacutil GacUtilProxy { get; set; }

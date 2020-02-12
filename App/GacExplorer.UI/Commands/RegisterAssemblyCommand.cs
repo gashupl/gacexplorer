@@ -35,7 +35,7 @@ namespace GacExplorer.UI.Commands
 
         public void Execute()
         {
-            if (this.gacUtilProxy == null)
+            if (this.gacUtilProxy?.Location == null)
             {
                 MessageBox.Show(Resources.YouNeedToConfigureLocalizationOfGacUtilToolBeforePerformingRegistration);
             }
