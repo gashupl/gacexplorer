@@ -32,4 +32,4 @@ Application was tested on the following operating systems:
 - Windows 2016 Datacenter
 
 Older versions:
-1.0.0.0: http://piotrgaszewski.pl/release/gacexplorer/GacExplorer-1.0.0.0.zip
+- 1.0.0.0: http://piotrgaszewski.pl/release/gacexplorer/GacExplorer-1.0.0.0.zip
