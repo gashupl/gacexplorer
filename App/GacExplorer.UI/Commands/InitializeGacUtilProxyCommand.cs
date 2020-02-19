@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GacExplorer.CommandProxy;
+﻿using GacExplorer.CommandProxy;
 using GacExplorer.Services;
 using GacExplorer.Services.OperationResults;
 using GacExplorer.UI.Commands.Base;
