@@ -2,10 +2,12 @@
 using GacExplorer.Services.OperationResults;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace GacExplorer.Services.Tests
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class GacutilOutputParserServiceTest :ServiceTestBase
     {
         private GacutilOutputParserService testedService; 

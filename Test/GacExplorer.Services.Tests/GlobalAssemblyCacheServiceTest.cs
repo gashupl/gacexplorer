@@ -1,9 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 using GacExplorer.CommandProxy;
 using GacExplorer.Services.OperationResults;
 using Moq;
@@ -11,6 +8,7 @@ using Moq;
 namespace GacExplorer.Services.Tests
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class GlobalAssemblyCacheServiceTest: ServiceTestBase
     {
         #region GetAssemblyLines tests
