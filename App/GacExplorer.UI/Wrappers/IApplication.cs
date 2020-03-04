@@ -1,6 +1,6 @@
 ﻿namespace GacExplorer.UI.Wrappers
 {
-    interface IApplicationWrapper
+    public interface IApplication
     {
         void Exit(); 
     }

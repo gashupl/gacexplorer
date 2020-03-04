@@ -2,7 +2,7 @@
 
 namespace GacExplorer.UI.Wrappers
 {
-    internal class ApplicationWrapper : IApplicationWrapper
+    internal class ApplicationWrapper : IApplication
     {
         public void Exit()
         {

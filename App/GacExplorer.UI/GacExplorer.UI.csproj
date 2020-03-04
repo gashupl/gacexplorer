@@ -92,7 +92,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wrappers\ApplicationWrapper.cs" />
-    <Compile Include="Wrappers\IApplicationWrapper.cs" />
+    <Compile Include="Wrappers\IApplication.cs" />
     <Content Include="explorer.ico" />
     <Content Include="Resources\Images\explorer.ico" />
     <Content Include="Resources\Images\face.jpg" />

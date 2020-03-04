@@ -12,6 +12,7 @@ using GacExplorer.UI.Commands;
 using GacExplorer.UI.Commands.Base;
 using GacExplorer.UI.Properties;
 using GacExplorer.UI.Commands.Settings;
+using GacExplorer.UI.Wrappers;
 
 namespace GacExplorer.UI
 {
@@ -52,7 +53,7 @@ namespace GacExplorer.UI
                 LblAssemblyListCount = this.lblAssemblyListCount
             });
 
-            this.applicationExitCommand = new ApplicationExitCommand();
+            this.applicationExitCommand = new ApplicationExitCommand(new ApplicationWrapper());
             this.showAboutFormCommand = new ShowAboutFormCommand(); 
         }
 
