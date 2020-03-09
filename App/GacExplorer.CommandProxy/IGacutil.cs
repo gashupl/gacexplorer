@@ -1,4 +1,6 @@
-﻿namespace GacExplorer.CommandProxy
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace GacExplorer.CommandProxy
 {
     public interface IGacutil
     {

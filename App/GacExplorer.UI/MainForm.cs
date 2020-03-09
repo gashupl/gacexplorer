@@ -28,17 +28,22 @@ namespace GacExplorer.UI
         private InitializeGacUtilProxyCommand initializeGacUtilProxyCommand;
         private ListAssembliesCommand listAssembliesCommand;
         private ApplicationExitCommand applicationExitCommand;
-        private ShowAboutFormCommand showAboutFormCommand; 
+        private ShowAboutFormCommand showAboutFormCommand;
+
+        private MessageBoxWrapper messageBox = new MessageBoxWrapper();
 
         public MainForm(IGacutilLocationService configurationService, IGacutilOutputParserService parserService, IGacutil gacUtilProxy, ILog log)
         {
             InitializeComponent();
+
+            
             this.log = log;
             this.gacUtilProxy = gacUtilProxy; 
             this.gacutilLocationService = configurationService;
             this.parserService = parserService;
 
-            this.showGacFileDialogCommand = new ShowGacFileDialogCommand(this.openGacFileDialog, this.gacutilLocationService, this.gacUtilProxy);
+            var fileDialogWrapper = new OpenFileDialogWrapper(this.openGacFileDialog); 
+            this.showGacFileDialogCommand = new ShowGacFileDialogCommand(fileDialogWrapper, this.gacutilLocationService, this.gacUtilProxy, this.messageBox);
             this.initializeGacUtilProxyCommand = new InitializeGacUtilProxyCommand(this.showGacFileDialogCommand, this.gacutilLocationService, this.gacUtilProxy);
             this.listAssembliesCommand = new ListAssembliesCommand(new ListAssembliesCommandSettings()
             {
@@ -88,7 +93,8 @@ namespace GacExplorer.UI
                 AddAssemblyFileDialog = this.addAssemblyFileDialog,
                 ParserService = this.parserService,
                 Log = this.log
-            })); 
+            },
+                this.messageBox)); 
         }
 
         private void BtnRemoveAssembly_Click(object sender, EventArgs e)
@@ -101,7 +107,8 @@ namespace GacExplorer.UI
                 ListAssembliesCommand = this.listAssembliesCommand,
                 Log = this.log,
                 GridViewAssemblies = this.gridViewAssemblies
-            }));
+            }, 
+                this.messageBox));
         }
 
         private void TbFilter_TextChanged(object sender, EventArgs e)

@@ -6,10 +6,11 @@ using GacExplorer.Services.OperationResults;
 using GacExplorer.UI.Commands.Base;
 using GacExplorer.UI.Commands.Settings;
 using GacExplorer.UI.Properties;
+using GacExplorer.UI.Wrappers;
 
 namespace GacExplorer.UI.Commands
 {
-    public class RegisterAssemblyCommand : ICommand
+    public class RegisterAssemblyCommand : Command, ICommand
     {
         private IGlobalAssemblyCacheService gacService;
         private IGacutil gacUtilProxy;
@@ -18,7 +19,7 @@ namespace GacExplorer.UI.Commands
         private ILog log;
         private OpenFileDialog addAssemblyFileDialog;
 
-        public RegisterAssemblyCommand(RegisterAssemblyCommandSettings settings)
+        public RegisterAssemblyCommand(RegisterAssemblyCommandSettings settings, IMessageBox messageBox) : base(messageBox)
         {
             gacService = settings.GacService;
             gacUtilProxy = settings.GacUtilProxy;
@@ -32,7 +33,7 @@ namespace GacExplorer.UI.Commands
         {
             if (this.gacUtilProxy?.Location == null)
             {
-                MessageBox.Show(Resources.YouNeedToConfigureLocalizationOfGacUtilToolBeforePerformingRegistration);
+                messageBox.Show(Resources.YouNeedToConfigureLocalizationOfGacUtilToolBeforePerformingRegistration);
             }
             else
             {
@@ -46,12 +47,12 @@ namespace GacExplorer.UI.Commands
                     var response = this.gacService.RegisterAssembly(this.addAssemblyFileDialog.FileName);
                     if (response.Result == OperationResult.Success)
                     {
-                        MessageBox.Show(Resources.AssemblySuccessfullyRegisteredInGac);
+                        messageBox.Show(Resources.AssemblySuccessfullyRegisteredInGac);
                         Command.Invoke(listAssembliesCommand);
                     }
                     else
                     {
-                        MessageBox.Show($"{Resources.ErrorWhenRegisteringAssemblyInGac}: {response.Message}");
+                        messageBox.Show($"{Resources.ErrorWhenRegisteringAssemblyInGac}: {response.Message}");
                     }
                 }
             }

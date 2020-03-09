@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using NLog;
 
 namespace GacExplorer.Logging
 {
+
+    [ExcludeFromCodeCoverage]
     public class Log : ILog
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();

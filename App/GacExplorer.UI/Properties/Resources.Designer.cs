@@ -97,6 +97,15 @@ namespace GacExplorer.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during saving GacUtil.exe location.
+        /// </summary>
+        internal static string ErrorWhenSavingGacUtilLocation {
+            get {
+                return ResourceManager.GetString("ErrorWhenSavingGacUtilLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error when unregistering assembly from GAC.
         /// </summary>
         internal static string ErrorWhenUnregisteringAssemblyFromGac {

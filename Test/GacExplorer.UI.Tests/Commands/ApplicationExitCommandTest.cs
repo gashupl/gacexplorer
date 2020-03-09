@@ -7,7 +7,7 @@ namespace GacExplorer.UI.Tests.Commands
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class ApplicationExitCommandTest
+    public class ApplicationExitCommandTest : CommandTestBase
     {
         private class ApplicationMock : IApplication
         {
