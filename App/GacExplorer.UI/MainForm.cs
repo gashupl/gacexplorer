@@ -113,7 +113,8 @@ namespace GacExplorer.UI
 
         private void TbFilter_TextChanged(object sender, EventArgs e)
         {
-            Command.Invoke(new FilterAssemblyGridCommand(this.gridViewAssemblies, this.textFilter));
+            var gridViewWrapper = new DataGridViewWrapper(this.gridViewAssemblies); 
+            Command.Invoke(new FilterAssemblyGridCommand(gridViewWrapper, this.textFilter));
         }
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)

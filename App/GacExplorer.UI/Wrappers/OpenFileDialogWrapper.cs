@@ -10,7 +10,11 @@ namespace GacExplorer.UI.Wrappers
             this.openFileDialog = openFileDialog; 
         }
 
-        public string FileName { get; set; }
+        public string FileName
+        {
+            get => this.openFileDialog.FileName;
+            set => this.openFileDialog.FileName = value;
+        }
 
         public DialogResult ShowDialog()
         {

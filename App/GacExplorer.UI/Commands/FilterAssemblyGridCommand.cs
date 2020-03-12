@@ -3,15 +3,16 @@ using System.Linq;
 using System.Windows.Forms;
 using GacExplorer.Services.DTO;
 using GacExplorer.UI.Commands.Base;
+using GacExplorer.UI.Wrappers;
 
 namespace GacExplorer.UI.Commands
 {
     public class FilterAssemblyGridCommand : ICommand
     {
-        private DataGridView gridViewAssemblies;
+        private IDataGridView gridViewAssemblies;
         private TextBox textFilter;
 
-        public FilterAssemblyGridCommand(DataGridView gridViewAssemblies, TextBox textFilter)
+        public FilterAssemblyGridCommand(IDataGridView gridViewAssemblies, TextBox textFilter)
         {
             this.gridViewAssemblies = gridViewAssemblies;
             this.textFilter = textFilter;
