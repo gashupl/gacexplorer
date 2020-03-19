@@ -1,18 +1,20 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using GacExplorer.Services.DTO;
 using GacExplorer.UI.Commands.Base;
+using GacExplorer.UI.Properties;
 using GacExplorer.UI.Wrappers;
 
 namespace GacExplorer.UI.Commands
 {
-    public class FilterAssemblyGridCommand : ICommand
+    public class FilterAssemblyGridCommand : Command, ICommand
     {
         private IDataGridView gridViewAssemblies;
         private TextBox textFilter;
 
-        public FilterAssemblyGridCommand(IDataGridView gridViewAssemblies, TextBox textFilter)
+        public FilterAssemblyGridCommand(IDataGridView gridViewAssemblies, TextBox textFilter, IMessageBox messageBox) : base(messageBox)
         {
             this.gridViewAssemblies = gridViewAssemblies;
             this.textFilter = textFilter;
@@ -37,7 +39,14 @@ namespace GacExplorer.UI.Commands
                     }
                     this.gridViewAssemblies.Refresh();
                 }
-
+                else
+                {
+                    messageBox.Show(Resources.InvalidBindingListContent);
+                }
+            }
+            else
+            {
+                messageBox.Show(Resources.InvalidDataGridDataSourceType);
             }
         }
     }

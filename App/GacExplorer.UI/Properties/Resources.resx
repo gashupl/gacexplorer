@@ -135,6 +135,12 @@
   <data name="ErrorWhenUnregisteringAssemblyFromGac" xml:space="preserve">
     <value>Error when unregistering assembly from GAC</value>
   </data>
+  <data name="InvalidBindingListContent" xml:space="preserve">
+    <value>Invalid binding list content</value>
+  </data>
+  <data name="InvalidDataGridDataSourceType" xml:space="preserve">
+    <value>Invalid data grid data source type</value>
+  </data>
   <data name="PleaseConfirmUninstalling" xml:space="preserve">
     <value>Please confirm uninstalling</value>
   </data>

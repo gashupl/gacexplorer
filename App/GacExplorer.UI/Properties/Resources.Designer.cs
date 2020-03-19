@@ -115,6 +115,24 @@ namespace GacExplorer.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid binding list content.
+        /// </summary>
+        internal static string InvalidBindingListContent {
+            get {
+                return ResourceManager.GetString("InvalidBindingListContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid data grid data source type.
+        /// </summary>
+        internal static string InvalidDataGridDataSourceType {
+            get {
+                return ResourceManager.GetString("InvalidDataGridDataSourceType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please confirm uninstalling.
         /// </summary>
         internal static string PleaseConfirmUninstalling {
