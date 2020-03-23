@@ -1,9 +1,12 @@
-﻿using GacExplorer.UI.Commands;
+﻿using GacExplorer.Services.DTO;
+using GacExplorer.UI.Commands;
 using GacExplorer.UI.Properties;
 using GacExplorer.UI.Wrappers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 
@@ -27,6 +30,25 @@ namespace GacExplorer.UI.Tests.Commands
                 throw new NotImplementedException();
             }
         }
+
+        private class DataGridViewMock : IDataGridView
+        {
+            BindingSource bindingSource = new BindingSource();
+            public bool IsRefreshed { get; private set; } = false;
+
+            public object DataSource 
+            {
+                get { return (object)bindingSource; }
+                set { this.bindingSource = value as BindingSource; }  
+            }
+
+            public void Refresh()
+            {
+                IsRefreshed =  true; 
+            }
+
+        }
+
         [TestMethod]
         public void Execute_DataSourceIsNotBindingSource_ShowError()
         {
@@ -49,7 +71,7 @@ namespace GacExplorer.UI.Tests.Commands
             var textBox = new TextBox();
             var messageBoxMock = new MessageBoxMock();
             Mock<IDataGridView> dataGridViewStub = new Mock<IDataGridView>();
-            //TODO: Setup DataSource to return something different that BindingList<AssemblyLineDto> 
+            dataGridViewStub.Setup(s => s.DataSource).Returns(new BindingSource() { DataSource = new List<object>() });
             var command = new FilterAssemblyGridCommand(dataGridViewStub.Object, textBox, messageBoxMock);
             command.Execute();
 
@@ -59,13 +81,57 @@ namespace GacExplorer.UI.Tests.Commands
         [TestMethod]
         public void Execute_FiltedTextIsGreaterThan2_SetFilteredDataSource()
         {
-            throw new NotImplementedException();
+
+            int expectedFilteredDataCount = 1;
+            var gridViewMock = new DataGridViewMock();
+
+            var command = Setup(gridViewMock, "ABC"); 
+            command.Execute();
+
+            var actualFilteredDataCount = ((BindingList<AssemblyLineDto>)((BindingSource)gridViewMock.DataSource).DataSource).Count;
+
+            Assert.AreEqual(expectedFilteredDataCount, actualFilteredDataCount); 
         }
 
         [TestMethod]
         public void Execute_FiltedTextIsLessThan2_SetNotFiltereDataSource()
         {
-            throw new NotImplementedException();
+            //TODO: This text need to be fixed
+            int expectedFilteredDataCount = 2;
+            var gridViewMock = new DataGridViewMock();
+
+            var command = Setup(gridViewMock, "AB");
+            command.Execute();
+
+            var actualFilteredDataCount = ((BindingList<AssemblyLineDto>)((BindingSource)gridViewMock.DataSource).DataSource).Count;
+
+            Assert.AreEqual(expectedFilteredDataCount, actualFilteredDataCount);
+        }
+
+        [TestMethod]
+        public void Execute_SetFiltedText_IsRefreshed()
+        {
+            var gridViewMock = new DataGridViewMock();
+
+            var command = Setup(gridViewMock, "POI");
+            command.Execute();
+
+            Assert.IsTrue(gridViewMock.IsRefreshed);
+        }
+
+        private FilterAssemblyGridCommand Setup(DataGridViewMock gridViewMock, string filterText)
+        {
+            var textBox = new TextBox();
+            textBox.Text = filterText;
+            var messageBoxMock = new MessageBoxMock();
+
+            ((BindingSource)gridViewMock.DataSource).DataSource = new BindingList<AssemblyLineDto>()
+                {
+                    new AssemblyLineDto(){ Name = "ABCDEFG"},
+                    new AssemblyLineDto(){ Name = "QWEZXC" }
+                };
+
+            return new FilterAssemblyGridCommand(gridViewMock, textBox, messageBoxMock);
         }
     }
 }
