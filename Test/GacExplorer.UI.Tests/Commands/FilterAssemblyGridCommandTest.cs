@@ -96,7 +96,6 @@ namespace GacExplorer.UI.Tests.Commands
         [TestMethod]
         public void Execute_FiltedTextIsLessThan2_SetNotFiltereDataSource()
         {
-            //TODO: This text need to be fixed
             int expectedFilteredDataCount = 2;
             var gridViewMock = new DataGridViewMock();
 
@@ -125,11 +124,11 @@ namespace GacExplorer.UI.Tests.Commands
             textBox.Text = filterText;
             var messageBoxMock = new MessageBoxMock();
 
-            ((BindingSource)gridViewMock.DataSource).DataSource = new BindingList<AssemblyLineDto>()
-                {
-                    new AssemblyLineDto(){ Name = "ABCDEFG"},
-                    new AssemblyLineDto(){ Name = "QWEZXC" }
-                };
+            Program.AssemblyLineList = new List<AssemblyLineDto>(){
+                    new AssemblyLineDto() { Name = "ABCDEFG" },
+                    new AssemblyLineDto() { Name = "QWEZXC" } };
+
+            ((BindingSource)gridViewMock.DataSource).DataSource = new BindingList<AssemblyLineDto>(Program.AssemblyLineList); ;
 
             return new FilterAssemblyGridCommand(gridViewMock, textBox, messageBoxMock);
         }
