@@ -66,6 +66,7 @@
     <Compile Include="Commands\ApplicationExitCommandTest.cs" />
     <Compile Include="Commands\CommandTestBase.cs" />
     <Compile Include="Commands\FilterAssemblyGridCommandTest.cs" />
+    <Compile Include="Commands\InitializeGacUtilProxyCommandTest.cs" />
     <Compile Include="Commands\ShowGacFileDialogCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
