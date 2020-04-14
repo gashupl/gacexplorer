@@ -83,6 +83,10 @@
       <Project>{097EEA7D-23CA-426E-9F74-4985F699FCDC}</Project>
       <Name>GacExplorer.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\App\GacExplorer.UI\GacExplorer.Logging\GacExplorer.Logging.csproj">
+      <Project>{876997EB-B898-4AD9-9D9F-AB2388C18A53}</Project>
+      <Name>GacExplorer.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\App\GacExplorer.UI\GacExplorer.UI.csproj">
       <Project>{11621624-acb5-4fba-bb0b-33dac4dae403}</Project>
       <Name>GacExplorer.UI</Name>

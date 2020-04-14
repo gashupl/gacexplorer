@@ -18,8 +18,8 @@ namespace GacExplorer.UI.Commands
         private IGacutil gacUtilProxy;
         private ILog log;
 
-        private ShowGacFileDialogCommand showGacFileDialogCommand;
-        private InitializeGacUtilProxyCommand initializeGacUtilProxyCommand;
+        private ICommand showGacFileDialogCommand;
+        private ICommand initializeGacUtilProxyCommand;
 
         private DataGridView gridViewAssemblies;
         private Label lblAssemblyListCount;
