@@ -58,23 +58,38 @@ namespace GacExplorer.UI.Tests.Commands
         }
 
         [TestMethod]
-        public void Execute_GacServiceNotExists_InitializeGacService()
-        {
-            //TODO: Possible refactoring - use factory to initialize Gac Service
-            throw new NotImplementedException();
-        }
-
-        [TestMethod]
         public void Execute_AssemblyLineListIsNull_DoNotSetDataSourceAndAssemblyCount()
         {
-            //TODO: Possible refactoring - separate commands for setting data source and assembly count
-            throw new NotImplementedException();
-        }
+            var gacUtilProxyMock = new Mock<IGacutil>();
+            gacUtilProxyMock.Setup(m => m.Location).Returns(@"c:\Location\gacutil.exe");
 
-        [TestMethod]
-        public void Execute_AssemblyLineListIsNotNull_SetDataSourceAndAssemblyCount()
-        {
-            throw new NotImplementedException();
+            var gacServiceMock = new Mock<IGlobalAssemblyCacheService>();
+            gacServiceMock.Setup(m => m.GetAssemblyLines()).Returns(new GetAssemblyLinesOperationResult(OperationResult.Success)
+            {
+                AssemblyLines = new List<AssemblyLineDto>() { new AssemblyLineDto() }
+            }); 
+
+            var initializeGacUtilProxyCommandMock = new CommandFake();
+            var settings = new ListAssembliesCommandSettings()
+            {
+
+                GacutilLocationService = null,
+                ParserService = null,
+                GacService = gacServiceMock.Object,
+                GacUtilProxy = gacUtilProxyMock.Object,
+                AssemblyLineList = null,
+                Log = this.LogMockObject,
+                ShowGacFileDialogCommand = new CommandFake(),
+                InitializeGacUtilProxyCommand = initializeGacUtilProxyCommandMock,
+                GridViewAssemblies = new DataGridView(),
+                LblAssemblyListCount = new Label() 
+            };
+
+            var command = new ListAssembliesCommand(settings);
+            command.Execute();
+
+            Assert.IsNotNull(settings.GridViewAssemblies.DataSource);
+            Assert.AreEqual("1", settings.LblAssemblyListCount.Text); 
         }
     }
 }
