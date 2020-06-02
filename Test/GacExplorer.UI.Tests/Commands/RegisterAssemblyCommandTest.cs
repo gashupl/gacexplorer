@@ -1,30 +1,44 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using GacExplorer.UI.Commands;
+using GacExplorer.UI.Commands.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GacExplorer.UI.Tests.Commands
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class RegisterAssemblyCommandTest
+    public class RegisterAssemblyCommandTest : CommandTestBase
     {
 
         [TestMethod]
         public void Execute_EmptyLocation_ShowMessageBox()
         {
-            throw new NotImplementedException(); 
+            var settings = new RegisterAssemblyCommandSettings();
+            var command = new RegisterAssemblyCommand(settings, this.MessageBoxMockObject);
+            command.Execute(); 
+
+            Assert.Fail();
         }
 
         [TestMethod]
         public void Execute_OperatonSuccess_ShowSucceedMessage()
         {
-            throw new NotImplementedException();
+            var settings = new RegisterAssemblyCommandSettings();
+            var command = new RegisterAssemblyCommand(settings, this.MessageBoxMockObject);
+            command.Execute();
+
+            Assert.Fail();
         }
 
         [TestMethod]
         public void Execute_OperatonFailed_ShowErrorMessage()
         {
-            throw new NotImplementedException();
+            var settings = new RegisterAssemblyCommandSettings();
+            var command = new RegisterAssemblyCommand(settings, this.MessageBoxMockObject);
+            command.Execute();
+
+            Assert.Fail();
         }
     }
 }
