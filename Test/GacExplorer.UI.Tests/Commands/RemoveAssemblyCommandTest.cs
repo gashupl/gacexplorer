@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Windows.Forms;
 using GacExplorer.UI.Commands;
 using GacExplorer.UI.Commands.Settings;
+using GacExplorer.UI.Wrappers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GacExplorer.UI.Tests.Commands
@@ -14,7 +16,9 @@ namespace GacExplorer.UI.Tests.Commands
         [TestMethod]
         public void Execute_EmptyLocation_ShowMessageBox()
         {
-            var settings = new RemoveAssemblyCommandSettings();
+            var settings = new RemoveAssemblyCommandSettings()
+            {
+            };
             var command = new RemoveAssemblyCommand(settings, this.MessageBoxMockObject);
             command.Execute();
 

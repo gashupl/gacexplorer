@@ -90,7 +90,7 @@ namespace GacExplorer.UI
                 GacService = this.gacService,
                 GacUtilProxy = this.gacUtilProxy,
                 ListAssembliesCommand = this.listAssembliesCommand,
-                AddAssemblyFileDialog = this.addAssemblyFileDialog,
+                AddAssemblyFileDialog = new OpenFileDialogWrapper(this.addAssemblyFileDialog),
                 ParserService = this.parserService,
                 Log = this.log
             },

@@ -17,7 +17,7 @@ namespace GacExplorer.UI.Commands
         private ICommand listAssembliesCommand;
         private IGacutilOutputParserService parserService;
         private ILog log;
-        private OpenFileDialog addAssemblyFileDialog;
+        private IOpenFileDialog addAssemblyFileDialog;
 
         public RegisterAssemblyCommand(RegisterAssemblyCommandSettings settings, IMessageBox messageBox) : base(messageBox)
         {
