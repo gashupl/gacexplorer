@@ -14,12 +14,12 @@ namespace GacExplorer.UI.Wrappers
         public object DataSource
         {
             get => this.gridView.DataSource;
-            set => this.DataSource = value; 
+            set => this.gridView.DataSource = value; 
         }
 
         public void Refresh()
         {
-            throw new NotImplementedException();
+            this.gridView.Refresh(); 
         }
     }
 }
