@@ -2,13 +2,15 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Configuration;
-using GacExplorer.Logging;
+using System.Diagnostics.CodeAnalysis;
 using GacExplorer.Services.Wrappers;
 using GacExplorer.Services.OperationResults;
+
 
 namespace GacExplorer.Services.Tests
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class GacutilLocationServiceTest : ServiceTestBase
     {
         [TestMethod]

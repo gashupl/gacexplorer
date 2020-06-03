@@ -1,8 +1,10 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace GacExplorer.CommandProxy
 {
+    [ExcludeFromCodeCoverage]
     public sealed class Gacutil : IGacutil
     {
 

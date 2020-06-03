@@ -4,6 +4,7 @@ using GacExplorer.CommandProxy;
 using GacExplorer.Logging;
 using GacExplorer.Services;
 using GacExplorer.Services.DTO;
+using GacExplorer.UI.Commands.Base;
 
 namespace GacExplorer.UI.Commands.Settings
 {
@@ -16,8 +17,8 @@ namespace GacExplorer.UI.Commands.Settings
         public List<AssemblyLineDto> AssemblyLineList { get; set; }
         public ILog Log { get; set; }
 
-        public ShowGacFileDialogCommand ShowGacFileDialogCommand { get; set; }
-        public InitializeGacUtilProxyCommand InitializeGacUtilProxyCommand { get; set; }
+        public ICommand ShowGacFileDialogCommand { get; set; }
+        public ICommand InitializeGacUtilProxyCommand { get; set; }
 
         public DataGridView GridViewAssemblies { get; set; }
         public Label LblAssemblyListCount { get; set; }

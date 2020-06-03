@@ -91,6 +91,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wrappers\ApplicationWrapper.cs" />
+    <Compile Include="Wrappers\DataGridViewWrapper.cs" />
+    <Compile Include="Wrappers\IApplication.cs" />
+    <Compile Include="Wrappers\IDataGridView.cs" />
+    <Compile Include="Wrappers\IMessageBox.cs" />
+    <Compile Include="Wrappers\IOpenFileDialog.cs" />
+    <Compile Include="Wrappers\MessageBoxWrapper.cs" />
+    <Compile Include="Wrappers\OpenFileDialogWrapper.cs" />
     <Content Include="explorer.ico" />
     <Content Include="Resources\Images\explorer.ico" />
     <Content Include="Resources\Images\face.jpg" />
@@ -122,15 +130,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

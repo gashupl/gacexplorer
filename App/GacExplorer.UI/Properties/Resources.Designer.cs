@@ -97,11 +97,38 @@ namespace GacExplorer.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during saving GacUtil.exe location.
+        /// </summary>
+        internal static string ErrorWhenSavingGacUtilLocation {
+            get {
+                return ResourceManager.GetString("ErrorWhenSavingGacUtilLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error when unregistering assembly from GAC.
         /// </summary>
         internal static string ErrorWhenUnregisteringAssemblyFromGac {
             get {
                 return ResourceManager.GetString("ErrorWhenUnregisteringAssemblyFromGac", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid binding list content.
+        /// </summary>
+        internal static string InvalidBindingListContent {
+            get {
+                return ResourceManager.GetString("InvalidBindingListContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid data grid data source type.
+        /// </summary>
+        internal static string InvalidDataGridDataSourceType {
+            get {
+                return ResourceManager.GetString("InvalidDataGridDataSourceType", resourceCulture);
             }
         }
         

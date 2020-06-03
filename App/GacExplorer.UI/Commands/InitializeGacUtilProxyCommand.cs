@@ -2,6 +2,7 @@
 using GacExplorer.Services;
 using GacExplorer.Services.OperationResults;
 using GacExplorer.UI.Commands.Base;
+using GacExplorer.UI.Wrappers;
 
 namespace GacExplorer.UI.Commands
 {

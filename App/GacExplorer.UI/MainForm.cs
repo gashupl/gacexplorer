@@ -12,6 +12,7 @@ using GacExplorer.UI.Commands;
 using GacExplorer.UI.Commands.Base;
 using GacExplorer.UI.Properties;
 using GacExplorer.UI.Commands.Settings;
+using GacExplorer.UI.Wrappers;
 
 namespace GacExplorer.UI
 {
@@ -27,17 +28,22 @@ namespace GacExplorer.UI
         private InitializeGacUtilProxyCommand initializeGacUtilProxyCommand;
         private ListAssembliesCommand listAssembliesCommand;
         private ApplicationExitCommand applicationExitCommand;
-        private ShowAboutFormCommand showAboutFormCommand; 
+        private ShowAboutFormCommand showAboutFormCommand;
+
+        private MessageBoxWrapper messageBox = new MessageBoxWrapper();
 
         public MainForm(IGacutilLocationService configurationService, IGacutilOutputParserService parserService, IGacutil gacUtilProxy, ILog log)
         {
             InitializeComponent();
+
+            
             this.log = log;
             this.gacUtilProxy = gacUtilProxy; 
             this.gacutilLocationService = configurationService;
             this.parserService = parserService;
 
-            this.showGacFileDialogCommand = new ShowGacFileDialogCommand(this.openGacFileDialog, this.gacutilLocationService, this.gacUtilProxy);
+            var fileDialogWrapper = new OpenFileDialogWrapper(this.openGacFileDialog); 
+            this.showGacFileDialogCommand = new ShowGacFileDialogCommand(fileDialogWrapper, this.gacutilLocationService, this.gacUtilProxy, this.messageBox);
             this.initializeGacUtilProxyCommand = new InitializeGacUtilProxyCommand(this.showGacFileDialogCommand, this.gacutilLocationService, this.gacUtilProxy);
             this.listAssembliesCommand = new ListAssembliesCommand(new ListAssembliesCommandSettings()
             {
@@ -52,7 +58,7 @@ namespace GacExplorer.UI
                 LblAssemblyListCount = this.lblAssemblyListCount
             });
 
-            this.applicationExitCommand = new ApplicationExitCommand();
+            this.applicationExitCommand = new ApplicationExitCommand(new ApplicationWrapper());
             this.showAboutFormCommand = new ShowAboutFormCommand(); 
         }
 
@@ -84,10 +90,11 @@ namespace GacExplorer.UI
                 GacService = this.gacService,
                 GacUtilProxy = this.gacUtilProxy,
                 ListAssembliesCommand = this.listAssembliesCommand,
-                AddAssemblyFileDialog = this.addAssemblyFileDialog,
+                AddAssemblyFileDialog = new OpenFileDialogWrapper(this.addAssemblyFileDialog),
                 ParserService = this.parserService,
                 Log = this.log
-            })); 
+            },
+                this.messageBox)); 
         }
 
         private void BtnRemoveAssembly_Click(object sender, EventArgs e)
@@ -100,12 +107,14 @@ namespace GacExplorer.UI
                 ListAssembliesCommand = this.listAssembliesCommand,
                 Log = this.log,
                 GridViewAssemblies = this.gridViewAssemblies
-            }));
+            }, 
+                this.messageBox));
         }
 
         private void TbFilter_TextChanged(object sender, EventArgs e)
         {
-            Command.Invoke(new FilterAssemblyGridCommand(this.gridViewAssemblies, this.textFilter));
+            var gridViewWrapper = new DataGridViewWrapper(this.gridViewAssemblies); 
+            Command.Invoke(new FilterAssemblyGridCommand(gridViewWrapper, this.textFilter, this.messageBox));
         }
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)

@@ -7,10 +7,11 @@ using GacExplorer.Services.OperationResults;
 using GacExplorer.UI.Commands.Base;
 using GacExplorer.UI.Commands.Settings;
 using GacExplorer.UI.Properties;
+using GacExplorer.UI.Wrappers;
 
 namespace GacExplorer.UI.Commands
 {
-    public class RemoveAssemblyCommand : ICommand
+    public class RemoveAssemblyCommand : Command, ICommand
     {
         private IGlobalAssemblyCacheService gacService;
         private IGacutil gacUtilProxy;
@@ -19,7 +20,7 @@ namespace GacExplorer.UI.Commands
         private ILog log; 
         private DataGridView gridViewAssemblies;
 
-        public RemoveAssemblyCommand(RemoveAssemblyCommandSettings settings)
+        public RemoveAssemblyCommand(RemoveAssemblyCommandSettings settings, IMessageBox messageBox) : base(messageBox)
         {
             gacService = settings.GacService;
             gacUtilProxy = settings.GacUtilProxy;
@@ -33,7 +34,7 @@ namespace GacExplorer.UI.Commands
         {
             if (this.gacUtilProxy?.Location == null)
             {
-                MessageBox.Show(Resources.YouNeedToConfigureLocalizationOfGacUtilToolBeforePerformingRegistration);
+                messageBox.Show(Resources.YouNeedToConfigureLocalizationOfGacUtilToolBeforePerformingRegistration);
             }
             else
             {
@@ -42,13 +43,13 @@ namespace GacExplorer.UI.Commands
                     var selectedRow = this.gridViewAssemblies.SelectedRows[0];
                     var assemblyName = Convert.ToString(selectedRow.Cells[0].Value);
 
-                    var result = MessageBox.Show(String.Format(Resources.AssemblyWillBeRemovedFromGlobalAssemblyCacheContinue, assemblyName),
+                    var result = messageBox.Show(String.Format(Resources.AssemblyWillBeRemovedFromGlobalAssemblyCacheContinue, assemblyName),
                         Resources.PleaseConfirmUninstalling, MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
                         if (this.gacUtilProxy == null)
                         {
-                            MessageBox.Show(Resources.YouNeedToConfigureLocalizationOfGacUtilToolBeforePerformingRegistration);
+                            messageBox.Show(Resources.YouNeedToConfigureLocalizationOfGacUtilToolBeforePerformingRegistration);
                         }
                         else
                         {
@@ -59,19 +60,19 @@ namespace GacExplorer.UI.Commands
                             var response = this.gacService.UnregisterAssembly(assemblyName);
                             if (response.Result == OperationResult.Success)
                             {
-                                MessageBox.Show(Resources.AssemblySuccessfullyUnregisteredFromGac);
+                                messageBox.Show(Resources.AssemblySuccessfullyUnregisteredFromGac);
                                 Command.Invoke(listAssembliesCommand);
                             }
                             else
                             {
-                                MessageBox.Show($"{Resources.ErrorWhenUnregisteringAssemblyFromGac}: {response.Message}");
+                                messageBox.Show($"{Resources.ErrorWhenUnregisteringAssemblyFromGac}: {response.Message}");
                             }
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show(Resources.SelectSingleAssemblyToBeUninstalledFromGac);
+                    messageBox.Show(Resources.SelectSingleAssemblyToBeUninstalledFromGac);
                 }
             }
         }
