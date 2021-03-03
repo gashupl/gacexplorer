@@ -32,7 +32,8 @@ namespace GacExplorer.CommandProxy
             string output;
             using (Process gacutilProcess = new Process())
             {
-                output = StartProcess(gacutilProcess, $"/i {path}", true); 
+                string args = "/i \"" + path + "\"";
+                output = StartProcess(gacutilProcess, args, true); 
                 gacutilProcess.WaitForExit();
             }
 

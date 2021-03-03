@@ -60,6 +60,8 @@ namespace GacExplorer.UI.Tests.Commands
         [TestMethod]
         public void Execute_AssemblyLineListIsNull_DoNotSetDataSourceAndAssemblyCount()
         {
+            var expected = "Number of Assemblies: 1"; 
+
             var gacUtilProxyMock = new Mock<IGacutil>();
             gacUtilProxyMock.Setup(m => m.Location).Returns(@"c:\Location\gacutil.exe");
 
@@ -89,7 +91,7 @@ namespace GacExplorer.UI.Tests.Commands
             command.Execute();
 
             Assert.IsNotNull(settings.GridViewAssemblies.DataSource);
-            Assert.AreEqual("1", settings.LblAssemblyListCount.Text); 
+            Assert.AreEqual(expected, settings.LblAssemblyListCount.Text); 
         }
     }
 }
