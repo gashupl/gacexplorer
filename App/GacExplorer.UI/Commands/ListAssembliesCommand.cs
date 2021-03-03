@@ -55,7 +55,7 @@ namespace GacExplorer.UI.Commands
             {
                 var bindingList = new BindingList<AssemblyLineDto>(Program.AssemblyLineList);
                 this.gridViewAssemblies.DataSource = new BindingSource(bindingList, null);
-                this.lblAssemblyListCount.Text += Program.AssemblyLineList.Count.ToString();
+                this.lblAssemblyListCount.Text = "Number of Assemblies: " + Program.AssemblyLineList.Count.ToString();
             }
         }
     }
