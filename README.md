@@ -1,7 +1,7 @@
 GAC EXPLORER is a tool for managing Global Assembly Cache memory. It is visual frontend for gacutil.exe tool so it requires gacutil.exe tool’s availability on the local operating system. 
 
 Release build may be downloaded from:
-http://piotrgaszewski.pl/release/gacexplorer/GacExplorer-1.1.0.0.zip
+http://piotrgaszewski.pl/release/gacexplorer/GacExplorer-1.1.1.0.zip
 
 Prerequisites:
 
@@ -32,4 +32,5 @@ Application was tested on the following operating systems:
 - Windows 2016 Datacenter
 
 Older versions:
+- 1.1.0.0: http://piotrgaszewski.pl/release/gacexplorer/GacExplorer-1.1.0.0.zip
 - 1.0.0.0: http://piotrgaszewski.pl/release/gacexplorer/GacExplorer-1.0.0.0.zip
